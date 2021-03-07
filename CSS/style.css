@@ -1,0 +1,59 @@
+header {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #0081A7;
+    padding: 40px;
+    font-size: 25px;
+    margin-bottom: 50px;
+}
+
+header a {
+    color: white;
+    margin: auto 30px;
+}
+textarea {
+    resize: none;
+    height: 300px;
+    
+    
+}
+input[type = text] {
+    height: 60px;
+}
+textarea,input[type = text]{
+    width: 95%;
+    min-width: 440px;
+    font-size: 30px;
+    border: solid 2px black;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+#text {
+    margin-left: 20px;
+    padding: 20px;
+    min-width: 450px;  
+
+}
+#details {
+    margin: 20px;
+    padding: 20px;
+}
+#algo {
+    margin: 20px;
+    padding: 20px;
+    border: solid 2px black;
+    border-radius: 5%;
+}
+#text, #details {
+    display: inline-block;
+    align-items: center;
+    
+}
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    position: sticky;
+}
+img {
+    width: 80px;
+    height: 80px;
+}
