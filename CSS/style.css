@@ -1,4 +1,13 @@
-header{
+* {
+    list-style: none;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header{
     width: 100%;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #7EA8BE;
@@ -14,33 +23,45 @@ header{
     align-content: center ;
 }
 
-.right img {
-    margin-right: 50px;
-    width: 40px;
+.right ul{
+    display: flex;
+    align-items: center;
 }
-.right img:hover {
-    border: 3px solid white;
+.right ul li {
+    position: relative;
+}
+.right ul li .dropdowUser { 
+    position: absolute;
+    top: 65px;
+    right: 0;
+    padding: 10px 25px;
     border-radius: 5px;
-    margin-right: 50px;
-    width: 40px;
+    background: #7EA8BE;
+    display: flex;
+    flex-direction: column;
+    display: none;
 }
+.right ul li.active .dropdowUser{
+    display: block;
+}
+.right ul li .dropdowUser .fas,.right ul li .dropdowUser .far {
+    margin-right: 10px;
+}
+
+.left img {
+    width: 60px;
+    height: 80px;
+}
+.header a {
+    color: white;
+    margin: auto 30px;
+    font-size: 25px;
+}
+
 .body{
     display: flex;
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-header a {
-    color: white;
-    margin: auto 30px;
-    font-size: 25px;
-}
-header a:hover {
-    color: white;
-    margin: auto 30px;
-    font-size: 25px;
-    border:3px solid white;
-    border-radius: 5px;
 
 }
 textarea {
@@ -86,8 +107,4 @@ button {
     height: min-content;
     margin: 0 20px 20px 20px;
     border-radius: 10px;
-}
-img {
-    width: 60px;
-    height: auto;
 }
