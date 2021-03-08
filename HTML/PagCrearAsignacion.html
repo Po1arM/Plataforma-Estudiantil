@@ -1,42 +1,56 @@
 <!DOCTYPE html>
+
 <header>
     <link href="/CSS/style.css" type="text/css" rel = "stylesheet">
-    <img src = "/IMG/5a631e30cd478440c20da8c5578dd77c-discos-con-logo-circular-by-vexels.png">
-    <a href="/HTML/PagPrincipalPlat.html">Mis Materias</a>
-    <a href="/HTML/PlataformaEventos.html">Eventos</a>
-    
+    <div class="left">
+        <img src = "https://www.revistaecclesia.com/wp-content/uploads/2016/07/Archicofrad%C3%ADa-del-Ap%C3%B3stol-Santiago.png">
+        <a href="/HTML/PagPrincipalPlat.html">Mis Materias</a>
+        <a href="/HTML/PlataformaEventos.html">Eventos</a>
+    </div>
+    <div class = "right">
+        <img src = "/IMG/search-3-64.png">
+        <img src = "/IMG/bell-3-64.png">
+        <img src = "/IMG/user-64.png">
+    </div>
 </header>
 <body>
-    <div id = "text">
-        <div id = "tittleAsig">
-            <input type="text" name="titulo" id="titulo" placeholder = "Titulo" required maxlength="20" minlength="5"><br>
-        </div>
-        <div id = "descriptionAsig">
-            <textarea rows="10" cols="50" name="descripcion" placeholder = "Descripción"></textarea>
-        </div>
-        <div id = "fileAd">
-            <input type="file"><br>
-        </div>
-    </div>
-    <div id = "details">
-        <div id = "algo">
-            <div id= "puntos">
-                <h2>Puntos:</h2>
-                <input type="number" min = 0 max = 100 step="1" value = "0"> <br>
+    <div class = "body">
+        <div id = "text">
+            <div id = "tittleAsig">
+                <input type="text" name="titulo" id="titulo" placeholder = "Titulo" required maxlength="40" minlength="5"><br>
             </div>
-            <div id = "entrega">
-                <h2>Fecha de Entrega:</h2>
-                <input type="date">
+            <div id = "descriptionAsig">
+                <textarea rows="10" cols="50" name="descripcion" placeholder = "Descripción"></textarea>
             </div>
-            <div id = "hora">
-                <h2>Hora de entrega:</h2>
-                <input type = "time">
+            <div id = "fileAd">
+                <input type="file"><br>
             </div>
         </div>
-        <div id = "crear">
+        <div id = "details">
+            <div id = "algo">
+                <div id= "puntos">
+                    <h2>Puntos:</h2>
+                    <input type="number" min = 0 max = 100 step="1" value = "0"> <br>
+                </div>
+                <div id = "apertura">
+                    <h2>Fecha de Apertura:</h2>
+                    <input type="date">
+                </div>
+                <div id = "horaEntrega">
+                    <h2>Hora de Apertura:</h2>
+                    <input type = "time">
+                </div>
+                <div id = "entrega">
+                    <h2>Fecha de Entrega:</h2>
+                    <input type="date">
+                </div>
+                <div id = "horaEntrega">
+                    <h2>Hora de entrega:</h2>
+                    <input type = "time">
+                </div>
+            </div>
             <button>Crear Tarea</button>
         </div>
     </div>
-    
 
 </body>
