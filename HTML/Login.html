@@ -2,7 +2,15 @@
 <html>
     <link rel="stylesheet" href="/CSS/mystyle.css">
 
-<button onclick="document.getElementById('id01').style.display='block'">Login</button>
+<button type = "button" onclick="document.getElementById('id01').style.display='block'">Login</button>
+
+<button type="button" onclick="volver()">Volver</button>
+<script>
+  function volver() {
+    window.history.back();
+  }
+  </script>
+ 
 
 <!-- The Modal -->
 <div id="id01" class="modal">
