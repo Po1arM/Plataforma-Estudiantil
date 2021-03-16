@@ -2,23 +2,10 @@
 <html>
     <link rel="stylesheet" href="/CSS/mystyle.css">
 
-<button type = "button" onclick="document.getElementById('id01').style.display='block'">Login</button>
-
-<button type="button" onclick="volver()">Volver</button>
-<script>
-  function volver() {
-    window.history.back();
-  }
-  </script>
+    <div class="header">
+          <img src = "https://www.revistaecclesia.com/wp-content/uploads/2016/07/Archicofrad%C3%ADa-del-Ap%C3%B3stol-Santiago.png">
+      </div>
  
-
-<!-- The Modal -->
-<div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none'"
-class="close" title="Close Modal">&times;</span>
-
-  <!-- Modal Content -->
-  <form class="modal-content animate" action="/action_page.php">
     <div class="imgcontainer">
       <img src="/IMG/user-64 - Black.png" alt="Avatar" class="avatar">
     </div>
@@ -37,8 +24,14 @@ class="close" title="Close Modal">&times;</span>
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
       <span class="psw">Forgot <a href="#">password?</a></span>
+
+      <button type="button" onclick="volver()">Volver</button>
+<script>
+  function volver() {
+    window.history.back();
+  }
+  </script>
     </div>
   </form>
 </div>

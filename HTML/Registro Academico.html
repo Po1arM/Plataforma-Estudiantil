@@ -9,7 +9,8 @@
   </head>
   <body>
 
-  <h2>Registro Academico</h2>
+    <h2>Registro Academico</h2>
+  
 
   <p>Datos del estudiante</p>
 
@@ -49,6 +50,14 @@
     </tr>
     
   </table>
+
+  <button type="button" onclick="volver()">Volver</button>
+  <button class="btn btn-primary hidden-print"onclick="window.print()"> <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir</h4></button>
+<script>
+  function volver() {
+    window.history.back();
+  }
+  </script>
 
   </body>
 </html>
