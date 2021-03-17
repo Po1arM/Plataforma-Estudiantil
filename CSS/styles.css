@@ -127,14 +127,14 @@ img {
 
 .buttons .btn{
     position: absolute;
-    top: 450px;
-    right: 15%;
+    top: 50px;
+    left: 40px;
    
 }
 .buttons .btn2{
     position: absolute;
-    top: 450px;
-    right: 90%;
+    top: 50px;
+    right: 190px;
     padding: 10px 30px;
    
 }
@@ -165,5 +165,126 @@ img {
     top: 450px;
     right: 10px;
 }
+
+/*Dropdown*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: all 0.2s ease;
+    transform: translateY(0);}
+
+.dropdown {
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    background-color: #7EA8BE;
+}
+#logo {
+    height: 100px;
+    width: auto;
+    margin-left: 15px ;
+}
+.izquierda {
+    display: flex;
+    align-items: center;
+
+}
+.derecha {
+    display: flex;
+    align-items: center;
+}
+.derecha button{
+    height: fit-content;
+    width: fit-content;
+    background: none;
+    border: none;
+}
+.derecha img{
+    height: 50%;
+    width: 50%;
+
+}
+.busqueda {
+    margin-right: 30px;
+}
+.notificaciones, .perfil {
+    position: relative;
+    margin: 30px;
+}
+.notificaciones ul{
+    position: absolute;
+}
+.perfil ul{
+    position: absolute;
+    right: 10%;
+}
+.notificaciones ul, .perfil ul {
+    margin-top: 10px;
+    display: flex;
+    background-color:white ;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    list-style: none;
+    border: solid 2px black;
+    border-radius:5px ;
+    width: 150px;
+    height: 200px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    transform: translateY(-10px);
+}
+
+.perfil button:focus + ul, .notificaciones button:focus + ul {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0px);
+
+}
+.notificaciones a, .perfil a{
+    color: black;
+    text-decoration: none;
+}
+.perfil li, .notificaciones li{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.perfil li:hover, .notificaciones li:hover{
+    background-color: #9dc1d4;
+
+}
+
+.home, .izquierda button{
+    background: none;
+    border: none;
+    color:white;
+    text-decoration: none;
+    font-size: 30px;
+    margin: 20px;
+}
+.home:hover {
+   text-decoration: underline; 
+}
+
+
+/*Entregar asignacion*/
+fieldset {
+    display: block;
+    margin-left: 0px;
+    margin-right: 2px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.50em;
+    padding-right: 0.75em;
+    border: 2px groove (internal value);
+  }
 
 
