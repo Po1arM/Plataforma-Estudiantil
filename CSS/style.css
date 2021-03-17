@@ -12,6 +12,7 @@
     align-items: center;
     justify-content:space-between;
     background-color: #7EA8BE;
+    z-index: 10;
 }
 #logo {
     height: 100px;
@@ -55,7 +56,6 @@
 .notificaciones ul, .perfil ul {
     margin-top: 10px;
     display: flex;
-    background-color:white ;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
@@ -68,14 +68,15 @@
     pointer-events: none;
     transition: all 0.2s ease;
     transform: translateY(-10px);
-    z-index: 10;
 }
 
 .perfil button:focus + ul, .notificaciones button:focus + ul {
-    opacity: 1;
+    opacity: 5;
+    background:white ;
     pointer-events: all;
     transform: translateY(0px);
     z-index: 10;
+    position: absolute;
 
 }
 .notificaciones a, .perfil a{
@@ -93,8 +94,6 @@
 }
 .perfil li:hover, .notificaciones li:hover{
     background-color: #9dc1d4;
-    z-index: 10;
-
 }
 
 .home, .izquierda button{
@@ -186,10 +185,12 @@ h1 {
 }
 
 .mat {
-    width: 500px;
+    min-width: 400px;
+    width: 40%;
     border: 2px black solid;
     border-radius: 15px;
     padding: 20px;
+    z-index: -1;
 }
 .a, .b{
     display: flex;
@@ -220,6 +221,7 @@ progress {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: -10;
     
 }
 
