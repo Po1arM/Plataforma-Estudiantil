@@ -1,5 +1,4 @@
 const {Schema, model} = require('mongose');
-const Schema = mongose.Schema;
 
 const usertSchem = new Schema ({
     _id: {type: String, required: true},
@@ -9,9 +8,7 @@ const usertSchem = new Schema ({
     password: {type: String, required: true},
     telefono: {type: String, required: true},
     tipo: {type: String, required: true},
-    curso: {type: String, required: true},
-    nivel: {type: String, required: true},
-    registro: {type: Array, required: true}
+    materias: {type: Array, required: true} //Materias que puede impartir un profesor
 });
 
-model.export = model('userEs',usertSchem);
+model.export = mode('user',usertSchem);
