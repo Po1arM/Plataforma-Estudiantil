@@ -2,38 +2,27 @@
 <html>
     <link rel="stylesheet" href="/CSS/mystyle.css">
 
-    <div class="header">
-          <img src = "https://www.revistaecclesia.com/wp-content/uploads/2016/07/Archicofrad%C3%ADa-del-Ap%C3%B3stol-Santiago.png">
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <!-- Tabs Titles -->
+        <h2 class="active"> Sign In </h2>
+    
+        <!-- Icon -->
+        <div class="fadeIn first">
+          <img src="/IMG/user-64 - Black.png" id="icon" alt="User Icon" />
+        </div>
+    
+        <!-- Login Form -->
+        <form>
+          <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+          <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+          <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+    
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+          <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+    
       </div>
- 
-    <div class="imgcontainer">
-      <img src="/IMG/user-64 - Black.png" alt="Avatar" class="avatar">
     </div>
-
-    <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
-
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-
-      <button type="submit">Login</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <span class="psw">Forgot <a href="#">password?</a></span>
-
-      <button type="button" onclick="volver()">Volver</button>
-<script>
-  function volver() {
-    window.history.back();
-  }
-  </script>
-    </div>
-  </form>
-</div>
-
-<html>
