@@ -40,3 +40,30 @@ body {
     background-color: gray;
     border-radius: 3px;
 }
+
+table {
+    margin-top: 50px;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+th {
+    background-color: black;
+    color: white;
+}
+td, th {
+    border: 2px solid black;
+    padding: 10px 20px;
+    text-align: center  ;
+}
+.aux {
+    display: flex;
+}
+
+.a {
+    margin: 40px auto;
+}
+
+.aux button {
+    width: 10%;
+}
+
