@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      table, th, td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h2>CALIFICACION ESCOLAR</h2>
+  
+
+  <p>Datos del estudiante</p>
+
+  <link rel="stylesheet" href="/CSS/mystyleRegistro.css">
+
+  <table style="width:100%">
+
+      <tr>
+        <th>Nombre del Alumno:</th>
+        <th>Clico Escolar:</th> 
+        <th>Curso:</th>
+      </tr>
+
+      <tr>
+          <td>Saul Beato</td>
+          <td>2do</td>
+          <td>4to Media</td>
+
+        </tr>
+
+  </table>
+
+  <table style="width:100%">
+    <tr>
+      <th>Asignatura</th>
+      <th>Periodo 1</th> 
+      <th>Periodo 2</th>
+      <th>Periodo 3</th>
+      <th>Periodo 4</th>
+      <th>Promedio (70%)</th>
+      <th>Examen (30%)</th>
+      <th>Nota final</th>
+    </tr>
+    <tr>
+      <td>Lengua Española</td>
+      <td>90</td>
+      <td>85</td>
+      <td>90</td>
+      <td>93</td>
+    </tr>
+    <tr>
+        <td>Matematica</td>
+        <td>100</td>
+        <td>95</td>
+        <td>90</td>
+        <td>95</td>
+      </tr>
+      <tr>
+        <td>Biologia</td>
+        <td>95</td>
+        <td>95</td>
+        <td>95</td>
+        <td>95</td>
+      </tr>
+      <tr>
+        <td>Sociales</td>
+        <td>95</td>
+        <td>90</td>
+        <td>90</td>
+        <td>90</td>
+      </tr>
+    
+  </table>
+
+  <button type="button" onclick="volver()">Volver</button>
+  <button class="btn btn-primary hidden-print"onclick="window.print()"> <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir</h4></button>
+<script>
+  function volver() {
+    window.history.back();
+  }
+  </script>
+
+  </body>
+</html>
