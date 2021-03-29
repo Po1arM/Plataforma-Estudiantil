@@ -11,7 +11,7 @@ body {
 }
 
 .menu-bar{
-    background: rgb(0, 0, 0);
+    background: rgba(0,0,0,0.8);
     text-align: center;
 }
 
@@ -37,7 +37,7 @@ body {
 }
 
 .active, .menu-bar ul li:hover {
-    background-color: gray;
+    background-color: rgb(88, 88, 88);
     border-radius: 3px;
 }
 
@@ -47,7 +47,7 @@ table {
     border-collapse: collapse;
 }
 th {
-    background-color: black;
+    background-color:rgba(0,0,0,0.8);
     color: white;
 }
 td, th {

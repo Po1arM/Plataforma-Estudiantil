@@ -1,0 +1,36 @@
+<%- include('partials/header') %>   
+         <div class="container">
+                <div class="row justify-content-md-center align-items-center">
+                    <div class="col-md-8"><h1>Maestros               </h1></div>
+                    
+                    <div class="col-md-1"><button class="btn btn-primary btn-block">Registrar</button></div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col-md-8">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr class="table-dark">
+                                    <th>Nombre </th>
+                                    <th>Apellido </th>
+                                    <th>Telefono </th>
+                                    <th>Correo</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i = 0; i < profesor.length; i++){ %>
+                                    <tr>
+                                        <td><%= profesor[i].nombre%></td>
+                                        <td><%= profesor[i].apellido1%></td>
+                                        <td><%= profesor[i].telefono%></td>
+                                        <td><%= profesor[i].correo%></td>
+                                        <td><a href="/edit/<%= profesor[i]._id%>" class="btn btn-primary">Ver</a></td>
+                                    </tr>
+                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>
