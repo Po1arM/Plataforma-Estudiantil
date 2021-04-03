@@ -8,8 +8,9 @@ const estudiante = new Schema({
     nacimiento: Date,
     password: String,
     telefono: String,
-    direccion: String,
+    curso: String,
     nivel: String,
+    direccion: String,
     tutor: String
 });
 
