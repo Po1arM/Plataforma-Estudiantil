@@ -9,7 +9,7 @@ async function connect() {
         const db = client.db('plataforma');
         console.log(`Connected to DB ${db.databaseName}`);
 
-        const student = await db.collection('users');
+        const student = await db.collection('estudiante');
 
         const cursorStudent = await student.find();
         cursorStudent.forEach(element => console.log(element));
