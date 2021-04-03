@@ -16,4 +16,12 @@ router.get('/grupos', (req,res) => {
 router.get('/docentes', (req,res) => {
     res.render('profesores')
 });
+router.get('/regEstudiante', (req,res) => {
+    res.render('RegEstudiante')
+});
+
+router.get('/RegDocente', (req,res) => {
+    res.render('RegDocente')
+});
+
 module.exports = router;
