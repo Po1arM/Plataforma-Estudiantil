@@ -6,15 +6,22 @@ const Docente = require('../models/docente.js');
 const Users = require('../models/users.js'); 
 
 //Cargar pagina principal
-router.get('/', (req,res) => {
-    res.render('index')
+router.get('/', async (req,res) => {
+    const estudiantes = await Estudiante.count();
+    const docentes = await Docente.count();
+
+    res.render('index', {
+        estudiantes,
+        docentes
+    });
 });
 
 //Cargar pagina estudiantes
 router.get('/estudiantes', async (req,res) => {
-    const estudiante = await Docente.find();
-    console.log(estudiante);
-    res.render('estudiantes')
+    const estudiantes = await Estudiante.find();
+    res.render('estudiantes',{
+        estudiantes
+    });
 });
 
 //Cargar pagina grupos
