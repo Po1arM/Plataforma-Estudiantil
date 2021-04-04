@@ -11,79 +11,26 @@
         <thead class="thead-dark">
             <th>ID</th>
             <th>Nombre</th>
-            <th>1er Apellido</th>
-            <th>2do Apellido</th>
+            <th>Apellido</th>
             <th>Curso</th>
-            <th>Nivel</th>
             <th>Tutor</th>
-            <th>Contacto</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
         </thead>
-        <tr>
-            <td>fGarLlo</td>
-            <td>Fabio</td>
-            <td>Garrido </td>
-            <td>Lloret </td>
-            <td>6to </td>
-            <td>Secundaria </td>
-            <td>Manuela Lloret </td>
-            <td>809-999-9999 </td>
-            <td><a href=""><i class="fa fa-pencil" ></i></a></td>
-        </tr>
-        <tr>
-            <td>iCanMot</td>
-            <td>Isaac</td>
-            <td>Candela </td>
-            <td>Mota </td>
-            <td>6to </td>
-            <td>Secundaria </td>
-            <td>José Candela </td>
-            <td>809-546-1780 </td> 
-            <td><a href=""><i class="fa fa-pencil" ></i></a></td>
-        </tr>
-        <tr>
-            <td>mMatGal</td>
-            <td>Maria</td>
-            <td>Mateo </td>
-            <td>Galvez </td>
-            <td>6to </td>
-            <td>Secundaria </td>
-            <td>Luis Mateo </td>
-            <td>789-732-1235 </td> 
-            <td><a href=""><i class="fa fa-pencil" ></i></a></td>
-        </tr>
-        <tr>
-            <td>gOrtSae</td>
-            <td>Giovanni</td>
-            <td>Ortuño </td>
-            <td>Saenz </td>
-            <td>6to </td>
-            <td>Secundaria </td>
-            <td>Angelica  Saenz </td>
-            <td>625-482-8689 </td> 
-            <td><a href=""><i class="fa fa-pencil" ></i></a></td>
-        </tr>
-        <tr>
-            <td>iVilAlm</td>
-            <td>Irina </td>
-            <td>Villalba </td>
-            <td>Almeida </td>
-            <td>6to </td>
-            <td>Secundaria </td>
-            <td>Delia Almeida </td>
-            <td>178-083-2146 </td> 
-            <td><a href=""><i class="fa fa-pencil" ></i></a></td>
-        </tr>
-        <tr>
-            <td>lSalGuz</td>
-            <td>Luis </td>
-            <td>Salguero </td>
-            <td>Guzman </td>
-            <td>6to </td>
-            <td>Secundaria </td>
-            <td>Donaldo Salguero </td>
-            <td>809-809-8009 </td> 
-            <td><a href="/HTML/Perfil.html"><i class="fa fa-pencil" ></i></a></td>
-        </tr>
+        <tbody>
+            <% for(var i = 0; i < estudiantes.length; i++) { %>
+                <tr>
+                    <td> <%= i +1 %> </td>
+                    <td> <%= estudiantes[i].nombre %> </td>
+                    <td> <%= estudiantes[i].apellido %> </td>
+                    <td> <%= estudiantes[i].nivel %> </td>
+                    <td> <%= estudiantes[i].tutor %> </td>
+                    <td> <%= estudiantes[i].direccion %> </td>
+                    <td> <%= estudiantes[i].telefono %> </td>
+                    <td><a href=""><i class="fa fa-pencil" ></i></a></td>
+                </tr>
+            <% }%>  
+        </tbody>
     </table>
 
       <!-- BEGIN VENDOR JS-->

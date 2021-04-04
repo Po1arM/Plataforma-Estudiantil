@@ -54,12 +54,8 @@ router.post('/regEstud', async (req,res) => {
 router.post('/regDoc', async (req,res) =>{
 
     const docente = new Docente(req.body);
-
     await docente.save();
-
     res.render('RegEstudiante');
-
-
     console.log(new Docente(req.body));
 
 });
