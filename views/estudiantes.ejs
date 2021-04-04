@@ -1,0 +1,48 @@
+<%- include('partials/_header1') %>
+
+<div class = "row">
+    <div class="col-xl-4 col-lg-6 col-md-12">
+        <h1>Estudiantes</h1>
+        <button type="button" onclick = "location.href='/regEstudiante'" class="btn btn-secondary btn-min-width mr-1 mb-1">Registrar</button>
+    </div>
+</div>
+<div class="table-responsive">
+    <table  class="table table-bordered" id = "tablaEstudiantes">
+        <thead class="thead-dark">
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Curso</th>
+            <th>Tutor</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+        </thead>
+        <tbody>
+            <% for(var i = 0; i < estudiantes.length; i++) { %>
+                <tr>
+                    <td> <%= i +1 %> </td>
+                    <td> <%= estudiantes[i].nombre %> </td>
+                    <td> <%= estudiantes[i].apellido %> </td>
+                    <td> <%= estudiantes[i].nivel %> </td>
+                    <td> <%= estudiantes[i].tutor %> </td>
+                    <td> <%= estudiantes[i].direccion %> </td>
+                    <td> <%= estudiantes[i].telefono %> </td>
+                    <td><a href=""><i class="fa fa-pencil" ></i></a></td>
+                </tr>
+            <% }%>  
+        </tbody>
+    </table>
+
+      <!-- BEGIN VENDOR JS-->
+      <script src="vendors/js/vendors.min.js" type="text/javascript"></script>
+      <!-- BEGIN VENDOR JS-->
+      <!-- BEGIN PAGE VENDOR JS-->
+      <!-- END PAGE VENDOR JS-->
+      <!-- BEGIN CHAMELEON  JS-->
+      <script src="js/core/app-menu-lite.js" type="text/javascript"></script>
+      <script src="js/core/app-lite.js" type="text/javascript"></script>
+      <!-- END CHAMELEON  JS-->
+      <!-- BEGIN PAGE LEVEL JS-->
+      <!-- END PAGE LEVEL JS-->
+    </body>
+  </html>
