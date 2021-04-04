@@ -33,45 +33,46 @@
     <div class="container p-3 my-3 bg-white">
   
                   <!-- Default form register -->
-                  <form class="text-center border border-dark p-4">
-          
+                  <!-- Establecer action como el router.post y method post para que sepa que se enviaran datos -->
+                  <form class="text-center border border-dark p-4" action = "/regEstud" method="POST">
+                    <!--En cada campo del formulario hay que agregar un atributo name que tiene que ser igual al campo del modelo-->
                     <p class="h4 mb-4">Registrar estudiante</p>
           
                     <div class="form-row mb-4">
                       <div class="col">
                         <!-- First name -->
-                        <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Nombre(s)">
+                        <input name = "nombre"type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Nombre(s)">
                       </div>
                       <div class="col">
                         <!-- Last name -->
-                        <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Apellido(s)">
+                        <input name = "apellido" type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Apellido(s)">
                       </div>
                     </div>
           
                     <!-- E-mail -->
-                    <input type="text" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+                    <input name = "correo" type="text" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
   
                     <!--Fecha de nacimiento-->
-                    <input type="date" input type="email" id="defaultRegisterBirthDatel" class="form-control mb-4" placeholder="Fecha de nacimiento">
+                    <input name  = "nacimiento" type="date" input type="email" id="defaultRegisterBirthDatel" class="form-control mb-4" placeholder="Fecha de nacimiento">
           
                     <!-- Password -->
-                    <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+                    <input name = "password" type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
                     <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
                     
                     </small>
           
                     <!-- Phone number -->
-                    <input type="tel" id="defaultRegisterPhonePassword" class="form-control" placeholder="Telefono +1()" aria-describedby="defaultRegisterFormPhoneHelpBlock" >
+                    <input name = "telefono" type="tel" id="defaultRegisterPhonePassword" class="form-control" placeholder="Telefono +1()" aria-describedby="defaultRegisterFormPhoneHelpBlock" >
 
                     <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
                       
                     </small>
   
-                    <input type="text" id="defaultRegisterFormAdress" class="form-control mb-4" placeholder="Direccion">
+                    <input name = "direccion" type="text" id="defaultRegisterFormAdress" class="form-control mb-4" placeholder="Direccion">
 
-                    <input type="text" id="defaultRegisterFormAcademic" class="form-control mb-4" placeholder="Nivel Academico">
+                    <input name = "nivel" type="text" id="defaultRegisterFormAcademic" class="form-control mb-4" placeholder="Nivel Academico">
 
-                    <input type="text" id="defaultRegisterFormName" class="form-control mb-4" placeholder="Nombre del Padre/Madre/Tutor">
+                    <input name = "tutor" type="text" id="defaultRegisterFormName" class="form-control mb-4" placeholder="Nombre del Padre/Madre/Tutor">
           
     
                     <!-- Sign up button -->
