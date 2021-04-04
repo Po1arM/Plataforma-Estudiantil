@@ -1,13 +1,15 @@
 <%- include('partials/_header1') %>
-
+<pre>
+    <%= grupos %>
+</pre>
 <div class = "row">
     <div class="col-xl-4 col-lg-6 col-md-12">
         <h1>Grupos</h1>
-        <button type="button" class="btn btn-secondary btn-min-width mr-1 mb-1">Agregar</button>
+        <button  onclick = "location.href='/genGrupos'" type="button" class="btn btn-secondary btn-min-width mr-1 mb-1">Generar Grupos</button>
     </div>
 </div>
 <div class="table-responsive">
-    <table  class="table table-bordered">
+    <table  class="table table-bordered bg-white">
         <thead class="thead-dark">
             <th>Codigo</th>
                         <th>Curso</th>

@@ -7,56 +7,26 @@
     </div>
 </div>
 <div class="table-responsive">
-    <table  class="table table-bordered">
+    <table  class="table table-bordered bg-white">
         <thead class="thead-dark">
-          <th>ID</th>
           <th>Nombre</th>
-          <th>1er Apellido</th>
-          <th>2do Apellido</th>
-          <th>Especialidad</th>
-          <th>Nivel</th>
-          <th>Contacto</th>
+          <th>Apellido</th>
+          <th>E-Mail</th>
+          <th>Telefono</th>
+          <th>Direccion</th>
       </tr>
-      <tr>
-          <td>mValBon </td>
-          <td>Mariam </td>
-          <td>Valencia </td>
-          <td>Bonilla </td>
-          <td>Lengua Española </td>
-          <td>Secundaria </td>
-          <td>293-302-0518 </td>
-          <td><a href=""><i class="fa fa-pencil" ></i></a></td>
-      </tr>
-      <tr>
-          <td>eAndPer </td>
-          <td>Evangelina </td>
-          <td>Andujar </td>
-          <td>Perez </td>
-          <td>Ciencias Naturales </td>
-          <td>Secundaria </td>
-          <td>567-143-0322 </td>
-          <td><a href=""><i class="fa fa-pencil" ></i></a></td>
-      </tr>
-      <tr>
-          <td>aBerGar </td>
-          <td>Adelaida  </td>
-          <td>Bernal </td>
-          <td>Garriga </td>
-          <td>Ciencias Sociales </td>
-          <td>Secundaria </td>
-          <td>809-393-0524 </td>
-          <td><a href=""><i class="fa fa-pencil" ></i></a></td>
-      </tr>
-      <tr>
-          <td>sCasCab </td>
-          <td>Sara </td>
-          <td>Castañeda </td>
-          <td>Cabrera</td>
-          <td>Matematicas </td>
-          <td>Secundaria </td>
-          <td>696-031-3563</td>
-          <td><a href=""><i class="fa fa-pencil" ></i></a></td>
-      </tr>
+      <tbody>
+        <% for(var i = 0; i < docentes.length; i++) { %>
+            <tr>
+                <td> <%= docentes[i].nombre %> </td>
+                <td> <%= docentes[i].apellido %> </td>
+                <td> <%= docentes[i].correo %> </td>
+                <td> <%= docentes[i].telefono %> </td>
+                <td> <%= docentes[i].direccion %> </td>
+                <td><a href=""><i class="fa fa-pencil" ></i></a></td>
+            </tr>
+        <% }%>  
+    </tbody>
     </table>
 
       <!-- BEGIN VENDOR JS-->
