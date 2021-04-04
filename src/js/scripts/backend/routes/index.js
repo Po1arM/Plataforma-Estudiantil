@@ -47,6 +47,22 @@ router.post('/regEstud', async (req,res) => {
     await estudiante.save();
     //Vuelve a cargar la pestaña de registro
     res.render('RegEstudiante');
+
 });
+
+//Registrar Docente
+router.post('/regDoc', async (req,res) =>{
+
+    const docente = new Docente(req.body);
+
+    await docente.save();
+
+    res.render('RegEstudiante');
+
+
+    console.log(new Docente(req.body));
+
+});
+
 
 module.exports = router;
