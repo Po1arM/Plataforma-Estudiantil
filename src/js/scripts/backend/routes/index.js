@@ -11,10 +11,12 @@ const Grupo = require('../models/grupo.js')
 router.get('/', async (req,res) => {
     const estudiantes = await Estudiante.count();
     const docentes = await Docente.count();
+    const grupos = await Grupo.count();
 
     res.render('index', {
         estudiantes,
-        docentes
+        docentes,
+        grupos
     });
 });
 
