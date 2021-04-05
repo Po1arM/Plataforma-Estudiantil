@@ -64,7 +64,7 @@ router.post('/regEstud', async (req,res) => {
     //Guarda el objeto en la base de datos
     await estudiante.save();
     //Vuelve a cargar la pestaña de registro
-    res.render('/RegEstudiante');
+    res.render('RegEstudiante');
 
 });
 
@@ -73,7 +73,7 @@ router.post('/regDoc', async (req,res) =>{
 
     const docente = new Docente(req.body);
     await docente.save();
-    res.render('/RegDocente');
+    res.render('RegDocente');
     console.log(new Docente(req.body));
 
 });
