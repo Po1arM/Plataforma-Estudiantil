@@ -9,17 +9,19 @@
 <div class="table-responsive">
     <table  class="table table-bordered bg-white">
         <thead class="thead-dark">
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>E-Mail</th>
-          <th>Telefono</th>
-          <th>Direccion</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Especialidad</th>
+            <th>E-Mail</th>
+            <th>Telefono</th>
+            <th>Direccion</th>
       </tr>
       <tbody>
         <% for(var i = 0; i < docentes.length; i++) { %>
             <tr>
                 <td> <%= docentes[i].nombre %> </td>
                 <td> <%= docentes[i].apellido %> </td>
+                <td> <%= docentes[i].especialidad %> </td>
                 <td> <%= docentes[i].correo %> </td>
                 <td> <%= docentes[i].telefono %> </td>
                 <td> <%= docentes[i].direccion %> </td>

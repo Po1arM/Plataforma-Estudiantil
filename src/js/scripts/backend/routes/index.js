@@ -6,8 +6,7 @@ const Docente = require('../models/docente.js')
 const Users = require('../models/users.js')
 const Pensum = require('../models/pensum.js')
 const Grupo = require('../models/grupo.js')
-const { render } = require('ejs')
-const { any } = require('bluebird')
+
 //Cargar pagina principal
 router.get('/', async (req,res) => {
     const estudiantes = await Estudiante.count();
@@ -29,7 +28,7 @@ router.get('/estudiantes', async (req,res) => {
 
 //Cargar pagina grupos
 router.get('/grupos',  async (req,res) => {
-    const grupos = Grupo.find()
+    const grupos = await Grupo.find()
     console.log(grupos)
 
     res.render('grupos',{
@@ -63,7 +62,7 @@ router.post('/regEstud', async (req,res) => {
     //Guarda el objeto en la base de datos
     await estudiante.save();
     //Vuelve a cargar la pestaña de registro
-    res.render('RegEstudiante');
+    res.render('/RegEstudiante');
 
 });
 
@@ -72,48 +71,59 @@ router.post('/regDoc', async (req,res) =>{
 
     const docente = new Docente(req.body);
     await docente.save();
-    res.render('RegEstudiante');
+    res.render('/RegDocente');
     console.log(new Docente(req.body));
 
 });
 
 router.get('/genGrupos', async (req,res) => {
     const pensum = await Pensum.find();
+    var grupos = await Grupo.remove();
     for(var i = 0 ; i  < pensum.length;i++ ){
         console.log(pensum[i].materia)
-        generar(pensum[i], pensum[i].materias);
+        generar(pensum[i]);
         
     }
-    
-})
-
-async function generar(pensum,arr) {
-    const nivel = pensum.nivel;
-    const curso = pensum.curso;
-    
-    
-    pensum.materia.forEach(element => {
-        const mat = element
-        const cod = mat.slice(0,4).toUpperCase() + curso.slice(0,2) +  nivel.slice(0,4).toUpperCase()
-        
-        const newGroup = {codigo: cod,
-            curso: curso,
-            nivel: nivel,
-            materia: mat}
-
-           Grupo.collection.insertOne(newGroup, function(err,docs) {
-               if(err){ 
-                   console.log(err)
-               } else {
-                   console.log('Grupo insertado')
-               }
-           })  
-    });
-
-    const grupos = Grupo.find()
+    grupos = Grupo.find()
     res.render('grupos',{
         grupos
-    })        
+    })    
+})
+
+async function generar(pensum) {
+    const nivel = pensum.nivel;
+    const curso = pensum.curso;
+    const materia = pensum.materia;
+
+
+    for(var i = 0; i < materia.length; i++){
+        var mat = materia[i]
+        const cod = mat.slice(0,3).toUpperCase() + curso.slice(0,1) +  nivel.slice(0,3).toUpperCase()
+        const docente = await Docente.find({especialidad : materia[i]}) 
+        if(docente.length == 0 ){
+                var newGroup = {codigo: cod,
+                    curso: curso,
+                    nivel: nivel,
+                    materia: mat,
+                }
+        }else{                
+            var newGroup = {codigo: cod,
+                curso: curso,
+                nivel: nivel,
+                materia: mat,
+                maestro: docente[0].nombre + ' ' + docente[0].apellido
+            }
+        }
+        
+        Grupo.collection.insertOne(newGroup, function(err,docs) {
+            if(err){ 
+                console.log(err)
+            } else {
+                console.log('Grupo insertado')
+            }
+        })  
+    }
+    
 }
     
 
