@@ -3,7 +3,7 @@ const router = express.Router()
 
 const Estudiante = require('../models/estudiante.js')
 const Docente = require('../models/docente.js')
-const Users = require('../models/users.js')
+const User = require('../models/users.js')
 const Pensum = require('../models/pensum.js')
 const Grupo = require('../models/grupo.js')
 
@@ -63,6 +63,19 @@ router.post('/regEstud', async (req,res) => {
     const estudiante = new Estudiante(req.body);
     //Guarda el objeto en la base de datos
     await estudiante.save();
+    const user = {
+        cod: estudiante._id.toString(),
+        user: estudiante.nombre + estudiante.apellido  ,
+        password: estudiante.password,
+        tipo: "estudiante"
+    }
+    User.collection.insertOne(user, function(err,docs) {
+        if(err){ 
+            console.log(err)
+        } else {
+            console.log('Usuario insertado')
+        }
+    })  
     //Vuelve a cargar la pestaña de registro
     res.render('RegEstudiante');
 
@@ -73,8 +86,20 @@ router.post('/regDoc', async (req,res) =>{
 
     const docente = new Docente(req.body);
     await docente.save();
+    const user = {
+        cod: docente._id.toString(),
+        user: docente.nombre + docente.apellido  ,
+        password: docente.password,
+        tipo: "docente"
+    }
+    User.collection.insertOne(user, function(err,docs) {
+        if(err){ 
+            console.log(err)
+        } else {
+            console.log('Usuario insertado')
+        }
+    })  
     res.render('RegDocente');
-    console.log(new Docente(req.body));
 
 });
 
