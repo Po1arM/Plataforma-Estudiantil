@@ -19,7 +19,9 @@ router.get('/', async (req,res) => {
         grupos
     });
 });
-
+router.get('/perfil', async (req,res) => {
+    res.render('Perfil')
+})
 //Cargar pagina estudiantes
 router.get('/estudiantes', async (req,res) => {
     const estudiantes = await Estudiante.find();
@@ -51,10 +53,34 @@ router.get('/docentes', async (req,res) => {
 router.get('/regEstudiante', (req,res) => {
     res.render('RegEstudiante')
 });
+router.get('/modPensum/:id', async (req,res) => {
+    const {id} = req.params
+    const pensum = await Pensum.findById(id)
+    var materias = "";
+    pensum.materia.forEach(element => {
+        console.log(element)
+        materias = materias.concat(element, " | ")
+    });
+    console.log(materias)
+    res.render('modPensum', {pensum, materias})
+});
 
+router.post('/modPensum/:id', async (req,res) =>{
+    const {id} = req.params
+    await Pensum.update({_id:id}, {materia : req.body.materias.split("|")})
+    res.redirect('/pensum')
+})
 //Cargar pagina regDocente
 router.get('/RegDocente', (req,res) => {
     res.render('RegDocente')
+});
+
+router.get('/pensum', async (req,res) => {
+    const pensums = await Pensum.find();
+
+    res.render('pensum' ,{
+        pensums
+    })
 });
 
 //Registrar estudiante
@@ -102,57 +128,6 @@ router.post('/regDoc', async (req,res) =>{
     res.render('RegDocente');
 
 });
-
-router.get('/genGrupos', async (req,res) => {
-    const pensum = await Pensum.find();
-    var grupos = await Grupo.remove();
-    for(var i = 0 ; i  < pensum.length;i++ ){
-        console.log(pensum[i].materia)
-        generar(pensum[i]);
-        
-    }
-    grupos = Grupo.find()
-    res.render('grupos',{
-        grupos
-    })    
-})
-
-async function generar(pensum) {
-    const nivel = pensum.nivel;
-    const curso = pensum.curso;
-    const materia = pensum.materia;
-
-
-    for(var i = 0; i < materia.length; i++){
-        var mat = materia[i]
-        const cod = mat.slice(0,3).toUpperCase() + curso.slice(0,1) +  nivel.slice(0,3).toUpperCase()
-        const docente = await Docente.find({especialidad : materia[i]}) 
-        if(docente.length == 0 ){
-                var newGroup = {codigo: cod,
-                    curso: curso,
-                    nivel: nivel,
-                    materia: mat,
-                }
-        }else{                
-            var newGroup = {codigo: cod,
-                curso: curso,
-                nivel: nivel,
-                materia: mat,
-                maestro: docente[0].nombre + ' ' + docente[0].apellido
-            }
-        }
-        
-        Grupo.collection.insertOne(newGroup, function(err,docs) {
-            if(err){ 
-                console.log(err)
-            } else {
-                console.log('Grupo insertado')
-            }
-        })  
-    }
-    
-}
-    
 
 
 module.exports = router;

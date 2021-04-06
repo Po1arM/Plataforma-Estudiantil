@@ -15,14 +15,14 @@
     <script src="https://kit.fontawesome.com/599c892ae7.js" crossorigin="anonymous"></script>
 
     <!-- BEGIN VENDOR CSS-->
-    <link rel="stylesheet" type="text/css" href="css/vendors.css">
+    <link rel="stylesheet" type="text/css" href="/css/vendors.css">
     <!-- END VENDOR CSS-->
     <!-- BEGIN CHAMELEON  CSS-->
-    <link rel="stylesheet" type="text/css" href="css/app-lite.css">
+    <link rel="stylesheet" type="text/css" href="/css/app-lite.css">
     <!-- END CHAMELEON  CSS-->
     <!-- BEGIN Page Level CSS-->
-    <link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="css/core/colors/palette-gradient.css">
+    <link rel="stylesheet" type="text/css" href="/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="/css/core/colors/palette-gradient.css">
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <!-- END Custom CSS-->
@@ -70,7 +70,6 @@
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-
     <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="images/backgrounds/02.jpg">
       <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">       
@@ -107,3 +106,24 @@
 <div class="row match-height">
    
 </div>
+    <div class="card">
+        <div class="card-header">
+            <h2> <%= pensum.curso + ' de ' + pensum.nivel%></h2>
+        </div>
+        <div class="card-content collapse show">
+            <div class="card-body">
+                <p>Separar las clases con |</p>
+                <form action = "/modPensum/<%= pensum._id %>" method="POST">
+                    <div class="form-group">
+                        <textarea name = "materias" class = "form-control" rows = 10 ><%= materias %></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-6 col-md-12">
+                            <button class="btn btn-secondary btn-block waves-effect " type="submit">Actualizar</button>
+                        </div>
+                        
+                    </div> 
+                </form>
+            </div>
+        </div>
+    </div>

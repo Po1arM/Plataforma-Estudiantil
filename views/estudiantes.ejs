@@ -14,9 +14,7 @@
             <th>Apellido</th>
             <th>Curso</th>
             <th>Nivel</th>
-            <th>Tutor</th>
-            <th>Direccion</th>
-            <th>Telefono</th>
+            
         </thead>
         <tbody>
             <% for(var i = 0; i < estudiantes.length; i++) { %>
@@ -26,10 +24,7 @@
                     <td> <%= estudiantes[i].apellido %> </td>
                     <td> <%= estudiantes[i].curso %> </td>
                     <td> <%= estudiantes[i].nivel %> </td>
-                    <td> <%= estudiantes[i].tutor %> </td>
-                    <td> <%= estudiantes[i].direccion %> </td>
-                    <td> <%= estudiantes[i].telefono %> </td>
-                    <td><a href=""><i class="fa fa-pencil" ></i></a></td>
+                    <td><a onclick = "location.href='/perfil'"><i class="fa fa-pencil" ></i></a></td>
                 </tr>
             <% }%>  
         </tbody>
