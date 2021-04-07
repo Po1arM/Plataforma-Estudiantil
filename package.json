@@ -98,5 +98,6 @@
   "bugs": {
     "url": "https://github.com/FGuzman29/Plataforma-Estudiantil/issues"
   },
-  "homepage": "https://github.com/FGuzman29/Plataforma-Estudiantil#readme"
+  "homepage": "https://github.com/FGuzman29/Plataforma-Estudiantil#readme",
+  "devDependencies": {}
 }
