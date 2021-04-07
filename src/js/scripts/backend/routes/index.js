@@ -6,9 +6,31 @@ const Docente = require('../models/docente.js')
 const User = require('../models/users.js')
 const Pensum = require('../models/pensum.js')
 const Grupo = require('../models/grupo.js')
+const { redirect } = require('statuses')
 
 //Cargar pagina principal
-router.get('/', async (req,res) => {
+router.get('/', (req,res) => {
+    res.render('LogIn')
+});
+router.post('/', async (req,res) => {
+    const user = await User.find({user: req.body.user,password: req.body.password})
+    /*if(user.count() != 0){
+        
+    }*/
+    if(user[0].tipo == 'admin'){
+        res.redirect('/adminDashboard')
+    } 
+    if(user[0].tipo == 'estudiante'){
+        const cod = user.cod
+        res.render('vistaEstudiante')
+
+    }if(user[0].tipo == 'docente'){
+        const cod = user.cod
+        res.render('vistaDocente')
+
+    }
+});
+router.get('/adminDashboard', async (req,res) => {
     const estudiantes = await Estudiante.count();
     const docentes = await Docente.count();
     const grupos = await Grupo.count();
@@ -208,7 +230,6 @@ router.get('/grupoActual', (req,res) => {
     
     res.render('grupoActual')
 });
-
 
 
 module.exports = router;

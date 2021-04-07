@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-<link rel="stylesheet" href="/Styles/mystyles.css">
+<link rel="stylesheet" href="/css/mystyles.css">
 
 <title>Login 
     
@@ -7,33 +7,32 @@
 </head>
 
 <body>
-
     <section class="Form my-4 mx-5">
         <div class = container>
             <div class="row no-gutters">
                 <div class = "col-lg-5 px-5 pt - 5">
-                    <img src ="/IMG/CESA_Santiago_Apostol.png" height="720" width="720" class ="img-fluid" alt="">
+                    <img src ="/images/CESA_Santiago_Apostol.png" height="720" width="720" class ="img-fluid" alt="">
                 </div>
                 <div class="col-lg-7">
                     <h1 class="font-weight-bold py-3">Colegio Santiago Apostol</h1>
                     <h4>Iniciar Sesion</h4>
-                   <form>
+                   <form action = "/" method="POST">
                       <div class="form-row">
                           <div class="col-lg-7">
-                              <input type="email" placeholder="Email-Address" class="form-control my-3 p-4">
+                              <input name ="user" type="user" placeholder="User-Name" class="form-control my-3 p-4">
                           </div>
                       </div> 
                       <div class="form-row">
                         <div class="col-lg-7">
-                            <input type="password" placeholder="******" class="form-control my-3 p-4">
+                            <input name="password" type="password" placeholder="Contraseña" class="form-control my-3 p-4">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-lg-7">
-                            <a href="/HTML/index.html"><button type="button" class="btn1">Login</button></a>
+                            <button  type="submit" class="btn1">Login</button>
                         </div>
                     </div> 
-                     <a href="#">Restaurar Clave</a>
+                     <a href="#">Olvidé mi Contraseña</a>
                    </form> 
                 </div>
         </div>
