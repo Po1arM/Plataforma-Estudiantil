@@ -24,7 +24,7 @@
                     <td> <%= estudiantes[i].apellido %> </td>
                     <td> <%= estudiantes[i].curso %> </td>
                     <td> <%= estudiantes[i].nivel %> </td>
-                    <td><a onclick = "location.href='/perfil'"><i class="fa fa-pencil" ></i></a></td>
+                    <td><a onclick = "location.href='/perfil/<%= estudiantes[i]._id %>'"><i class="fa fa-pencil" ></i></a></td>
                 </tr>
             <% }%>  
         </tbody>

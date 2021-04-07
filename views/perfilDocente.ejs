@@ -115,10 +115,10 @@
                     <div class="col-md-12">
                         <div class="profile-head">
                                     <h2>
-                                        <%= estudiante.nombre + estudiante.apellido%>
+                                        <%= docente.nombre + docente.apellido %>
                                     </h2>
                                     <h3>
-                                        <%= estudiante.curso + ' de ' + estudiante.nivel%>
+                                        <%= docente.especialidad %>
                                     </h3>
 
                         </div>
@@ -141,18 +141,10 @@
                                 </div>        
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Tutor</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><%= estudiante.tutor%></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
                                         <label>Email</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><%= estudiante.correo%></p>
+                                        <p><%= docente.correo%></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -160,7 +152,7 @@
                                         <label>Telefono</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><%= estudiante.telefono.slice(0,3) + "-" + estudiante.telefono.slice(3,6) + "-" + estudiante.telefono.slice(6)%></p>
+                                        <p><%= docente.telefono.slice(0,3) + "-" + docente.telefono.slice(3,6) + "-" + docente.telefono.slice(6)%></p>
                                     </div>
                             </div>
                             <div class="row">
@@ -168,8 +160,42 @@
                                     <label>Direccion</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <p><%= estudiante.direccion %></p>
+                                    <p><%= docente.direccion %></p>
                                 </div>
-                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Materias</label>
+                                </div>
+                                <div class="col-md-6"></div>
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive"> 
+                                        <table class="table table-bordered bg-white">
+                                            <thead class="thead-dark">
+                                                <th>Curso</th>
+                                                <th>Nivel</th>
+                                                <th>Materia</th>
+                                          </tr>
+                                          <tbody>
+                                            <% for(var i = 0; i < grupos.length; i++) { %>
+                                                <tr>
+                                                  <td> <%= grupos[i].curso %></td>
+                                                  <td> <%= grupos[i].nivel %></td>
+                                                  <td> <%= grupos[i].materia %></td>  
+                                                </tr>
+                                            <% }%>  
+                                          </tbody>
+                                        </table>                                
+                                    </div>
+                            </div>
+                                
+                            </div>
                             </div>
                         </div></div></div>
+
+
+                       

@@ -19,9 +19,13 @@ router.get('/', async (req,res) => {
         grupos
     });
 });
-router.get('/perfil', async (req,res) => {
-    res.render('Perfil')
+router.get('/perfil/:id', async (req,res) => {
+    const {id} = req.params
+    const estudiante = await Estudiante.findById(id)
+    const edad = calcularEdad(estudiante.nacimiento)
+    res.render('Perfil', {estudiante, edad})
 })
+
 //Cargar pagina estudiantes
 router.get('/estudiantes', async (req,res) => {
     const estudiantes = await Estudiante.find();
@@ -53,6 +57,16 @@ router.get('/docentes', async (req,res) => {
 router.get('/regEstudiante', (req,res) => {
     res.render('RegEstudiante')
 });
+
+router.get('/perfilDocente/:id', async (req,res) => {
+    const {id} = req.params
+    const docente = await Docente.findById(id)
+    const grupos = await Grupo.find({maestro: docente.nombre + " " + docente.apellido})
+    console.log(docente)
+    const edad = calcularEdad(docente.nacimiento)
+    res.render('perfilDocente', {docente, edad, grupos})
+})
+
 router.get('/modPensum/:id', async (req,res) => {
     const {id} = req.params
     const pensum = await Pensum.findById(id)
@@ -70,6 +84,7 @@ router.post('/modPensum/:id', async (req,res) =>{
     await Pensum.update({_id:id}, {materia : req.body.materias.split("|")})
     res.redirect('/pensum')
 })
+
 //Cargar pagina regDocente
 router.get('/RegDocente', (req,res) => {
     res.render('RegDocente')
@@ -129,5 +144,16 @@ router.post('/regDoc', async (req,res) =>{
 
 });
 
+function calcularEdad(fecha) {
+    var hoy = new Date();
+    var cumpleanos = fecha;
+    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+    var m = hoy.getMonth() - cumpleanos.getMonth();
+
+    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+        edad--;
+    }
+    return edad
+}
 
 module.exports = router;
