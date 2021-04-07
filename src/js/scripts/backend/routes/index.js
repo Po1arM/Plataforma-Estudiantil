@@ -15,17 +15,17 @@ router.get('/', (req,res) => {
 router.post('/', async (req,res) => {
     const user = await User.find({user: req.body.user,password: req.body.password})
     /*if(user.count() != 0){
-        
+    
     }*/
     if(user[0].tipo == 'admin'){
         res.redirect('/adminDashboard')
     } 
     if(user[0].tipo == 'estudiante'){
-        const cod = user.cod
+        const cod = user[0].cod
         res.render('vistaEstudiante')
 
     }if(user[0].tipo == 'docente'){
-        const cod = user.cod
+        const cod = user[0].cod
         res.render('vistaDocente',{cod})
 
     }
@@ -229,14 +229,14 @@ router.get('/vistaEstudiante', (req,res) => {
 
 
 //Cargar ventana del grupo del que se encarga el docente
-router.get('/grupoActual', (req,res) => {
+router.get('/grupoActual/:cod', async (req,res) => {
     
-    const profesor = Docente.find({_id : cod});
-    const grupos = Grupo.find();
-    console.log(profesor)
+    const cod = req.body
+    const profesor = await Docente.find({id : cod});
+    const grupos = await Grupo.find({maestro : profesor.nombre + " " + profesor.apellido});
 
     res.render('grupoActual',{
-        grupos
+        grupos,cod
     })
 
 });
