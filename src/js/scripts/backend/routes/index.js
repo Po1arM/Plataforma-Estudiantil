@@ -15,21 +15,23 @@ router.get('/', (req,res) => {
 router.post('/', async (req,res) => {
     const user = await User.find({user: req.body.user,password: req.body.password})
     /*if(user.count() != 0){
-        
+    
     }*/
     if(user[0].tipo == 'admin'){
         res.redirect('/adminDashboard')
     } 
     if(user[0].tipo == 'estudiante'){
-        const cod = user.cod
+        const cod = user[0].cod
         res.render('vistaEstudiante')
 
     }if(user[0].tipo == 'docente'){
-        const cod = user.cod
-        res.render('vistaDocente')
+        const cod = user[0].cod
+        res.render('vistaDocente',{cod})
 
     }
 });
+
+
 router.get('/adminDashboard', async (req,res) => {
     const estudiantes = await Estudiante.count();
     const docentes = await Docente.count();
@@ -216,6 +218,7 @@ function calcularEdad(fecha) {
 
 //Cargar Vista del Docente
 router.get('/vistaDocente', (req,res) => {
+    
     res.render('vistaDocente')
 });
 
@@ -226,9 +229,16 @@ router.get('/vistaEstudiante', (req,res) => {
 
 
 //Cargar ventana del grupo del que se encarga el docente
-router.get('/grupoActual', (req,res) => {
+router.get('/grupoActual/:cod', async (req,res) => {
     
-    res.render('grupoActual')
+    const cod = req.body
+    const profesor = await Docente.find({id : cod});
+    const grupos = await Grupo.find({maestro : profesor.nombre + " " + profesor.apellido});
+
+    res.render('grupoActual',{
+        grupos,cod
+    })
+
 });
 
 
