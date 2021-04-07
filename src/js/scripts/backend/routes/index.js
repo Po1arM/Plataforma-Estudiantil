@@ -26,10 +26,12 @@ router.post('/', async (req,res) => {
 
     }if(user[0].tipo == 'docente'){
         const cod = user.cod
-        res.render('vistaDocente')
+        res.render('vistaDocente',{cod})
 
     }
 });
+
+
 router.get('/adminDashboard', async (req,res) => {
     const estudiantes = await Estudiante.count();
     const docentes = await Docente.count();
@@ -216,6 +218,7 @@ function calcularEdad(fecha) {
 
 //Cargar Vista del Docente
 router.get('/vistaDocente', (req,res) => {
+    
     res.render('vistaDocente')
 });
 
@@ -228,7 +231,14 @@ router.get('/vistaEstudiante', (req,res) => {
 //Cargar ventana del grupo del que se encarga el docente
 router.get('/grupoActual', (req,res) => {
     
-    res.render('grupoActual')
+    const profesor = Docente.find({_id : cod});
+    const grupos = Grupo.find();
+    console.log(profesor)
+
+    res.render('grupoActual',{
+        grupos
+    })
+
 });
 
 

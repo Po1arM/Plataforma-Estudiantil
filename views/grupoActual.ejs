@@ -1,10 +1,9 @@
 <%- include('partials/_header3') %>
 
-
 <div class = "row">
     <div class="col-xl-4 col-lg-6 col-md-12">
-        <h1>Grupos</h1>
-        <button  onclick = "location.href='/genGrupos'" type="button" class="btn btn-secondary btn-min-width mr-1 mb-1">Generar Grupos</button>
+        <h1>Tus grupos</h1>
+        
     </div>
 </div>
 <div class="table-responsive">
@@ -17,11 +16,19 @@
             <th>Horario</th>
             <th>Maestro</th>
         </thead>
-            <tbody> 
-                
-
-                
-            </tbody>
+        <tbody>
+            <% for(var i = 0; i < grupos.length; i++) { %>
+                <tr>
+                    <td> <%= grupos[i].codigo %> </td>
+                    <td> <%= grupos[i].curso %> </td>
+                    <td> <%= grupos[i].nivel %> </td>
+                    <td> <%= grupos[i].materia %> </td>
+                    <td> <%= grupos[i].horario %> </td>
+                    <td> <%= grupos[i].maestro %> </td>
+                    <td><a href=""><i class="fa fa-pencil" ></i></a></td>
+                </tr>
+            <% }%>  
+        </tbody>
                     
     </table>
 
