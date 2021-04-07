@@ -1,0 +1,125 @@
+<%- include('partials/_header2') %>
+
+<!--CARTA REGISTRO-->
+
+
+<div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-wrapper-before"></div>
+      <div class="content-header row">
+      </div>
+      <div class="content-body">
+
+<!--Register form-->
+<div class="row">  
+    <div class="container p-3 my-3 bg-white">
+  
+                  <!-- Default form register -->
+                  <form class="text-center border border-dark p-4" action = "/crearGrupo" method="POST">
+          
+                    <p class="h4 mb-4">Creaer grupo</p>
+                    <div class="form-group">
+                        <h3>Curso</h3>
+                        <select name="curso" type="text" id="defaultRegisterFormSelect" class="form-control mb-4" placeholder="Curso"> 
+                            <option value="1ero">1ero</option>
+                            <option value="2do">2do</option>
+                            <option value="3ero">3ero</option>
+                            <option value="4rto">4rto</option>
+                            <option value="5to">5to</option>
+                            <option value="6to">6to</option>
+                        </select>
+                    </div>
+          
+                    <div class="form-group">
+                        <h3>Nivel</h3>
+                    <select name="nivel" type="text" id="defaultRegisterFormSelect" class="form-control mb-4" placeholder="Nivel"> 
+                        <option value="Basico">Básico</option>
+                        <option value="Secundario">Secundario</option>
+                      </select>
+                    </div>
+
+                    <!-- Especialidad -->
+                    <div class="form-group">
+                    <h3>Materia</h3>
+                      <select name="asignatura" type="text" id="defaultRegisterFormSelect" class="form-control mb-4" placeholder="Asignatura"> 
+                      <option value="Lengua Española">Lengua española</option>
+                      <option value="Matematicas">Matematicas</option>
+                      <option value="Ciencias Sociales">Ciencias Sociales</option>
+                      <option value="Ciencias Naturales">Ciencias Naturales</option>
+                      <option value="Civica">Moral y Civica</option>
+                      <option value="Emprendimiento">Emprendimiento</option>
+                      <option value="Ingles">Ingles</option>
+                      <option value="Frances">Frances</option>
+                      <option value="Arte">Arte</option>
+                      <option value="Deporte">Educacion fisica</option>
+                      <option value="Religion">Religion</option>
+                      <option value="Informatica">Informatica</option>
+                    </select>
+                    </div>
+
+                  
+                      
+
+          
+                    <!-- Phone number -->
+                    <h3>Horario</h3>
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            <label>Inicio</label>
+                            <div class="form-group">
+                                <input type="time" class = "form-control" list="timeList" name = "hora">
+                                <datalist id="timeList">
+                                    <option value="08:00">
+                                    <option value="09:00">
+                                    <option value="10:00">
+                                    <option value="11:00">
+                                    <option value="12:00">
+                                    <option value="13:00">
+                                    <option value="14:00">
+                                </datalist>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <label>Dias</label>
+                            <div class="form-group">
+                                <select class="form-control" multiple="multiple" size = 3 name = dia>
+                                    <option>Lunes</option>
+                                    <option>Martes</option>
+                                    <option>Miercoles</option>
+                                    <option>Jueves</option>
+                                    <option>Viernes</option>
+                                </select>                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input list="listaDoncentes" class="form-control" placeholder="Docente" name="maestro">
+                        <datalist id="listaDoncentes">
+                            <% for(var i = 0; i < docentes.length; i++) { %>
+                                <option value="<%= docentes[i].nombre + " " + docentes[i].apellido%>" >
+                                    <% }%>
+                        </datalist>
+                    </div>
+                    
+          
+    
+                    <!-- Sign up button -->
+                    <button class="btn btn-secondary my-4 btn-block waves-effect " type="submit">Registrar</button>
+          
+                 
+             
+          
+                
+                  </p></form>
+                  <!-- TERMINO Register form -->
+    
+      </div>
+      <div class="row match-height">
+
+         
+                <!--Section: Live preview-->
+            
+           
+    </body>
+  </html>

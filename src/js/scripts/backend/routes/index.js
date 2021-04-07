@@ -44,6 +44,41 @@ router.get('/grupos',  async (req,res) => {
     })
 });
 
+router.get('/crearGrupo', async (req,res) => {
+    const docentes = await Docente.find()
+    res.render('crearGrupo', {docentes})
+});
+
+router.post('/crearGrupo', async (req,res) => {
+    var cantGrupos = await Grupo.find({curso : req.body.curso, 
+                                        nivel : req.body.nivel,
+                                        materia : req.body.asignatura}).count()
+    cantGrupos = String.fromCharCode(65+cantGrupos);
+    const horario = req.body.dia + " " + req.body.hora
+
+    const cod = req.body.asignatura.slice(0,3) + "-" + req.body.curso[0] + cantGrupos + "-" + req.body.nivel.slice(0,3) 
+    const grupo = {
+        codigo: cod.toUpperCase(),
+        curso: req.body.curso ,
+        nivel:  req.body.nivel,
+        materia: req.body.asignatura,
+        horario : horario,
+        maestro : req.body.maestro
+    }
+    console.log( grupo  )
+    
+    Grupo.collection.insertOne(grupo, function(err,docs) {
+        if(err){ 
+            console.log(err)
+        } else {
+            console.log('Grupo insertado')
+        }
+    }) 
+    res.redirect('grupos')
+    
+});
+
+
 //Cargar pagina docentes
 router.get('/docentes', async (req,res) => {
     const docentes = await Docente.find();
