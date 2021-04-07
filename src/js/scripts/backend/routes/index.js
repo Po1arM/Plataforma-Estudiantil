@@ -156,4 +156,24 @@ function calcularEdad(fecha) {
     return edad
 }
 
+
+//Cargar Vista del Docente
+router.get('/vistaDocente', (req,res) => {
+    res.render('vistaDocente')
+});
+
+//Cargar vista del estudiante
+router.get('/vistaEstudiante', (req,res) => {
+    res.render('vistaEstudiante')
+});
+
+
+//Cargar ventana del grupo del que se encarga el docente
+router.get('/grupoActual', (req,res) => {
+    
+    res.render('grupoActual')
+});
+
+
+
 module.exports = router;
