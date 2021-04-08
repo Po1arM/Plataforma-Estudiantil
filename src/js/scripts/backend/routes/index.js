@@ -6,6 +6,8 @@ const Docente = require('../models/docente.js')
 const User = require('../models/users.js')
 const Pensum = require('../models/pensum.js')
 const Grupo = require('../models/grupo.js')
+const Evento = require('../models/evento.js')
+
 const { redirect } = require('statuses')
 
 //Cargar pagina principal
@@ -82,6 +84,18 @@ router.get('/grupos',  async (req,res) => {
         grupos
     })
 });
+
+router.get('/eliminarGrupo/:id', async (req,res) => {
+    const {id} = req.params
+    await Grupo.deleteOne({_id: id})
+    res.redirect('/grupos')
+})
+
+router.get('/modificarGrupo/:id', async (req,res) => {
+    const {id} = req.params
+    const grupo = await Grupo.findById(id)
+    res.render('modGrupo', {grupo})
+})
 
 router.get('/crearGrupo', async (req,res) => {
     const docentes = await Docente.find()
@@ -162,6 +176,11 @@ router.post('/modPensum/:id', async (req,res) =>{
 //Cargar pagina regDocente
 router.get('/RegDocente', (req,res) => {
     res.render('RegDocente')
+});
+
+router.get('/eventos',  async (req,res) => {
+    const eventos = Evento.find()
+    res.render('eventos', {eventos})
 });
 
 router.get('/pensum', async (req,res) => {
