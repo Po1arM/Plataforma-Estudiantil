@@ -12,22 +12,24 @@ const { redirect } = require('statuses')
 router.get('/', (req,res) => {
     res.render('LogIn')
 });
+
 router.post('/', async (req,res) => {
     const user = await User.find({user: req.body.user,password: req.body.password})
-    /*if(user.count() != 0){
-    
-    }*/
-    if(user[0].tipo == 'admin'){
-        res.redirect('/adminDashboard')
-    } 
-    if(user[0].tipo == 'estudiante'){
-        const cod = user[0].cod
-        res.render('vistaEstudiante')
+    if(user.length == 0){
+        res.redirect('/')
+    }else{
+        if(user[0].tipo == 'admin'){
+            res.redirect('/adminDashboard')
+        } 
+        if(user[0].tipo == 'estudiante'){
+            const cod = user[0].cod
+            res.render('vistaEstudiante')
 
-    }if(user[0].tipo == 'docente'){
-        const cod = user[0].cod
-        res.render('vistaDocente',{cod})
+        }if(user[0].tipo == 'docente'){
+            const cod = user[0].cod
+            res.render('vistaDocente',{cod})
 
+        }
     }
 });
 
@@ -218,7 +220,6 @@ function calcularEdad(fecha) {
 
 //Cargar Vista del Docente
 router.get('/vistaDocente', (req,res) => {
-    
     res.render('vistaDocente')
 });
 
