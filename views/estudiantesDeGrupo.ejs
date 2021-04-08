@@ -118,15 +118,13 @@
             <th>Maestro</th>
         </thead>
         <tbody>
-            <% for(var i = 0; i < grupos.length; i++) { %>
+            <% for(var i = 0; i < estudiantes.length; i++) { %>
                 <tr>
-                    <td> <%= grupos[i].codigo %> </td>
-                    <td> <%= grupos[i].curso %> </td>
-                    <td> <%= grupos[i].nivel %> </td>
-                    <td> <%= grupos[i].materia %> </td>
-                    <td> <%= grupos[i].horario %> </td>
-                    <td> <%= grupos[i].maestro %> </td>
-                    <td><a href="/estudiantesDeGrupo"><i class="fa fa-pencil" ></i></a></td>
+                    <td> <%= i +1 %> </td>
+                    <td> <%= estudiantes[i].nombre %> </td>
+                    <td> <%= estudiantes[i].apellido %> </td>
+                    <td> <%= estudiantes[i].curso %> </td>
+                    <td> <%= estudiantes[i].nivel %> </td>
                 </tr>
             <% }%>  
         </tbody>

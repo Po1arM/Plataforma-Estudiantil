@@ -45,6 +45,19 @@ router.get('/adminDashboard', async (req,res) => {
         grupos
     });
 });
+
+
+router.get('/vistaDocente', async (req,res) => {
+    const estudiantes = await Estudiante.count();
+    const docentes = await Docente.count();
+    const grupos = await Grupo.count();
+
+    res.render('vistaDocente', {
+        estudiantes,
+        docentes,
+        grupos
+    });
+});
 router.get('/perfil/:id', async (req,res) => {
     const {id} = req.params
     const estudiante = await Estudiante.findById(id)
@@ -232,15 +245,39 @@ router.get('/vistaEstudiante', (req,res) => {
 //Cargar ventana del grupo del que se encarga el docente
 router.get('/grupoActual/:cod', async (req,res) => {
     
-    const cod = req.body
-    const profesor = await Docente.find({id : cod});
-    const grupos = await Grupo.find({maestro : profesor.nombre + " " + profesor.apellido});
+    const {cod} =  req.params
+    const profesor = await Docente.findById(cod)
+    const grupos = await Grupo.find({maestro : profesor.nombre + " " + profesor.apellido})
+    console.log(grupos)
 
-    res.render('grupoActual',{
-        grupos,cod
-    })
+    res.render('grupoActual',{ grupos })
+
 
 });
 
+/*Edita esto*/
+//Cargar ventana que muestra los estudiantes del grupo seleccionado por el Docente
+router.get('/estudiantesDeGrupo', (req,res) => {
+    /*
+    const {id} =  req.params
+    const profesor = await Docente.findById(cod)
+    const grupos = await Grupo.find({maestro : profesor.nombre + " " + profesor.apellido})
+    console.log(grupos)*/
+
+    res.render('estudiantesDeGrupo')
+
+
+});
+
+
+/*
+router.get('/perfilDocente/:id', async (req,res) => {
+    const {id} = req.params
+    const docente = await Docente.findById(id)
+    const grupos = await Grupo.find({maestro: docente.nombre + " " + docente.apellido})
+    console.log(docente)
+    const edad = calcularEdad(docente.nacimiento)
+    res.render('perfilDocente', {docente, edad, grupos})
+})*/
 
 module.exports = router;
