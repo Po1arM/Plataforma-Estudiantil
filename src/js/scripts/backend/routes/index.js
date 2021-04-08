@@ -243,17 +243,19 @@ router.get('/vistaEstudiante', (req,res) => {
 
 
 //Cargar ventana del grupo del que se encarga el docente
-router.get('/grupoActual/:cod', async (req,res) => {
+router.get('/grupoActual/:id', async (req,res) => {
     
-    const {cod} =  req.params
-    const profesor = await Docente.findById(cod)
-    const grupos = await Grupo.find({maestro : profesor.nombre + " " + profesor.apellido})
-    console.log(grupos)
+    const {id} = req.params
+    console.log(id)
+    const profesor = await Docente.findById(id);
+    const grupos = await Grupo.find({maestro : profesor.nombre + " " + profesor.apellido});
 
-    res.render('grupoActual',{ grupos })
-
+    res.render('grupoActual',{
+        grupos,id
+    })
 
 });
+
 
 /*Edita esto*/
 //Cargar ventana que muestra los estudiantes del grupo seleccionado por el Docente
