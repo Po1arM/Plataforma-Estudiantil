@@ -195,12 +195,14 @@ router.get('/pensum', async (req,res) => {
 router.post('/regEstud', async (req,res) => {
     //Crea un nuevo objeto con los datos del formulario
     const estudiante = new Estudiante(req.body);
+    const letra = await letraCurso(estudiante.nivel, estudiante.curso);  //aqui
     //Guarda el objeto en la base de datos
     await estudiante.save();
     const user = {
         cod: estudiante._id.toString(),
         user: estudiante.nombre + estudiante.apellido  ,
         password: estudiante.password,
+        letra: estudiante.letra, //aqui
         tipo: "estudiante"
     }
     User.collection.insertOne(user, function(err,docs) {
@@ -248,6 +250,7 @@ function calcularEdad(fecha) {
     }
     return edad
 }
+
 
 
 //Cargar Vista del Docente
@@ -300,5 +303,14 @@ router.get('/perfilDocente/:id', async (req,res) => {
     const edad = calcularEdad(docente.nacimiento)
     res.render('perfilDocente', {docente, edad, grupos})
 })*/
+
+//Calcular la letra del curso
+async function letraCurso(nivelActual, cursoActual){
+    const cantEstudiantes = await Estudiante.find({curso: cursoActual, nivel: nivelActual}).count();
+    var letra = String.fromCharCode(65+ (cantEstudiantes/5));
+
+    return letra;
+}
+
 
 module.exports = router;
