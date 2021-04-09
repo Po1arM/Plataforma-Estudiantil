@@ -11,7 +11,8 @@ const estudiante = new Schema({
     curso: String,
     nivel: String,
     direccion: String,
-    tutor: String
+    tutor: String,
+    letra: String
 });
 
 module.exports = mongoose.model('estudiante', estudiante);
