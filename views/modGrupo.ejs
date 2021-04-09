@@ -13,10 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700" rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/599c892ae7.js" crossorigin="anonymous"></script>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/css/perfil.css">
+
     <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="/css/vendors.css">
     <!-- END VENDOR CSS-->
@@ -33,7 +30,7 @@
   <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-gradient-x" data-col="2-columns">
 
     <!-- fixed-top-->
-    <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
+    <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-light">
       <div class="navbar-wrapper">
         <div class="navbar-container content">
           <div class="collapse navbar-collapse show" id="navbar-mobile">
@@ -73,7 +70,8 @@
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-    <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="images/backgrounds/02.jpg">
+
+   <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="images/backgrounds/02.jpg">
       <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">       
           <li class="nav-item mr-auto"><a class="navbar-brand" href="index.html"><img class="brand-logo" alt="Chameleon admin logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Cross_Santiago.svg/220px-Cross_Santiago.svg.png"/>
@@ -93,83 +91,108 @@
           </li>
           <li class=" nav-item"><a href="/"><i class="fas fa-calendar-week"></i><span class="menu-title" data-i18n="">Eventos</span></a>
           </li>
-          <li class=" nav-item"><a href="/pensum"><i class="fas fa-book"></i><span class="menu-title" data-i18n="">Pensums</span></a>
-          </li>
         </ul>
       </div>
       <div class="navigation-background"></div>
     </div>
-    
-    <div class="app-content content">
-      <div class="content-wrapper">
-        <div class="content-wrapper-before"></div>
-        <div class="content-header row">
-        </div>
-        <div class="content-body"><!-- Chart -->
-<div class="row match-height">
-   
-<div class="container emp-profile">
-            <form method="post">
-                <div class="row">
+<!--CARTA REGISTRO-->
 
-                    <div class="col-md-12">
-                        <div class="profile-head">
-                                    <h2>
-                                        <%= grupo.codigo%>
-                                    </h2>
-                                    <h3>
-                                        <%= grupo.curso + '-' + grupo.nivel%>
-                                    </h3>
 
+<div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-wrapper-before"></div>
+      <div class="content-header row">
+      </div>
+      <div class="content-body">
+
+<!--Register form-->
+<div class="row">  
+    <div class="container p-3 my-3 bg-white">
+  
+                  <!-- Default form register -->
+                  <form class="text-center border border-dark p-4" action = "/modificarGrupo/<%= grupo._id%>" method="POST">
+          
+                    <p class="h4 mb-4">Creaer grupo</p>
+                    <div class="form-group">
+                        <h3>Curso</h3>
+                        <input name = "curso" value="<%= grupo.curso %>" readonly="readonly" class="form-control">
+                    </div>
+          
+                    <div class="form-group">
+                        <h3>Nivel</h3>
+                        <input name = "nivel" value="<%= grupo.nivel %>" readonly="readonly" class="form-control">
+
+
+                    <!-- Especialidad -->
+                    <div class="form-group">
+                    <h3>Materia</h3>
+                    <input name = "materia" value="<%= grupo.materia %>" readonly="readonly" class="form-control">
+
+                    </div>
+
+                  
+                      
+
+          
+                    <!-- Phone number -->
+                    <h3>Horario</h3>
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            <label>Inicio</label>
+                            <div class="form-group">
+                                <input type="time" class = "form-control" list="timeList" name = "hora">
+                                <datalist id="timeList">
+                                    <option value="08:00">
+                                    <option value="09:00">
+                                    <option value="10:00">
+                                    <option value="11:00">
+                                    <option value="12:00">
+                                    <option value="13:00">
+                                    <option value="14:00">
+                                </datalist>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <label>Dias</label>
+                            <div class="form-group">
+                                <select class="form-control" multiple="multiple" size = 3 name = dia>
+                                    <option>Lunes</option>
+                                    <option>Martes</option>
+                                    <option>Miercoles</option>
+                                    <option>Jueves</option>
+                                    <option>Viernes</option>
+                                </select>                            </div>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    
+                    <div class="form-group">
+                        <input list="listaDoncentes" class="form-control" value="<%= grupo.maestro %>" name="maestro">
+                        <datalist id="listaDoncentes">
+                            <% for(var i = 0; i < docentes.length; i++) { %>
+                                <option value="<%= docentes[i].nombre + " " + docentes[i].apellido%>" >
+                                    <% }%>
+                        </datalist>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Materia</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><%= grupo.materia %></p>
-                                    </div>
-                                </div>        
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Tutor</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><%= %></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Email</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><%= %></p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Telefono</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><%= %></p>
-                                    </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>Direccion</label>
-                                </div>
-                                <div class="col-md-6">
-                                    <p><%= %></p>
-                                </div>
-                </div>
-                            </div>
-                        </div></div></div>
+                    
+          
+    
+                    <!-- Sign up button -->
+                    <button class="btn btn-secondary my-4 btn-block waves-effect " type="submit">Registrar</button>
+          
+                 
+             
+          
+                
+                  </p></form>
+                  <!-- TERMINO Register form -->
+    
+      </div>
+      <div class="row match-height">
+
+         
+                <!--Section: Live preview-->
+            
+           
+    </body>
+  </html>

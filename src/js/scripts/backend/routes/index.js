@@ -120,7 +120,16 @@ router.get('/eliminarGrupo/:id', async (req,res) => {
 router.get('/modificarGrupo/:id', async (req,res) => {
     const {id} = req.params
     const grupo = await Grupo.findById(id)
-    res.render('modGrupo', {grupo})
+    const docentes = await Docente.find()
+    res.render('modGrupo', {grupo,docentes})
+})
+
+router.post('/modificarGrupo/:id', async (req,res) => {
+    const {id} = req.params
+    const grupo = await Grupo.findById(id)
+    const horario = req.body.dia + " " + req.body.hora
+    await Grupo.update({_id: id}, {horario: horario, maestro: req.body.maestro})
+    res.redirect('/grupos')
 })
 
 router.get('/crearGrupo', async (req,res) => {
