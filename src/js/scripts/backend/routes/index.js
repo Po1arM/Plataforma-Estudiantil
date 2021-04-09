@@ -9,6 +9,7 @@ const Grupo = require('../models/grupo.js')
 const Evento = require('../models/evento.js')
 
 const { redirect } = require('statuses')
+const estudiante = require('../models/estudiante.js')
 
 //Cargar pagina principal
 router.get('/', (req,res) => {
@@ -308,14 +309,17 @@ router.get('/grupoActual/:id', async (req,res) => {
 
 /*Edita esto*/
 //Cargar ventana que muestra los estudiantes del grupo seleccionado por el Docente
-router.get('/estudiantesDeGrupo', (req,res) => {
-    /*
-    const {id} =  req.params
-    const profesor = await Docente.findById(cod)
-    const grupos = await Grupo.find({maestro : profesor.nombre + " " + profesor.apellido})
-    console.log(grupos)*/
+router.get('/estudiantesDeGrupo/:id', async (req,res) => {
+    
+    const {id} = req.params
+    const grupo = await Grupo.findById(id)
+    const estudiantes = await Estudiante.find({curso : grupo.curso})
+    
+    console.log(estudiantes)
 
-    res.render('estudiantesDeGrupo')
+    res.render('estudiantesDeGrupo',{
+        estudiantes
+    })
 
 
 });

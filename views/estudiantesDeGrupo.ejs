@@ -110,17 +110,16 @@
 <div class="table-responsive">
     <table  class="table table-bordered bg-white">
         <thead class="thead-dark">
-            <th>Codigo</th>
-            <th>Curso</th>
-            <th>Nivel</th>
-            <th>Materia</th>
-            <th>Horario</th>
-            <th>Maestro</th>
+            <th>nombre</th>
+            <th>apellido</th>
+            <th>curso</th>
+            <th>nivel</th>
+            
         </thead>
         <tbody>
             <% for(var i = 0; i < estudiantes.length; i++) { %>
                 <tr>
-                    <td> <%= i +1 %> </td>
+                    <td> <%= i + 1 %> </td>
                     <td> <%= estudiantes[i].nombre %> </td>
                     <td> <%= estudiantes[i].apellido %> </td>
                     <td> <%= estudiantes[i].curso %> </td>
