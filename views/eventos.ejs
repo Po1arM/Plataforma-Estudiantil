@@ -1,1 +1,43 @@
 <%- include('partials/_header1') %>
+
+<div class = "row">
+    <div class="col-xl-4 col-lg-6 col-md-12">
+        <h1>Eventos</h1>
+        <button type="button" onclick = "location.href='/addEvent'" class="btn btn-secondary btn-min-width mr-1 mb-1">Registrar</button>
+    </div>
+</div>
+<div class="table-responsive">
+    <table  class="table table-bordered bg-white">
+        <thead class="thead-dark">
+            <th>#</th>
+            <th>Titulo</th>
+            <th>Descripción</th>
+            
+      </tr>
+      <tbody>
+        <% for(var i = 0; i < eventos.length; i++) { %>
+            <tr>
+                <td> <%=i + 1 %> </td>
+                <td> <%= eventos[i].titulo %> </td>
+                <td> <%= eventos[i].descripcion %> </td>
+                <td><a href="/modEvento/<%= eventos[i]._id %>"><i class="fa fa-pencil" ></i></a></td>
+                <td><a href="/eliminarEvento/<%= eventos[i]._id %>"><i class="fa fa-trash" ></i></a></td>
+
+            </tr>
+        <% }%>  
+    </tbody>
+    </table>
+
+      <!-- BEGIN VENDOR JS-->
+      <script src="vendors/js/vendors.min.js" type="text/javascript"></script>
+      <!-- BEGIN VENDOR JS-->
+      <!-- BEGIN PAGE VENDOR JS-->
+      <!-- END PAGE VENDOR JS-->
+      <!-- BEGIN CHAMELEON  JS-->
+      <script src="js/core/app-menu-lite.js" type="text/javascript"></script>
+      <script src="js/core/app-lite.js" type="text/javascript"></script>
+      <!-- END CHAMELEON  JS-->
+      <!-- BEGIN PAGE LEVEL JS-->
+      <!-- END PAGE LEVEL JS-->
+    </body>
+  </html>

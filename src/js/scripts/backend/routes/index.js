@@ -48,6 +48,31 @@ router.get('/adminDashboard', async (req,res) => {
     });
 });
 
+router.get('/addEvent', (req,res) => {
+    res.render('agregarEvento')
+});
+
+router.post('/addEvent', async (req,res) => {
+    const evento = new Evento(req.body);
+    await evento.save()
+    res.redirect('/eventos')
+});
+
+router.get('/eliminarEvento/:id', async (req,res) => {
+    const {id} = req.params
+    await Evento.deleteOne({_id: id})
+    res.redirect('/eventos')
+});
+router.get('/modEvento/:id', async (req,res) => {
+    const {id} = req.params
+    const evento = await Evento.findById(id)
+    res.render('actualizarEvento',{evento})
+});
+router.post('/modEvento/:id', async (req,res) => {
+    const {id} = req.params
+    await Evento.update({_id : id }, req.body)
+    res.redirect('/eventos')
+});
 
 router.get('/vistaDocente', async (req,res) => {
     const estudiantes = await Estudiante.count();
@@ -163,13 +188,15 @@ router.get('/modPensum/:id', async (req,res) => {
         console.log(element)
         materias = materias.concat(element, " | ")
     });
+    materias = materias.slice(0,-3)
     console.log(materias)
     res.render('modPensum', {pensum, materias})
 });
 
 router.post('/modPensum/:id', async (req,res) =>{
     const {id} = req.params
-    await Pensum.update({_id:id}, {materia : req.body.materias.split("|")})
+    const materias = req.body.materias.replace(/ /g, "")
+    await Pensum.update({_id:id}, {materia : materias.split('|')})
     res.redirect('/pensum')
 })
 
@@ -179,7 +206,7 @@ router.get('/RegDocente', (req,res) => {
 });
 
 router.get('/eventos',  async (req,res) => {
-    const eventos = Evento.find()
+    const eventos = await Evento.find()
     res.render('eventos', {eventos})
 });
 
@@ -312,5 +339,42 @@ async function letraCurso(nivelActual, cursoActual){
     return letra;
 }
 
+async function generarGrupos(){
+    const pensums = await Pensum.find()
+    for(var i = 0; i < pensums.length; i++){
+        console.log(pensums.length)
+        var cantEstudiantes = await cantGrupos(pensums[i])
+        console.log(cantEstudiantes)
 
+        for(var j = 0; j < cantEstudiantes; j++){
+            for(var k = 0; k < pensums[i].materia.length; k++) {
+
+                var letraGrupo = String.fromCharCode(64+cantEstudiantes);
+                var cod = pensums[i].materia[k].slice(0,3) + "-" + pensums[i].curso[0] + letraGrupo + "-" + pensums[i].nivel.slice(0,3) 
+                var grupo = {
+                    codigo: cod.toUpperCase(),
+                    curso: pensums[i].curso ,
+                    nivel:  pensums[i].nivel,
+                    materia: pensums[i].materia[k],
+        
+                }
+                /*Grupo.collection.insertOne(grupo, function(err,docs) {
+                    if(err){ 
+                        console.log(err)
+                    } else {
+                        console.log('Grupo insertado')
+                    }
+                })*/ 
+            }
+        }
+    
+    }
+}
+
+async function cantGrupos(pensum){
+    var cantEstudiantes = await Estudiante.find({curso:pensum.cuso, nivel: pensum.nivel}).count()
+    cantEstudiantes = Math.floor(cantEstudiantes/5)
+
+    return cantEstudiantes + 1
+}
 module.exports = router;

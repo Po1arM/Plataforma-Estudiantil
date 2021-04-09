@@ -15,14 +15,14 @@
     <script src="https://kit.fontawesome.com/599c892ae7.js" crossorigin="anonymous"></script>
 
     <!-- BEGIN VENDOR CSS-->
-    <link rel="stylesheet" type="text/css" href="css/vendors.css">
+    <link rel="stylesheet" type="text/css" href="/css/vendors.css">
     <!-- END VENDOR CSS-->
     <!-- BEGIN CHAMELEON  CSS-->
-    <link rel="stylesheet" type="text/css" href="css/app-lite.css">
+    <link rel="stylesheet" type="text/css" href="/css/app-lite.css">
     <!-- END CHAMELEON  CSS-->
     <!-- BEGIN Page Level CSS-->
-    <link rel="stylesheet" type="text/css" href="css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="css/core/colors/palette-gradient.css">
+    <link rel="stylesheet" type="text/css" href="/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="/css/core/colors/palette-gradient.css">
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <!-- END Custom CSS-->
@@ -30,7 +30,7 @@
   <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-gradient-x" data-col="2-columns">
 
     <!-- fixed-top-->
-    <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
+    <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-light">
       <div class="navbar-wrapper">
         <div class="navbar-container content">
           <div class="collapse navbar-collapse show" id="navbar-mobile">
@@ -71,7 +71,7 @@
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
-    <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="images/backgrounds/02.jpg">
+   <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="images/backgrounds/02.jpg">
       <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">       
           <li class="nav-item mr-auto"><a class="navbar-brand" href="index.html"><img class="brand-logo" alt="Chameleon admin logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Cross_Santiago.svg/220px-Cross_Santiago.svg.png"/>
@@ -81,7 +81,7 @@
       </div>
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          <li class=" nav-item"><a href="/adminDashboard"><i class="fas fa-school"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+          <li class=" nav-item"><a href="/"><i class="fas fa-school"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
           </li>
           <li class=" nav-item"><a href="/estudiantes"><i class="fas fa-user-graduate"></i><span class="menu-title" data-i18n="">Estudiantes</span></a>
           </li>
@@ -89,21 +89,49 @@
           </li>
           <li class=" nav-item"><a href="/grupos"><i class="fas fa-user-friends"></i><span class="menu-title" data-i18n="">Grupos</span></a>
           </li>
-          <li class=" nav-item"><a href="/eventos"><i class="fas fa-calendar-week"></i><span class="menu-title" data-i18n="">Eventos</span></a>
-          </li>
-          <li class=" nav-item"><a href="/pensum"><i class="fas fa-book"></i><span class="menu-title" data-i18n="">Pensums</span></a>
+          <li class=" nav-item"><a href="/"><i class="fas fa-calendar-week"></i><span class="menu-title" data-i18n="">Eventos</span></a>
           </li>
         </ul>
       </div>
       <div class="navigation-background"></div>
     </div>
+<!--CARTA REGISTRO-->
+
+
+<div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-wrapper-before"></div>
+      <div class="content-header row">
+      </div>
+      <div class="content-body">
+
+<!--Register form-->
+<div class="row">  
+    <div class="container p-3 my-3 bg-white">
+  
+                  <!-- Default form register -->
+                  <form class="text-center border border-dark p-4" action = "/modEvento/<%= evento._id %>" method="POST">
+                    <div class="form-group">
+                        <label for="titulo">Titulo</label>
+                        <input type="text" name = "titulo" class="form-control" value="<%= evento.titulo%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+
+                        <textarea name="descripcion" cols="200" rows="20" class="form-control" ><%= evento.descripcion %></textarea>
+                    </div>
+                    <!-- Sign up button -->
+                    <button class="btn btn-secondary my-4 btn-block waves-effect " type="submit">Actualizar</button>
+          
+        </form>
+                  <!-- TERMINO Register form -->
     
-    <div class="app-content content">
-      <div class="content-wrapper">
-        <div class="content-wrapper-before"></div>
-        <div class="content-header row">
-        </div>
-        <div class="content-body"><!-- Chart -->
-<div class="row match-height">
-   
-</div>
+      </div>
+      <div class="row match-height">
+
+         
+                <!--Section: Live preview-->
+            
+           
+    </body>
+  </html>

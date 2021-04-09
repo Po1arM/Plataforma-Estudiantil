@@ -1,0 +1,42 @@
+<%- include('partials/_header2') %>
+
+<!--CARTA REGISTRO-->
+
+
+<div class="app-content content">
+    <div class="content-wrapper">
+      <div class="content-wrapper-before"></div>
+      <div class="content-header row">
+      </div>
+      <div class="content-body">
+
+<!--Register form-->
+<div class="row">  
+    <div class="container p-3 my-3 bg-white">
+  
+                  <!-- Default form register -->
+                  <form class="text-center border border-dark p-4" action = "/addEvent" method="POST">
+                    <div class="form-group">
+                        <label for="titulo">Titulo</label>
+                        <input type="text" name = "titulo" placeholder="Inserte un titulo" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripcion</label>
+
+                        <textarea name="descripcion" cols="200" rows="20" class="form-control" placeholder="Inserte una descripcion"></textarea>
+                    </div>
+                    <!-- Sign up button -->
+                    <button class="btn btn-secondary my-4 btn-block waves-effect " type="submit">Añadir</button>
+          
+        </form>
+                  <!-- TERMINO Register form -->
+    
+      </div>
+      <div class="row match-height">
+
+         
+                <!--Section: Live preview-->
+            
+           
+    </body>
+  </html>
