@@ -13,13 +13,13 @@ const estudiante = require('../models/estudiante.js')
 
 //Cargar pagina principal
 router.get('/', (req,res) => {
-    res.render('LogIn')
+    res.render('log')
 });
 
 router.post('/', async (req,res) => {
     const user = await User.find({user: req.body.user,password: req.body.password})
     if(user.length == 0){
-        res.redirect('/')
+        res.render('LogIn')
     }else{
         if(user[0].tipo == 'admin'){
             res.redirect('/adminDashboard')
