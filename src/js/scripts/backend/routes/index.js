@@ -145,14 +145,29 @@ router.post('/crearGrupo', async (req,res) => {
     const horario = req.body.dia + " " + req.body.hora
 
     const cod = req.body.asignatura.slice(0,3) + "-" + req.body.curso[0] + cantGrupos + "-" + req.body.nivel.slice(0,3) 
+
+
+    const curso = req.body.curso
+    const nivel = req.body.nivel
+    const estudiantes = Estudiante.find({curso:curso, nivel:nivel})
+    var calificaciones; 
+
+    for(int = 0; i < estudiantes.length(); i++){
+        calificaciones[i][0] = estudiantes[i]._id
+        calificaciones[i][1] = 0
+    }
+
     const grupo = {
         codigo: cod.toUpperCase(),
         curso: req.body.curso ,
         nivel:  req.body.nivel,
         materia: req.body.asignatura,
         horario : horario,
-        maestro : req.body.maestro
+        maestro : req.body.maestro,
+        calificaciones: calificaciones
     }
+    
+
     console.log( grupo  )
     
     Grupo.collection.insertOne(grupo, function(err,docs) {
@@ -323,26 +338,16 @@ router.get('/estudiantesDeGrupo/:id', async (req,res) => {
     const {id} = req.params
     const grupo = await Grupo.findById(id)
     const estudiantes = await Estudiante.find({curso : grupo.curso})
-    
+    const grupos = await Grupo.find({curso : grupo.curso})
     console.log(estudiantes)
 
     res.render('estudiantesDeGrupo',{
-        estudiantes
+        estudiantes,grupos
     })
 
 
 });
 
-
-/*
-router.get('/perfilDocente/:id', async (req,res) => {
-    const {id} = req.params
-    const docente = await Docente.findById(id)
-    const grupos = await Grupo.find({maestro: docente.nombre + " " + docente.apellido})
-    console.log(docente)
-    const edad = calcularEdad(docente.nacimiento)
-    res.render('perfilDocente', {docente, edad, grupos})
-})*/
 
 //Calcular la letra del curso
 async function letraCurso(nivelActual, cursoActual){
@@ -383,6 +388,42 @@ async function generarGrupos(){
     
     }
 }
+//Cargar pagina para calificar 
+router.get('/calificar', (req,res) => {
+    res.render('calificar')
+});
+
+//Enviar calificacion
+
+
+
+
+
+
+router.post('/calificar/:id/:cod', async (req,res) =>{
+
+    const {id} = req.params
+    const {cod} = req.params
+    const grupo =  await Grupo.findById(id);
+    var aux = false;
+    var i = 0;
+    const nota = grupo.calificaciones
+
+    while(!aux){
+        if (nota[i][0] == cod){
+            nota[i][1] = req.body;
+            aux = true;
+        }
+        i++;
+    }
+    await Grupo.update({_id: id}, {calificaciones : nota})
+
+    res.render('estudiantesDeGrupo');
+
+});
+
+
+
 
 async function cantGrupos(pensum){
     var cantEstudiantes = await Estudiante.find({curso:pensum.cuso, nivel: pensum.nivel}).count()

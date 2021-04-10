@@ -8,6 +8,7 @@ const grupo = new Schema({
     materia: String,
     horario: String,
     maestro: String,
+    calificaciones: Array,
 });
 
 module.exports = mongoose.model('grupo', grupo);
