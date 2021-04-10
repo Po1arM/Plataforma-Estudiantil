@@ -16,6 +16,12 @@ router.get('/', (req,res) => {
     res.render('log')
 });
 
+router.get('/log', (req,res) => {
+    res.render('log')
+});
+
+
+
 router.post('/', async (req,res) => {
     const user = await User.find({user: req.body.user,password: req.body.password})
     if(user.length == 0){
@@ -443,6 +449,12 @@ router.post('/calificar/:id/:cod', async (req,res) =>{
     })
 });
 
+//Cargar pagina de ver eventos en Docente y Estudiante
+
+router.get('/verEventos',  async (req,res) => {
+    const eventos = await Evento.find()
+    res.render('verEventos', {eventos})
+});
 
 
 
