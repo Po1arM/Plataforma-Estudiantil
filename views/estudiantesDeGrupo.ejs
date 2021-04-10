@@ -120,15 +120,14 @@
         <tbody>
             <% for(var i = 0; i < estudiantes.length; i++) { %>
                 <tr>
-        
                     <td> <%= estudiantes[i].nombre %> </td>
                     <td> <%= estudiantes[i].apellido %> </td>
                     <td> <%= estudiantes[i].curso %> </td>
                     <td> <%= estudiantes[i].nivel %> </td>
-                    <td> <%= grupos[i].calificacion %> </td>
-                    <td><a href="/calificar/<%= grupos[i]._id %>/<%= estudiantes[i]._id %>"><i class="fa fa-pencil" ></i></a></td>
+                    <td> <%= grupo.calificaciones[i].valor %> </td>
+                    <td><a href="/calificar/<%= grupo._id %>/<%= estudiantes[i]._id %>"><i class="fa fa-pencil" ></i></a></td>
                 </tr>
-            <% }%>  
+            <% } %>  
         </tbody>
                     
     </table>
