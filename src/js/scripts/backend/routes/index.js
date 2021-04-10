@@ -406,7 +406,14 @@ router.get('/calificar/:id/:cod', async (req,res) => {
 });
 
 //Enviar calificacion
+router.get('/gruposEstudiante/:id', async (req,res) => {
+    const {id}= req.params
+    const estudiante = await Estudiante.findById(id)
+    const grupos = await Grupo.find({nivel: estudiante.nivel, curso : estudiante.curso})
 
+    res.render('gruposEstudiante',{
+        grupos,id
+    })});
 
 
 
