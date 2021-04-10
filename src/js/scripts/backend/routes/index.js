@@ -26,7 +26,7 @@ router.post('/', async (req,res) => {
         } 
         if(user[0].tipo == 'estudiante'){
             const cod = user[0].cod
-            res.render('vistaEstudiante')
+            res.render('vistaEstudiante',{cod})
 
         }if(user[0].tipo == 'docente'){
             const cod = user[0].cod
