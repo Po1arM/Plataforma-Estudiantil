@@ -83,6 +83,8 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
           <li class=" nav-item"><a href="/grupoActual>"><i class="fas fa-user-friends"></i><span class="menu-title" data-i18n="">Grupo</span></a>
           </li>
+          <li class=" nav-item"><a href="/estudiantes"><i class="fas fa-user-graduate"></i><span class="menu-title" data-i18n="">Estudiantes</span></a>
+          </li>
           <li class=" nav-item"><a href="/"><i class="fas fa-calendar-week"></i><span class="menu-title" data-i18n="">Eventos</span></a>
           </li>
         </ul>
@@ -106,17 +108,51 @@
                   <!-- Default form register -->
                   <form class="text-center border border-dark p-4" action = "/calificar/<%= grupo._id %>/<%= estudiante._id %>" method="POST">
           
-                    <p class="h4 mb-4">Nota</p>
+                    <p class="h4 mb-4">Notas</p>
           
                     <div class="form-row mb-4">
                       <div class="col">
                         <!-- First name -->
-                        <input name="nombre" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Calificacion:">
+                        <input name="nota1" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Septiembre:">
+                        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+                      
+                        </small>
+
+                        <input name="nota2" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Octubre:">
+                        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+                      
+                        </small>
+
+                        <input name="nota3" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Noviembre:">
+                        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+                      
+                        </small>
+
+                        <input name="nota4" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Enero:">
+                        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+                      
+                        </small>
+
+                        <input name="nota5" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Febrero:">
+                        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+                      
+                        </small>
+
+                        <input name="nota6" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Marzo:">
+                        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+                      
+                        </small>
+
+                        <input name="nota7" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Abril:">
+                        <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+                      
+                        </small>
+
+                      
                       </div>
                     
-    
                     <!-- Sign up button -->
-                    <button class="btn btn-secondary my-4 btn-block waves-effect " type="submit">Calificar</button>
+                    <button class="btn btn-secondary my-2 btn-block waves-effect " type="submit">Calificar</button>
           
                  
              

@@ -165,7 +165,15 @@ router.post('/crearGrupo', async (req,res) => {
 
         var objeto = { 
             "id"    : estudiantes[i]._id,
-            "valor"  : 0 
+            "valor1" : 0,
+            "valor2" : 0,
+            "valor3" : 0,
+            "valor4" : 0,
+            "valor5" : 0,
+            "valor6" : 0,
+            "valor7" : 0,
+            "cont" : 0
+
         };
         
         calificaciones.push(objeto)
