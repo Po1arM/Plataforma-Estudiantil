@@ -81,11 +81,9 @@
       </div>
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          <li class=" nav-item"><a href="/grupoActual>"><i class="fas fa-user-friends"></i><span class="menu-title" data-i18n="">Grupo</span></a>
+          <li class=" nav-item"><a href="/grupoActual/<%= id%>"><i class="fas fa-user-friends"></i><span class="menu-title" data-i18n="">Grupo</span></a>
           </li>
-          <li class=" nav-item"><a href="/estudiantes"><i class="fas fa-user-graduate"></i><span class="menu-title" data-i18n="">Estudiantes</span></a>
-          </li>
-          <li class=" nav-item"><a href="/"><i class="fas fa-calendar-week"></i><span class="menu-title" data-i18n="">Eventos</span></a>
+          <li class=" nav-item"><a href="/verEventos/<%= id%>"><i class="fas fa-calendar-week"></i><span class="menu-title" data-i18n="">Eventos</span></a>
           </li>
         </ul>
       </div>
@@ -119,7 +117,7 @@
   <% for(var i = 0; i < eventos.length; i++) { %>
       <tr >
           
-        <div class="card  col-xl-4 col-lg-6 col-md-12"  style="width: 18rem; ">
+        <div class="card  col-xl-3 col-lg-4 col-md-10"  style="width: 15rem; margin: 2rem">
             <div class="card-body">
               <h5 class="card-title"><%= eventos[i].titulo %></h5>
               <p class="card-text">

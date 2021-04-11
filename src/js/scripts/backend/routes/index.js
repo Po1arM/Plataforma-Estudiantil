@@ -7,6 +7,8 @@ const User = require('../models/users.js')
 const Pensum = require('../models/pensum.js')
 const Grupo = require('../models/grupo.js')
 const Evento = require('../models/evento.js')
+const Matricula = require('../models/matricula.js')
+
 
 const { redirect } = require('statuses')
 const estudiante = require('../models/estudiante.js')
@@ -35,8 +37,8 @@ router.post('/', async (req,res) => {
             res.render('vistaEstudiante',{cod})
 
         }if(user[0].tipo == 'docente'){
-            const cod = user[0].cod
-            res.render('vistaDocente',{cod})
+            const id = user[0].cod
+            res.render('vistaDocente',{id})
 
         }
     }
@@ -260,6 +262,7 @@ router.post('/regEstud', async (req,res) => {
     //Crea un nuevo objeto con los datos del formulario
     const estudiante = new Estudiante(req.body);
     const letra = await letraCurso(estudiante.nivel, estudiante.curso);  //aqui
+    const cont = await Matricula
     //Guarda el objeto en la base de datos
     await estudiante.save();
     const user = {
@@ -277,7 +280,7 @@ router.post('/regEstud', async (req,res) => {
         }
     })  
     //Vuelve a cargar la pestaña de registro
-    res.render('RegEstudiante');
+    res.redirect('/estudiante');
 
 });
 
@@ -332,12 +335,11 @@ router.get('/vistaEstudiante', (req,res) => {
 router.get('/grupoActual/:id', async (req,res) => {
     
     const {id} = req.params
-    console.log(id)
     const profesor = await Docente.findById(id);
     const grupos = await Grupo.find({maestro : profesor.nombre + " " + profesor.apellido});
 
     res.render('grupoActual',{
-        grupos,id
+        id, grupos
     })
 
 });
@@ -345,15 +347,16 @@ router.get('/grupoActual/:id', async (req,res) => {
 
 /*Edita esto*/
 //Cargar ventana que muestra los estudiantes del grupo seleccionado por el Docente
-router.get('/estudiantesDeGrupo/:id', async (req,res) => {
+router.get('/estudiantesDeGrupo/:id/:cod', async (req,res) => {
     
-    const {id} = req.params
+    const id = req.params.id
+    const cod = req.params.cod
     const grupo = await Grupo.findById(id)
     const estudiantes = await Estudiante.find({curso : grupo.curso, nivel : grupo.nivel})
     console.log(grupo)
 
     res.render('estudiantesDeGrupo',{
-        estudiantes,grupo
+        estudiantes,grupo,id,cod
     })
 
 
@@ -451,9 +454,10 @@ router.post('/calificar/:id/:cod', async (req,res) =>{
 
 //Cargar pagina de ver eventos en Docente y Estudiante
 
-router.get('/verEventos',  async (req,res) => {
+router.get('/verEventos/:id',  async (req,res) => {
+    const {id} = req.params
     const eventos = await Evento.find()
-    res.render('verEventos', {eventos})
+    res.render('verEventos', {eventos, id})
 });
 
 
