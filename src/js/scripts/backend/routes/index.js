@@ -1,4 +1,5 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const router = express.Router()
 
 const Estudiante = require('../models/estudiante.js')
@@ -96,8 +97,10 @@ router.get('/vistaDocente', async (req,res) => {
 router.get('/perfil/:id', async (req,res) => {
     const {id} = req.params
     const estudiante = await Estudiante.findById(id)
+    var cod = await User.find({cod: estudiante._id})
+    cod = cod[0].user
     const edad = calcularEdad(estudiante.nacimiento)
-    res.render('Perfil', {estudiante, edad})
+    res.render('Perfil', {estudiante, edad, cod})
 })
 
 //Cargar pagina estudiantes
@@ -277,8 +280,8 @@ router.post('/regEstud', async (req,res) => {
     cont[0].cont++
     await Cont.update({_id: cont[0].id},{cont:cont[0].cont })
     const user = {
-        cod: cod,
-        user: estudiante.nombre + estudiante.apellido  ,
+        user: cod,
+        cod: estudiante._id.toString(),
         password: estudiante.password,
         letra: estudiante.letra, //aqui
         tipo: "estudiante"
@@ -447,12 +450,15 @@ router.get('/calificar/:id/:cod', async (req,res) => {
 
 //Enviar calificacion
 router.get('/gruposEstudiante/:id', async (req,res) => {
-    const {id}= req.params
+    const id = mongoose.Types.ObjectId(req.params.id)
+    console.log(id)
     const estudiante = await Estudiante.findById(id)
+    console.log(estudiante)
     const grupos = await Grupo.find({nivel: estudiante.nivel, curso : estudiante.curso})
-
+    console.log(grupos)
+    const cod = id
     res.render('gruposEstudiante',{
-        grupos,id
+        grupos,id,cod
     })});
 
 
@@ -491,6 +497,11 @@ router.get('/verEventos/:id',  async (req,res) => {
     res.render('verEventos', {eventos, id})
 });
 
+router.get('/eventosEstudiantes/:cod', async (req,res) => {
+    const eventos = await Evento.find()
+    const cod = req.params.cod
+    res.render('verEventosEstud',{eventos,cod})
+})
 async function calificacione(curso, nivel){
     const estudiantes = await Estudiante.find({curso: curso, nivel: nivel})
     var calificaciones = []
