@@ -121,7 +121,7 @@
                     <td> <%= estudiantes[i].apellido %> </td>
                     <td> <%= estudiantes[i].curso %> </td>
                     <td> <%= estudiantes[i].nivel %> </td>
-                    <td> <%= grupo.calificaciones[i].valor %> </td>
+                    <td> <%= grupo.calificaciones[i] %> </td>
                     <td><a href="/calificar/<%= grupo._id %>/<%= estudiantes[i]._id %>"><i class="fa fa-pencil" ></i></a></td>
                 </tr>
             <% } %>  

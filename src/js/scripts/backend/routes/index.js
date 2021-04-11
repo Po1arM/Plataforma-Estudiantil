@@ -9,7 +9,8 @@ const Pensum = require('../models/pensum.js')
 const Grupo = require('../models/grupo.js')
 const Evento = require('../models/evento.js')
 const Cont = require('../models/cont.js')
-
+const Calificacion = require('../models/cont.js')
+0
 const { redirect } = require('statuses')
 const estudiante = require('../models/estudiante.js')
 
@@ -442,9 +443,33 @@ router.get('/calificar/:id/:cod', async (req,res) => {
     const cod = req.params.cod
     const grupo =  await Grupo.findOne({_id: id});
     const estudiante = await Estudiante.findOne({_id: cod})
-    console.log(grupo, estudiante)
-    res.render('calificar', {grupo, estudiante})
-  
+    const calificaciones = await Calificacion.find({ estudiante : estudiante.id, grupo : grupo.cod})
+    var nota = []
+    for(var i = 0; i < 7; i++){
+        nota[i] = 0;
+    }
+    if(calificaciones.length){
+        
+        console.log(grupo, estudiante,calificaciones)
+        res.render('calificar', {grupo, estudiante,calificaciones})
+    
+    }
+    
+    else{
+        
+       const calificaciones = {
+            "estudiante" : id,
+            "grupo" : cod,
+            "nota" : nota
+            
+        }
+
+        
+        console.log(grupo, estudiante, calificaciones)
+        res.render('calificar', 
+        {grupo, estudiante,calificaciones})
+
+    }
 
 });
 
@@ -470,22 +495,16 @@ router.post('/calificar/:id/:cod', async (req,res) =>{
     const id = req.params.id
     const cod = req.params.cod
     const grupo =  await Grupo.findOne({_id: id});
-    var aux = false;
-    var i = 0;
-    const nota = grupo.calificaciones
-
-    while(!aux){
-        if (nota[i].id == cod){
-            nota[i].valor = req.body.nombre;
-            aux = true;
-        }
-        i++;
-    }
-    await Grupo.update({_id: id}, {calificaciones : nota})
     const estudiantes = await Estudiante.find({curso : grupo.curso, nivel : grupo.nivel})
-    console.log(estudiantes)
-    res.render('estudiantesDeGrupo',{
-        estudiantes,grupo
+
+    
+    const calificaciones = await Calificacion.find({ estudiante : estudiante.id, grupo : grupo.cod})
+
+   
+    await Calificacion.update({estudiante: cod},{grupo: id}, {nota : calificaciones})
+    console.log(calificaciones)
+    res.render('calificar', {
+        grupo,estudiante,calificaciones
     })
 });
 
