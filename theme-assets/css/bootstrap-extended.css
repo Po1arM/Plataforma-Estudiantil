@@ -3295,12 +3295,12 @@ pre[class*='language-']
 }
 .nav-vertical .nav-left.nav-tabs.nav-border-left li.nav-item a.nav-link
 {
-    color: #fa626b;
+    color: #348034;
 }
 .nav-vertical .nav-left.nav-tabs.nav-border-left li.nav-item a.nav-link.active
 {
     color: #555; 
-    border-left: 3px solid #fa626b;
+    border-left: 3px solid #348034;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
@@ -3351,12 +3351,12 @@ pre[class*='language-']
 }
 .nav-vertical .nav-right.nav-tabs.nav-border-right li.nav-item a.nav-link
 {
-    color: #fa626b;
+    color: #348034;
 }
 .nav-vertical .nav-right.nav-tabs.nav-border-right li.nav-item a.nav-link.active
 {
     color: #555; 
-    border-right: 3px solid #fa626b;
+    border-right: 3px solid #348034;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
