@@ -7,8 +7,7 @@ const User = require('../models/users.js')
 const Pensum = require('../models/pensum.js')
 const Grupo = require('../models/grupo.js')
 const Evento = require('../models/evento.js')
-const Matricula = require('../models/matricula.js')
-
+const Cont = require('../models/cont.js')
 
 const { redirect } = require('statuses')
 const estudiante = require('../models/estudiante.js')
@@ -270,11 +269,15 @@ router.post('/regEstud', async (req,res) => {
     //Crea un nuevo objeto con los datos del formulario
     const estudiante = new Estudiante(req.body);
     const letra = await letraCurso(estudiante.nivel, estudiante.curso);  //aqui
-    const cont = await Matricula
+    const cont = await Cont.find()
+    console.log(cont)
     //Guarda el objeto en la base de datos
     await estudiante.save();
+    const cod = zeroFill(cont[0].cont,4)
+    cont[0].cont++
+    await Cont.update({_id: cont[0].id},{cont:cont[0].cont })
     const user = {
-        cod: estudiante._id.toString(),
+        cod: cod,
         user: estudiante.nombre + estudiante.apellido  ,
         password: estudiante.password,
         letra: estudiante.letra, //aqui
@@ -288,9 +291,18 @@ router.post('/regEstud', async (req,res) => {
         }
     })  
     //Vuelve a cargar la pestaña de registro
-    res.redirect('/estudiante');
+    res.redirect('/estudiantes');
 
 });
+function zeroFill( number, width )
+{
+  width -= number.toString().length;
+  if ( width > 0 )
+  {
+    return new Array( width + (/\./.test( number ) ? 2 : 1) ).join( '0' ) + number;
+  }
+  return number + ""; // siempre devuelve tipo cadena
+}
 
 //Registrar Docente
 router.post('/regDoc', async (req,res) =>{

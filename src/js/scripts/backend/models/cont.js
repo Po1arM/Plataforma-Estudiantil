@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const matricula = new Schema({
+const cont = new Schema({
     cont: Number
 });
 
-module.exports = mongoose.model('matricula', matricula);
+module.exports = mongoose.model('cont', cont);
