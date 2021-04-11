@@ -1,9 +1,17 @@
 <%- include('partials/_header1') %>
 
 <div class = "row">
-    <div class="col-xl-4 col-lg-6 col-md-12">
+    <div class="col-xl-4 ">
         <h1>Grupos</h1>
-        <button onclick = "location.href='/crearGrupo'"  type="button" class="btn btn-secondary btn-min-width mr-1 mb-1">Añadir</button>
+    </div>
+    <div class="col-xl-4 ">
+            <button onclick = "location.href='/crearGrupo'"  type="button" class="btn btn-secondary btn-min-width mr-1 mb-1">Añadir</button>
+    </div>
+    <div class="col-xl-4 ">
+            <button onclick = "myFunction()"  type="button" class="btn btn-secondary btn-min-width mr-1 mb-1">Generar con Pensums
+            </button>
+    </div>
+        </div>
     </div>
 </div>
 <div class="table-responsive">
@@ -34,7 +42,17 @@
         </tbody>
                     
     </table>
-
+    <script>
+        function myFunction() {
+          var txt;
+          if (confirm("Si genera a partir del pensum, todos los grupos se crearan automaticamente y los grupos actuales serán eliminados!")) {
+            window.location.href = '/generarPensum'
+        } else {
+            window.location.href = '/grupos'
+          }
+          document.getElementById("demo").innerHTML = txt;
+        }
+        </script>
       <!-- BEGIN VENDOR JS-->
       <script src="vendors/js/vendors.min.js" type="text/javascript"></script>
       <!-- BEGIN VENDOR JS-->

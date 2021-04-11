@@ -8,6 +8,7 @@ const docente = new Schema({
     nacimiento: Date,
     password: String,
     especialidad: String,
+    especialidad2: String,
     telefono: String,
     direccion: String,
     });

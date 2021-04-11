@@ -322,7 +322,7 @@ router.post('/regDoc', async (req,res) =>{
             console.log('Usuario insertado')
         }
     })  
-    res.render('RegDocente');
+    res.redirect('/docentes');
 
 });
 
@@ -382,6 +382,16 @@ router.get('/estudiantesDeGrupo/:id/:cod', async (req,res) => {
 
 });
 
+router.get('/generarPensum', async (req,res ) => {
+    Grupo.db.dropCollection('grupos', function(err,result){
+        if(err){ 
+            console.log(err)
+        }else{
+        console.log('Grupos eliminados')
+    }})
+    await generarGrupos()
+    res.redirect('/grupos')
+})
 
 //Calcular la letra del curso
 async function letraCurso(nivelActual, cursoActual){
@@ -403,20 +413,21 @@ async function generarGrupos(){
 
                 var letraGrupo = String.fromCharCode(64+cantEstudiantes);
                 var cod = pensums[i].materia[k].slice(0,3) + "-" + pensums[i].curso[0] + letraGrupo + "-" + pensums[i].nivel.slice(0,3) 
+                var calificaciones = await calificacione(pensums[i].curso, pensums[i].nivel)
                 var grupo = {
                     codigo: cod.toUpperCase(),
                     curso: pensums[i].curso ,
                     nivel:  pensums[i].nivel,
                     materia: pensums[i].materia[k],
-        
+                    calificaciones: calificaciones
                 }
-                /*Grupo.collection.insertOne(grupo, function(err,docs) {
+                Grupo.collection.insertOne(grupo, function(err,docs) {
                     if(err){ 
                         console.log(err)
                     } else {
                         console.log('Grupo insertado')
                     }
-                })*/ 
+                })
             }
         }
     
@@ -480,7 +491,27 @@ router.get('/verEventos/:id',  async (req,res) => {
     res.render('verEventos', {eventos, id})
 });
 
+async function calificacione(curso, nivel){
+    const estudiantes = await Estudiante.find({curso: curso, nivel: nivel})
+    var calificaciones = []
 
+    for(var i = 0 ; i < estudiantes.length; i++){
+        var objeto = {
+            "id"    : estudiantes[i]._id,
+            "valor1" : 0,
+            "valor2" : 0,
+            "valor3" : 0,
+            "valor4" : 0,
+            "valor5" : 0,
+            "valor6" : 0,
+            "valor7" : 0,
+            "cont" : 0
+
+        }
+        calificaciones.push(objeto)
+    }
+    return calificaciones
+} 
 
 async function cantGrupos(pensum){
     var cantEstudiantes = await Estudiante.find({curso:pensum.cuso, nivel: pensum.nivel}).count()
