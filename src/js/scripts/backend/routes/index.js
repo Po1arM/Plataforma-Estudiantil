@@ -451,7 +451,7 @@ router.get('/calificar/:id/:cod', async (req,res) => {
         cod1 = calificaciones._id.toString()
         console.log(grupo, estudiante,calificaciones)
         
-        res.render('calificar', {grupo, estudiante, nota })
+        res.render('calificar', {grupo, estudiante, nota,id,cod })
     } else{
         nota = []
         for(var i = 0; i < 7; i++){
