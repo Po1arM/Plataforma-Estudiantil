@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
-
+const url = require('url')
 const Estudiante = require('../models/estudiante.js')
 const Docente = require('../models/docente.js')
 const User = require('../models/users.js')
@@ -9,8 +9,7 @@ const Pensum = require('../models/pensum.js')
 const Grupo = require('../models/grupo.js')
 const Evento = require('../models/evento.js')
 const Cont = require('../models/cont.js')
-const Calificacion = require('../models/cont.js')
-0
+const Calificacion = require('../models/calificaciones.js')
 const { redirect } = require('statuses')
 const estudiante = require('../models/estudiante.js')
 
@@ -443,31 +442,42 @@ router.get('/calificar/:id/:cod', async (req,res) => {
     const cod = req.params.cod
     const grupo =  await Grupo.findOne({_id: id});
     const estudiante = await Estudiante.findOne({_id: cod})
-    const calificaciones = await Calificacion.find({ estudiante : estudiante.id, grupo : grupo.cod})
-    var nota = []
-    for(var i = 0; i < 7; i++){
-        nota[i] = 0;
-    }
-    if(calificaciones.length){
-        
+    var nota
+    var cod1
+    var calificaciones = await Calificacion.findOne({ estudiante : estudiante._id, grupo : grupo._id})
+    console.log(calificaciones)
+    if(calificaciones){
+        nota = calificaciones.nota
+        cod1 = calificaciones._id.toString()
         console.log(grupo, estudiante,calificaciones)
-        res.render('calificar', {grupo, estudiante,calificaciones})
-    
-    }
-    
-    else{
         
-       const calificaciones = {
-            "estudiante" : id,
-            "grupo" : cod,
-            "nota" : nota
+        res.render('calificar', {grupo, estudiante, nota })
+    } else{
+        nota = []
+        for(var i = 0; i < 7; i++){
+            nota.push(0);
+        }
+        calificaciones = {
+            estudiante : estudiante._id.toString(),
+            grupo : grupo._id.toString(),
+            nota : nota
             
         }
 
-        
-        console.log(grupo, estudiante, calificaciones)
+        Calificacion.collection.insertOne(calificaciones, function(err,docs) {
+            if(err){ 
+                console.log(err)
+            } else {
+                console.log('calificaciones insertado')
+            }
+        })
+        calificaciones = await Calificacion.findOne({ estudiante : estudiante._id, grupo : grupo._id})
+        console.log(grupo, estudiante._id, calificaciones)
+        nota = calificaciones.nota
+        console.log(nota)
+        cod1 = calificaciones._id.toString()
         res.render('calificar', 
-        {grupo, estudiante,calificaciones})
+        {nota, grupo, estudiante})
 
     }
 
@@ -492,22 +502,33 @@ router.get('/gruposEstudiante/:id', async (req,res) => {
 
 router.post('/calificar/:id/:cod', async (req,res) =>{
 
-    const id = req.params.id
+    var id = req.params.id
     const cod = req.params.cod
     const grupo =  await Grupo.findOne({_id: id});
-    const estudiantes = await Estudiante.find({curso : grupo.curso, nivel : grupo.nivel})
-
-    
-    const calificaciones = await Calificacion.find({ estudiante : estudiante.id, grupo : grupo.cod})
-
-   
-    await Calificacion.update({estudiante: cod},{grupo: id}, {nota : calificaciones})
+    const estudiantes = await Estudiante.findOne({_id: cod})
+    var calificaciones = await Calificacion.findOne({ estudiante : estudiantes._id, grupo : grupo._id})
+    nota = crearNota(req.body)
+    await Calificacion.update({_id: calificaciones._id},{nota: nota})
     console.log(calificaciones)
-    res.render('calificar', {
-        grupo,estudiante,calificaciones
-    })
-});
+    nombre = grupo.maestro.split(" ")
+    const profesor = await Docente.findOne({nombre: nombre[0], apellido: nombre[1]})
+    const grupos = await Grupo.find({maestro : profesor.nombre + " " + profesor.apellido});
 
+    id = profesor._id
+    res.render('grupoActual',{id,grupos})
+
+});
+function crearNota(nota){
+    notas = []
+    notas.push(nota.nota1)
+    notas.push(nota.nota2)
+    notas.push(nota.nota3)
+    notas.push(nota.nota4)
+    notas.push(nota.nota5)
+    notas.push(nota.nota6)
+    notas.push(nota.nota7)
+    return notas
+}
 //Cargar pagina de ver eventos en Docente y Estudiante
 
 router.get('/verEventos/:id',  async (req,res) => {

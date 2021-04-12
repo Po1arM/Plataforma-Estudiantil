@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const calificaciones = new schema({
+const calificacion = new Schema({
 
     estudiante: String,
     grupo: String,
@@ -10,4 +10,4 @@ const calificaciones = new schema({
 });
 
 
-module.exports = mongoose.model('calificaciones', calificaciones);
+module.exports = mongoose.model('calificacion', calificacion);

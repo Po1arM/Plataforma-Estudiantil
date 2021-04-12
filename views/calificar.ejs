@@ -104,47 +104,49 @@
   <!--Register form-->
   <div class="row">  
     <div class="container p-3 my-3 bg-white">
-
+        
                   <!-- Default form register -->
                   <form class="text-center border border-dark p-4" action = "/calificar/<%= grupo._id %>/<%= estudiante._id %>" method="POST">
           
                     <p class="h4 mb-4">Notas</p>
-          
                     <div class="form-row mb-4">
                       <div class="col">
                         <!-- First name -->
-                        
-                        <input name="nota1" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Septiembre: <td> <%= calificaciones.nota[0] %> </td>">
+                        <label for="nota1">Septiembre: </label>
+                        <input name="nota1" type="text" id="defaultRegisterFormFirstName" class="form-control" value="<%= nota[0] %>">
                         <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
                       
                         </small>
-
-                        <input name="nota2" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Octubre:">
+                        <label for="nota2">Octubre: </label>
+                        <input name="nota2" type="text" id="defaultRegisterFormFirstName" class="form-control" value="<%= nota[1] %>">
                         <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
                       
                         </small>
+                        <label for="nota3">Noviembre: </label>
 
-                        <input name="nota3" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Noviembre:">
+                        <input name="nota3" type="text" id="defaultRegisterFormFirstName" class="form-control" value="<%= nota[2] %>">
                         <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
                       
                         </small>
+                        <label for="nota4">Enero: </label>
 
-                        <input name="nota4" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Enero:">
+                        <input name="nota4" type="text" id="defaultRegisterFormFirstName" class="form-control" value="<%= nota[3] %>">
                         <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
                       
                         </small>
-
-                        <input name="nota5" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Febrero:">
+                        <label for="nota5">Febrero: </label>
+                        <input name="nota5" type="text" id="defaultRegisterFormFirstName" class="form-control" value="<%= nota[4] %>">
                         <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
                       
                         </small>
+                        <label for="nota6">Marzo: </label>
 
-                        <input name="nota6" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Marzo:">
+                        <input name="nota6" type="text" id="defaultRegisterFormFirstName" class="form-control" value="<%= nota[5] %>">
                         <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
                       
                         </small>
-
-                        <input name="nota7" type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Abril:">
+                        <label for="nota7">Abril: </label>
+                        <input name="nota7" type="text" id="defaultRegisterFormFirstName" class="form-control" value="<%= nota[6] %>">
                         <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
                       
                         </small>
