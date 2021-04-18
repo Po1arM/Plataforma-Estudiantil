@@ -83,7 +83,7 @@
       </div>
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          <li class=" nav-item"><a href="/"><i class="fas fa-school"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+          <li class=" nav-item"><a href="/adminDashboard"><i class="fas fa-school"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
           </li>
           <li class=" nav-item"><a href="/estudiantes"><i class="fas fa-user-graduate"></i><span class="menu-title" data-i18n="">Estudiantes</span></a>
           </li>
@@ -91,7 +91,7 @@
           </li>
           <li class=" nav-item"><a href="/grupos"><i class="fas fa-user-friends"></i><span class="menu-title" data-i18n="">Grupos</span></a>
           </li>
-          <li class=" nav-item"><a href="/"><i class="fas fa-calendar-week"></i><span class="menu-title" data-i18n="">Eventos</span></a>
+          <li class=" nav-item"><a href="/eventos"><i class="fas fa-calendar-week"></i><span class="menu-title" data-i18n="">Eventos</span></a>
           </li>
           <li class=" nav-item"><a href="/pensum"><i class="fas fa-book"></i><span class="menu-title" data-i18n="">Pensums</span></a>
           </li>
@@ -118,7 +118,7 @@
                                         <%= estudiante.nombre + estudiante.apellido%>
                                     </h2>
                                     <h3>
-                                        <%= estudiante.curso + ' de ' + estudiante.nivel%>
+                                        <%= estudiante.curso + ' De Nivel ' + estudiante.nivel%>
                                     </h3>
 
                         </div>
@@ -130,7 +130,14 @@
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                
+                              <div class="row">
+                                <div class="col-md-6">
+                                    <label>Matricula</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><%= estudiante.matricula %></p>
+                                </div>
+                            </div>      
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>Edad</label>
