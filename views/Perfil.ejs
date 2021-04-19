@@ -56,12 +56,12 @@
               </li>
             </ul>
     
+            
             <ul class="nav navbar-nav float-right">
-              <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             <span class="avatar avatar-online"><img src="images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span></a>
+              <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             <span class="avatar avatar-online"><img src="/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                  <div class="arrow_box_right"><a class="dropdown-item" href="#"><span class="avatar avatar-online"><img src="images/portrait/small/avatar-s-19.png" alt="avatar"><span class="user-name text-bold-700 ml-1">Luis </span></span></a>
-                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="ft-user"></i> Editar Perfil</a><a class="dropdown-item" href="#"><i class="ft-mail"></i> Mensajes</a><a class="dropdown-item" href="#">
-                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="ft-power"></i> Logout</a>
+                  <div class="arrow_box_right"><a class="dropdown-item" href="#"><span class="avatar avatar-online"><img src="/images/portrait/small/avatar-s-19.png" alt="avatar"><span class="user-name text-bold-700 ml-1">Luis </span></span></a>
+                    <div class="dropdown-divider"></div><a class="dropdown-item" href="/"><i class="ft-power"></i> Logout</a>
                   </div>
                 </div>
               </li>
@@ -73,7 +73,7 @@
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-    <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="images/backgrounds/02.jpg">
+    <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="/images/backgrounds/02.jpg">
       <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">       
           <li class="nav-item mr-auto"><a class="navbar-brand" href="index.html"><img class="brand-logo" alt="Chameleon admin logo" src="/images/10670266_1577389569156019_6243918119872285123_n-540923671.png"/>
@@ -83,7 +83,7 @@
       </div>
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          <li class=" nav-item"><a href="/"><i class="fas fa-school"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+          <li class=" nav-item"><a href="/adminDashboard"><i class="fas fa-school"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
           </li>
           <li class=" nav-item"><a href="/estudiantes"><i class="fas fa-user-graduate"></i><span class="menu-title" data-i18n="">Estudiantes</span></a>
           </li>
@@ -91,7 +91,7 @@
           </li>
           <li class=" nav-item"><a href="/grupos"><i class="fas fa-user-friends"></i><span class="menu-title" data-i18n="">Grupos</span></a>
           </li>
-          <li class=" nav-item"><a href="/"><i class="fas fa-calendar-week"></i><span class="menu-title" data-i18n="">Eventos</span></a>
+          <li class=" nav-item"><a href="/eventos"><i class="fas fa-calendar-week"></i><span class="menu-title" data-i18n="">Eventos</span></a>
           </li>
           <li class=" nav-item"><a href="/pensum"><i class="fas fa-book"></i><span class="menu-title" data-i18n="">Pensums</span></a>
           </li>
@@ -118,7 +118,7 @@
                                         <%= estudiante.nombre + estudiante.apellido%>
                                     </h2>
                                     <h3>
-                                        <%= estudiante.curso + ' de ' + estudiante.nivel%>
+                                        <%= estudiante.curso + ' De Nivel ' + estudiante.nivel%>
                                     </h3>
 
                         </div>
@@ -130,7 +130,14 @@
                     <div class="col-md-8">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                
+                              <div class="row">
+                                <div class="col-md-6">
+                                    <label>Matricula</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><%= estudiante.matricula %></p>
+                                </div>
+                            </div>      
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>Edad</label>

@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const estudiante = new Schema({
     nombre: String,
     apellido: String,
+    matricula: String,
     correo: String,
     nacimiento: Date,
     password: String,
