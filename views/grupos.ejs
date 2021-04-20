@@ -14,34 +14,56 @@
         </div>
     </div>
 </div>
-<div class="table-responsive">
-    <table  class="table table-bordered bg-white">
-        <thead class="thead-dark">
-            <th>Codigo</th>
-            <th>Curso</th>
-            <th>Nivel</th>
-            <th>Materia</th>
-            <th>Horario</th>
-            <th>Maestro</th>
-            <th>Modificar</th>
-            <th>Eliminar</th>
-        </thead>
-        <tbody>
-            <% for(var i = 0; i < grupos.length; i++) { %>
-                <tr>
-                    <td> <%= grupos[i].codigo %> </td>
-                    <td> <%= grupos[i].curso %> </td>
-                    <td> <%= grupos[i].nivel %> </td>
-                    <td> <%= grupos[i].materia %> </td>
-                    <td> <%= grupos[i].horario %> </td>
-                    <td> <%= grupos[i].maestro %> </td>
-                    <td><a href="/modificarGrupo/<%= grupos[i]._id%>"><i class="fa fa-pencil" ></i></a></td>
-                    <td><a href="/eliminarGrupo/<%= grupos[i]._id%>"><i class="fa fa-trash" ></i></a></td>
-                </tr>
-            <% }%>  
-        </tbody>
-                    
-    </table>
+<div class="row ">
+    <div class="col ">
+        <div class="card ">
+            <div class="card-header">
+                <h4 class="card-title">Grupos Actuales</h4>
+                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                <div class="heading-elements">
+                    <ul class="list-inline mb-0">
+                        <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-content collapse show">
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                    <table  class="table table-bordered bg-white">
+                        <thead class="thead-dark">
+                            <th>Codigo</th>
+                            <th>Curso</th>
+                            <th>Nivel</th>
+                            <th>Materia</th>
+                            <th>Horario</th>
+                            <th>Maestro</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                        </thead>
+                        <tbody>
+                            <% for(var i = 0; i < grupos.length; i++) { %>
+                                <tr>
+                                    <td> <%= grupos[i].codigo %> </td>
+                                    <td> <%= grupos[i].curso %> </td>
+                                    <td> <%= grupos[i].nivel %> </td>
+                                    <td> <%= grupos[i].materia %> </td>
+                                    <td> <%= grupos[i].horario %> </td>
+                                    <td> <%= grupos[i].maestro %> </td>
+                                    <td><a href="/modificarGrupo/<%= grupos[i]._id%>"><i class="fa fa-pencil" ></i></a></td>
+                                    <td><a href="/eliminarGrupo/<%= grupos[i]._id%>"><i class="fa fa-trash" ></i></a></td>
+                                </tr>
+                            <% }%>  
+                        </tbody>
+                                    
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     <script>
         function myFunction() {
           var txt;

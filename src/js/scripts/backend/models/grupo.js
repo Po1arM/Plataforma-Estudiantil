@@ -9,6 +9,7 @@ const grupo = new Schema({
     horario: String,
     maestro: String,
     calificaciones: Array,
+    periodo: String
 });
 
 module.exports = mongoose.model('grupo', grupo);

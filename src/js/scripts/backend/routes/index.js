@@ -12,6 +12,11 @@ const Cont = require('../models/cont.js')
 const Calificacion = require('../models/calificaciones.js')
 const { redirect } = require('statuses')
 const estudiante = require('../models/estudiante.js')
+const Periodo = require('../models/periodo.js')
+
+const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+"Julio", "Augosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+];
 
 //Cargar pagina principal
 router.get('/', (req,res) => {
@@ -23,7 +28,13 @@ router.get('/log', (req,res) => {
 });
 
 router.get('/addPeriod', (req,res) => {
-    res.render('periodoCalificaciones')
+    res.render('adPeriodo')
+});
+
+router.post('/addPeriod', async (req,res) => {
+    const periodo = new Periodo(req.body) 
+    await periodo.save()
+    res.redirect('/adminDashboard')
 });
 
 router.post('/', async (req,res) => {
@@ -410,6 +421,7 @@ async function letraCurso(nivelActual, cursoActual){
 
 async function generarGrupos(){
     const pensums = await Pensum.find()
+    const periodo = await Periodo.findOne({estado: 'activo'})
     for(var i = 0; i < pensums.length; i++){
         console.log(pensums.length)
         var cantEstudiantes = await cantGrupos(pensums[i])
@@ -426,7 +438,8 @@ async function generarGrupos(){
                     curso: pensums[i].curso ,
                     nivel:  pensums[i].nivel,
                     materia: pensums[i].materia[k],
-                    calificaciones: calificaciones
+                    calificaciones: calificaciones,
+                    periodo: periodo._id
                 }
                 Grupo.collection.insertOne(grupo, function(err,docs) {
                     if(err){ 
@@ -450,9 +463,7 @@ router.get('/calificar/:id/:cod', async (req,res) => {
     var cod1
     var calificaciones = await Calificacion.findOne({ estudiante : estudiante._id, grupo : grupo._id})
     console.log(calificaciones)
-    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-  "Julio", "Augosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-];
+  
     var mes = monthNames[new Date().getMonth()]	
     if(calificaciones != null){
         nota = calificaciones.nota
@@ -504,8 +515,16 @@ router.get('/gruposEstudiante/:id', async (req,res) => {
     })});
 
 
-router.get('/periodo', (req,res) => {
-    res.render('periodos')
+router.get('/periodo', async (req,res) => {
+    var actual = await Periodo.findOne({estado: 'activo'})
+    var pasados = await Periodo.find({estado: 'concluido'})
+    actual = {
+        cod : actual.cod,
+        inicio: actual.inicio.getDate()+1 + " de " + monthNames[actual.inicio.getMonth()] +" " + actual.inicio.getFullYear(),
+        fin: actual.fin.getDate()+1 + " de " + monthNames[actual.fin.getMonth()] + " "+ actual.fin.getFullYear(),
+        
+    }
+    res.render('periodos',{actual, pasados})
 });
 
 router.post('/calificar/:id/:cod', async (req,res) =>{
