@@ -22,7 +22,9 @@ router.get('/log', (req,res) => {
     res.render('log')
 });
 
-
+router.get('/addPeriod', (req,res) => {
+    res.render('periodoCalificaciones')
+});
 
 router.post('/', async (req,res) => {
     const user = await User.find({user: req.body.user,password: req.body.password})
@@ -216,8 +218,10 @@ router.get('/docentes', async (req,res) => {
 });
 
 //Cargar pagina regEstudiante
-router.get('/regEstudiante', (req,res) => {
-    res.render('RegEstudiante')
+router.get('/regEstudiante', async (req,res) => {
+    const cont = await Cont.find()
+    const cod = zeroFill(cont[0].cont,4)
+    res.render('RegEstudiante',{cod})
 });
 
 router.get('/perfilDocente/:id', async (req,res) => {
@@ -446,13 +450,16 @@ router.get('/calificar/:id/:cod', async (req,res) => {
     var cod1
     var calificaciones = await Calificacion.findOne({ estudiante : estudiante._id, grupo : grupo._id})
     console.log(calificaciones)
-    if(calificaciones){
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+  "Julio", "Augosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+];
+    var mes = monthNames[new Date().getMonth()]	
+    if(calificaciones != null){
         nota = calificaciones.nota
         cod1 = calificaciones._id.toString()
         console.log(grupo, estudiante,calificaciones)
         
-        res.render('calificar', {grupo, estudiante, nota,id,cod })
-    } else{
+    }else {
         nota = []
         for(var i = 0; i < 7; i++){
             nota.push(0);
@@ -471,16 +478,16 @@ router.get('/calificar/:id/:cod', async (req,res) => {
                 console.log('calificaciones insertado')
             }
         })
-        calificaciones = await Calificacion.findOne({ estudiante : estudiante._id, grupo : grupo._id})
+        calificaciones = await Calificacion.findOne({ estudiante : estudiante._id.toString(), grupo : grupo._id.toString()})
         console.log(grupo, estudiante._id, calificaciones)
         nota = calificaciones.nota
         console.log(nota)
         cod1 = calificaciones._id.toString()
-        res.render('calificar', 
-        {nota, grupo, estudiante})
+        
 
     }
-
+    res.render('calificar', 
+    {nota, grupo, estudiante,id,cod,mes})
 });
 
 //Enviar calificacion
@@ -497,8 +504,9 @@ router.get('/gruposEstudiante/:id', async (req,res) => {
     })});
 
 
-
-
+router.get('/periodo', (req,res) => {
+    res.render('periodos')
+});
 
 router.post('/calificar/:id/:cod', async (req,res) =>{
 

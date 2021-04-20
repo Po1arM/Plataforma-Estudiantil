@@ -1,0 +1,43 @@
+<%- include('partials/_header1') %>
+<div class = "row">
+    <div class="col-xl-4 col-lg-6 col-md-12">
+        <h1>Periodos</h1>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header">
+        <h1>Periodo Actual: 2020-2021</h1>
+    </div>
+    <div class="card-content" aria-expanded="true">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-6 ">
+                <h4>Inicio de docencia: 7 de Septiembre 2020</h4>
+                </div>
+                <div class="col-xl-6 ">
+                <h4>Fin de docencia: 16 de Abril 2021</h4>
+                </div>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+<div class="row justify-content-around">
+    <div class="col-4">
+        <button onclick = "location.href='/addPeriod'"  type="button" class="btn btn-secondary btn-min-width mr-1 mb-1">Periodo de Calificaciones</button>
+    </div>
+    <div class="col-4 ">
+        <button onclick = "location.href='/crearGrupo'"  type="button" class="btn btn-secondary btn-min-width mr-1 mb-1">Promoción de cursos</button>
+    </div>
+</div>
+</div>
+<div class="table-responsive">
+    <table  class="table table-bordered bg-white">
+        <thead class="thead-dark">
+            <th>Periodo</th>
+            <th>Inicio</th>
+            <th>Fin</th>
+        </thead>
+                    
+    </table>

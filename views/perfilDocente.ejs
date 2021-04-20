@@ -83,7 +83,7 @@
       </div>
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          <li class=" nav-item"><a href="/"><i class="fas fa-school"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+          <li class=" nav-item"><a href="/adminDashboard"><i class="fas fa-school"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
           </li>
           <li class=" nav-item"><a href="/estudiantes"><i class="fas fa-user-graduate"></i><span class="menu-title" data-i18n="">Estudiantes</span></a>
           </li>
@@ -115,10 +115,10 @@
                     <div class="col-md-12">
                         <div class="profile-head">
                                     <h2>
-                                        <%= docente.nombre + docente.apellido %>
+                                        <%= docente.nombre + " " + docente.apellido %>
                                     </h2>
                                     <h3>
-                                        <%= docente.especialidad %>
+                                        <%= docente.especialidad + (docente.especialidad == docente.especialidad2 ? "" : " - " + docente.especialidad2) %>
                                     </h3>
 
                         </div>

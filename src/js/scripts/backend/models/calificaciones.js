@@ -6,7 +6,6 @@ const calificacion = new Schema({
     estudiante: String,
     grupo: String,
     nota: Array
-
 });
 
 

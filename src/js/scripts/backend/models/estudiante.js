@@ -13,7 +13,12 @@ const estudiante = new Schema({
     nivel: String,
     direccion: String,
     tutor: String,
-    letra: String
+    letra: String,
+    cedula: String,
+    estado: {
+        type: String,
+        default: "activo"
+    }
 });
 
 module.exports = mongoose.model('estudiante', estudiante);

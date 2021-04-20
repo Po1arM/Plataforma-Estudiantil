@@ -2,100 +2,106 @@
 
 <!--CARTA REGISTRO-->
 
-<div class="container">
-     
-    <nav class="navbar navbar-expand-lg navbar-light navbar-laravel">
-      <div class="container">
-      <a class="navbar-brand" href="#"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
-          
-          </ul>
-    
-      </div>
-      </div>
-    </nav>
-</div>
 
-<div class="app-content content">
-    <div class="content-wrapper">
-      <div class="content-wrapper-before"></div>
-      <div class="content-header row">
-      </div>
-      <div class="content-body"><!-- Chart -->
 
 <!--Register form-->
-<div class="row">  
     <div class="container p-3 my-3 bg-white">
   
                   <!-- Default form register -->
                   <!-- Establecer action como el router.post y method post para que sepa que se enviaran datos -->
-                  <form class="text-center border border-dark p-4" action = "/regEstud" method="POST">
+                  <form class="text-center form" action = "/regEstud" method="POST">
                     <!--En cada campo del formulario hay que agregar un atributo name que tiene que ser igual al campo del modelo-->
-                    <p class="h4 mb-4">Registrar estudiante</p>
+                    <p class="h4 mb-1">Registrar estudiante</p>
           
-                    <div class="form-row mb-4">
+                    <label for="matricula">Matricula</label>
+                    <input  readonly name = "matricula" type="text" id="defaultRegisterFormEmail" class="form-control mb-1" value="<%= cod %>" >
+                    
+                    <div class="form-row mb-1">
                       <div class="col">
                         <!-- First name -->
+                        <label for="nombre">Nombre(s)</label>
                         <input name = "nombre"type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Nombre(s)">
                       </div>
                       <div class="col">
                         <!-- Last name -->
+                        <label for="apellido">Apellido(s)</label>
                         <input name = "apellido" type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Apellido(s)">
                       </div>
                     </div>
 
-                      <!-- E-mail -->
-                    <input name = "matricula" type="text" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="Matricula">
-  
-          
+                    <label for="nacimiento">Fecha de Nacimiento</label>
+                    <input name  = "nacimiento" type="date" input type="email" id="defaultRegisterBirthDatel" class="form-control mb-1" placeholder="Fecha de nacimiento">
+                    <div class="form-row mb-1">
+                      <div class="col">
+                      <label for="curso">Curso</label>
+
+                      <select name="curso" type="text" id="defaultRegisterFormSelect" class="form-control mb-1" placeholder="Curso"> 
+                        <option value="1ro">1ero</option>
+                        <option value="2o">2do</option>
+                        <option value="3ro">3ero</option>
+                        <option value="4to">4rto</option>
+                        <option value="5to">5to</option>
+                        <option value="6to">6to</option>
+                      </select>
+                    </div>
+                      <!-- Nivel -->
+                      <div class="col">
+                      <label for="nivel">Nivel</label>
+
+                      <select name="nivel" type="text" id="defaultRegisterFormSelect" class="form-control mb-1" placeholder="Nivel"> 
+                        <option value="Basico">Básico</option>
+                        <option value="Secundario">Secundario</option>
+                      </select>
+                    </div>
+                    </div>
                     <!-- E-mail -->
-                    <input name = "correo" type="text" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+                    <div class="form-row mb-1">
+                    <div class="col">
+                    <label for="tutor">Tutor</label>
+                    <input name = "tutor" type="text" id="defaultRegisterFormName" class="form-control mb-1" placeholder="Nombre del Padre/Madre/Tutor">
+                    </div>
+                    
+                    <div class="col">
+                    <label for="cedula">Cédula </label>
+                    <input name = "cedula" type="text" id="defaultRegisterFormName" class="form-control mb-1" placeholder="Número de cédula ">
+                    </div>
+                    </div>
+                    <!-- E-mail -->
+                    <label for="correo">Correo</label>
+
+                    <input name = "correo" type="text" id="defaultRegisterFormEmail" class="form-control mb-1" placeholder="E-mail">
   
                     <!--Fecha de nacimiento-->
-                    <input name  = "nacimiento" type="date" input type="email" id="defaultRegisterBirthDatel" class="form-control mb-4" placeholder="Fecha de nacimiento">
+                    
           
                     <!-- Password -->
+                    <label for="password">Contraseña</label>
+
                     <input name = "password" type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
-                    <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                    <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-1">
                     
                     </small>
           
                     <!-- Phone number -->
+                    <label for="telefono">Telefono</label>
+
                     <input name = "telefono" type="tel" id="defaultRegisterPhonePassword" class="form-control" placeholder="Telefono +1()" aria-describedby="defaultRegisterFormPhoneHelpBlock" >
 
-                    <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+                    <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-1">
                       
                     </small>
 
                     <!-- Curso  -->
-                    <select name="curso" type="text" id="defaultRegisterFormSelect" class="form-control mb-4" placeholder="Curso"> 
-                      <option value="1ro">1ero</option>
-                      <option value="2o">2do</option>
-                      <option value="3ro">3ero</option>
-                      <option value="4to">4rto</option>
-                      <option value="5to">5to</option>
-                      <option value="6to">6to</option>
-                    </select>
-
-                    <!-- Nivel -->
-                    <select name="nivel" type="text" id="defaultRegisterFormSelect" class="form-control mb-4" placeholder="Nivel"> 
-                      <option value="Basico">Básico</option>
-                      <option value="Secundario">Secundario</option>
-                    </select>
-              
+                   
                   <!--Letra-->
-                  <!--<input name = "letra" type="text" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder=" ">-->
+                  <!--<input name = "letra" type="text" id="defaultRegisterFormEmail" class="form-control mb-1" placeholder=" ">-->
 
                     <!-- Direccion -->
-                    <input name = "direccion" type="text" id="defaultRegisterFormAdress" class="form-control mb-4" placeholder="Direccion">
+                    <label for="direccion">Dirección</label>
 
+                    <textarea name = "direccion"  id="defaultRegisterFormAdress" class="form-control mb-1" rows="5"></textarea>
                     <!-- Nombre del tutor -->
-                    <input name = "tutor" type="text" id="defaultRegisterFormName" class="form-control mb-4" placeholder="Nombre del Padre/Madre/Tutor">
+                    
           
     
                     <!-- Sign up button -->
@@ -107,8 +113,7 @@
                 
                   </p></form>
                   <!-- TERMINO Register form -->
-    
-      </div>
+
       <div class="row match-height">
 
          

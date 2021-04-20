@@ -1,0 +1,38 @@
+<%- include('partials/_header1') %>
+<div class = "row">
+    <div class="col-xl-4 col-lg-6 col-md-12">
+        <h1>Nuevo Periodo</h1>
+    </div>
+</div>
+<div class="container p-3 my-3 bg-white">
+    <form class="text-center border border-dark p-4" action = "/addPeriod" method="POST">
+        <h1>Periodo</h1>
+        <input name="anno" type="text" class="form-control" value="2021-2022" disabled>
+        <div class="form-row mb-2 mt-2">
+            <div class="col">
+                <label for="inicio">Inicio de docencia</label>
+                <input type='date' id='inicio' name='inicio' class="form-control">
+
+                <script type="text/javascript">
+                    var d1 = new Date();
+                    var y1= d1.getFullYear();
+                    var m1 = d1.getMonth()+1;
+                    if(m1<10)
+                        m1="0"+m1;
+                    var dt1 = d1.getDate();
+                    if(dt1<10)
+                    dt1 = "0"+dt1;
+                    var d2 = y1+"-"+m1+"-"+dt1;
+                    document.getElementById('inicio').value=d2;
+                </script>
+                </div>
+            <div class="col">
+                <label for="fin">Fin de docencia</label>
+                <input type="date" name="fin" class="form-control">
+            </div>
+        </div>
+        <label for="sub">Sub-Periodos</label>
+        <input type="number" class="form-control" value="4" min="1">
+        <button type="submit" class="btn btn-secondary my-4 btn-block waves-effect" >Aceptar</button>
+    </form>
+</div>
