@@ -38,8 +38,7 @@
                             <th>Materia</th>
                             <th>Horario</th>
                             <th>Maestro</th>
-                            <th>Modificar</th>
-                            <th>Eliminar</th>
+                            <th>Opciones</th>
                         </thead>
                         <tbody>
                             <% for(var i = 0; i < grupos.length; i++) { %>
@@ -50,8 +49,7 @@
                                     <td> <%= grupos[i].materia %> </td>
                                     <td> <%= grupos[i].horario %> </td>
                                     <td> <%= grupos[i].maestro %> </td>
-                                    <td><a href="/modificarGrupo/<%= grupos[i]._id%>"><i class="fa fa-pencil" ></i></a></td>
-                                    <td><a href="/eliminarGrupo/<%= grupos[i]._id%>"><i class="fa fa-trash" ></i></a></td>
+                                    <td><a href="/modificarGrupo/<%= grupos[i]._id%>"><i class="fa fa-pencil" ></i></a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="/eliminarGrupo/<%= grupos[i]._id%>"><i class="fa fa-trash" ></i></a></td>
                                 </tr>
                             <% }%>  
                         </tbody>

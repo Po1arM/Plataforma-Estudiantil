@@ -5,7 +5,7 @@ const periodo = new Schema({
     cod: String,
     inicio: Date,
     fin: Date,
-    subPeriodos: Number,
+    sub: Number,
     estado: {
         type: String,
         default: "activo"

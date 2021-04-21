@@ -17,7 +17,9 @@ const Periodo = require('../models/periodo.js')
 const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
 "Julio", "Augosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
 ];
-
+router.get('/perioCali', (req,res) => {
+    res.render('periodoCalificaciones')
+})
 //Cargar pagina principal
 router.get('/', (req,res) => {
     res.render('log')
@@ -32,6 +34,7 @@ router.get('/addPeriod', (req,res) => {
 });
 
 router.post('/addPeriod', async (req,res) => {
+    const actual = await Periodo.updateOne({estado: 'activo'},{estado: 'concluido'})
     const periodo = new Periodo(req.body) 
     await periodo.save()
     res.redirect('/adminDashboard')
@@ -118,9 +121,10 @@ router.get('/perfil/:id', async (req,res) => {
 
 //Cargar pagina estudiantes
 router.get('/estudiantes', async (req,res) => {
-    const estudiantes = await Estudiante.find();
+    const estudiantes = await Estudiante.find({estado: 'activo'});
+    const graduados = await Estudiante.find({estado: {$ne: 'activo'}});
     res.render('estudiantes',{
-        estudiantes
+        estudiantes,graduados
     })
 })
 
@@ -174,26 +178,7 @@ router.post('/crearGrupo', async (req,res) => {
     const nivel = req.body.nivel
     const estudiantes = await Estudiante.find({curso:curso, nivel:nivel})
 
-    var calificaciones= []
-
-    for(var i = 0; i < estudiantes.length; i++){
-
-        var objeto = { 
-            "id"    : estudiantes[i]._id,
-            "valor1" : 0,
-            "valor2" : 0,
-            "valor3" : 0,
-            "valor4" : 0,
-            "valor5" : 0,
-            "valor6" : 0,
-            "valor7" : 0,
-            "cont" : 0
-
-        };
-        
-        calificaciones.push(objeto)
-
-    }
+    
     console.log(calificaciones)
     const grupo = {
         codigo: cod.toUpperCase(),
@@ -202,7 +187,6 @@ router.post('/crearGrupo', async (req,res) => {
         materia: req.body.asignatura,
         horario : horario,
         maestro : req.body.maestro,
-        calificaciones: calificaciones
     }
     
 
@@ -432,13 +416,11 @@ async function generarGrupos(){
 
                 var letraGrupo = String.fromCharCode(64+cantEstudiantes);
                 var cod = pensums[i].materia[k].slice(0,3) + "-" + pensums[i].curso[0] + letraGrupo + "-" + pensums[i].nivel.slice(0,3) 
-                var calificaciones = await calificacione(pensums[i].curso, pensums[i].nivel)
                 var grupo = {
                     codigo: cod.toUpperCase(),
                     curso: pensums[i].curso ,
                     nivel:  pensums[i].nivel,
                     materia: pensums[i].materia[k],
-                    calificaciones: calificaciones,
                     periodo: periodo._id
                 }
                 Grupo.collection.insertOne(grupo, function(err,docs) {
@@ -472,7 +454,8 @@ router.get('/calificar/:id/:cod', async (req,res) => {
         
     }else {
         nota = []
-        for(var i = 0; i < 7; i++){
+        const aux = await Periodo.findOne({estado: 'activo'})
+        for(var i = 0; i < aux.sub ; i++){
             nota.push(0);
         }
         calificaciones = {
