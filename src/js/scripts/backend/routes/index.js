@@ -17,8 +17,25 @@ const Periodo = require('../models/periodo.js')
 const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
 "Julio", "Augosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
 ];
-router.get('/perioCali', (req,res) => {
-    res.render('periodoCalificaciones')
+router.get('/perioCali', async (req,res) => {
+    const periodo = await Periodo.findOne({estado: 'activo'})
+    var sub = periodo.periodos 
+    console.log(sub)
+    res.render('periodoCalificaciones', {periodo, sub})
+})
+
+router.post('/periodo', async (req,res) => {
+    var aux = Object.values(req.body)
+    var arr = []
+    
+    for(var i = 0; i < aux.length; i += 2){
+        var aux1 = []
+        aux1.push(aux[i], aux[i+1])
+        arr.push(aux1)
+    }
+    await Periodo.updateOne({estado:'activo'},{periodos: arr})
+    res.redirect('/periodo')
+
 })
 //Cargar pagina principal
 router.get('/', (req,res) => {
@@ -35,8 +52,18 @@ router.get('/addPeriod', (req,res) => {
 
 router.post('/addPeriod', async (req,res) => {
     const actual = await Periodo.updateOne({estado: 'activo'},{estado: 'concluido'})
-    const periodo = new Periodo(req.body) 
+    var peri = await generarSub(req.body.inicio, req.body.fin, req.body.sub)
+    console.log(peri)
+    const periodo = new Periodo({
+        cod: req.body.cod,
+        inicio: req.body.inicio,
+        fin: req.body.fin,
+        sub: req.body.sub,
+        periodos: peri
+    }) 
+    console.log(peri)
     await periodo.save()
+
     res.redirect('/adminDashboard')
 });
 
@@ -402,6 +429,26 @@ async function letraCurso(nivelActual, cursoActual){
 
     return letra;
 }
+async function generarSub(ini, fi, cant){
+    var fecha1 = new Date(ini)
+    var fecha2 = new Date(fi)
+    const diferencia = Math.floor(((fecha2.getTime() - fecha1.getTime()) / (1000 * 3600 * 24))/cant)
+    var arr = []
+    for(var i = 0; i < cant; i++){
+        var aux = []
+        fecha1.setDate(fecha1.getDate() + diferencia)
+        fecha2 = new Date(fecha1.toLocaleString())
+        fecha2.setDate(fecha2.getDate()+7)
+        console.log(fecha1,fecha2)
+        var str1 = fecha1.getFullYear() + '-' +zeroFill(fecha1.getMonth(),2) +'-' + zeroFill(fecha1.getDate()+1,2) 
+        var str2 = fecha2.getFullYear() + '-' +zeroFill(fecha2.getMonth(),2) +'-' + zeroFill(fecha2.getDate() +1,2)  
+ 
+        aux.push(str1,str2)
+        arr.push(aux)
+    }
+    console.log(arr)
+    return arr
+}
 
 async function generarGrupos(){
     const pensums = await Pensum.find()
@@ -528,17 +575,7 @@ router.post('/calificar/:id/:cod', async (req,res) =>{
     res.render('grupoActual',{id,grupos})
 
 });
-function crearNota(nota){
-    notas = []
-    notas.push(nota.nota1)
-    notas.push(nota.nota2)
-    notas.push(nota.nota3)
-    notas.push(nota.nota4)
-    notas.push(nota.nota5)
-    notas.push(nota.nota6)
-    notas.push(nota.nota7)
-    return notas
-}
+
 //Cargar pagina de ver eventos en Docente y Estudiante
 
 router.get('/verEventos/:id',  async (req,res) => {

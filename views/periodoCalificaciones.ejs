@@ -1,44 +1,23 @@
 <%- include('partials/_header1') %>
-<form class=" form" action = "/periodo" method="get">
-    <div class="card">
-        <div class="card-header">
-            <h4>Enero</h4>
-        </div>
-        <div class="card-content" aria-expanded="true">
-            <div class="card-body">
-                <input type="week" class="form-control">
+<form class=" form" action = "/periodo" method="POST">
+    <%for(var i = 0; i < sub.length; i++){%>
+        <div class="card">
+            <div class="card-header">
+                <h4>Sub-Periodo <%= i + 1%></h4>
+            </div>
+            <div class="card-content" aria-expanded="true">
+                <div class="card-body">
+                    <div class="row">
+                    <div class="col">
+                        <input name = '<%= 'p1_' + i  %>' type="date" class="form-control" value="<%= sub[i][0]%>">
+                    </div>
+                    <div class="col">
+                        <input name = '<%= 'p2_' + i  %>' type="date" class="form-control" value="<%= sub[i][1]%>">
+                    </div>
+                </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            <h4>Febrero</h4>
-        </div>
-        <div class="card-content" aria-expanded="true">
-            <div class="card-body">
-                <input type="week" class="form-control">
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            <h4>Marzo</h4>
-        </div>
-        <div class="card-content" aria-expanded="true">
-            <div class="card-body">
-                <input type="week" class="form-control">
-            </div>
-        </div>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            <h4>Abril</h4>
-        </div>
-        <div class="card-content" aria-expanded="true">
-            <div class="card-body">
-                <input type="week" class="form-control">
-            </div>
-        </div>
-    </div>
+        <%}%>
     <button type="submit" class="btn btn-secondary my-4 btn-block waves-effect">Aceptar</button>
 </form>

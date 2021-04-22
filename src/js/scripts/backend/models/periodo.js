@@ -9,7 +9,8 @@ const periodo = new Schema({
     estado: {
         type: String,
         default: "activo"
-    }
+    },
+    periodos: Array
 });
 
 module.exports = mongoose.model('periodo', periodo);
