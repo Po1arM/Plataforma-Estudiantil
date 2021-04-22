@@ -13,6 +13,7 @@ const Calificacion = require('../models/calificaciones.js')
 const { redirect } = require('statuses')
 const estudiante = require('../models/estudiante.js')
 const Periodo = require('../models/periodo.js')
+const calificaciones = require('../models/calificaciones.js')
 
 const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
 "Julio", "Augosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
@@ -629,6 +630,42 @@ async function calificacione(curso, nivel){
     }
     return calificaciones
 } 
+
+//Cargar pagina promocion
+router.get('/promocion', async (req,res) => {
+    const estudiantes = await Estudiante.find()
+    var promedio = 0
+    var grupos
+    for(var i = 0; i < estudiantes.length; i++){
+        grupos = await Grupo.find({curso: estudiantes[i].curso, nivel: estudiantes[i].nivel})
+
+        for(var j = 0; j < grupos.length;j++){
+            const calificacion = await Calificacion.findOne({estudiante: estudiantes[i]._id, grupo: grupos[j]._id})
+            console.log(calificacion)
+
+            if(calificacion != null){
+                for(var z = 0; z < calificacion.nota.length; z++){
+                    promedio = promedio + calificacion.nota[z]
+                }
+                promedio = promedio/calificacion.nota.length
+            }
+            
+
+        }
+    }
+    promedio = parseFloat(promedio/grupos.length)
+    console.log(promedio)
+
+    console.log(estudiantes)
+
+   
+   // console.log(grupos)
+
+    res.render('promocion',{
+        estudiantes,grupos,promedio
+    })
+});
+
 
 async function cantGrupos(pensum){
     var cantEstudiantes = await Estudiante.find({curso:pensum.cuso, nivel: pensum.nivel}).count()

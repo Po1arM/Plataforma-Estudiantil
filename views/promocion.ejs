@@ -1,0 +1,44 @@
+<%- include('partials/_header1') %>
+
+
+
+<div class = "row">
+    <div class="col-xl-4 col-lg-6 col-md-12">
+        <h1>Estudiantes elegibles </h1>        
+    </div>
+</div>
+<div class="table-responsive">
+    <table  class="table table-bordered bg-white">
+        <thead class="thead-dark">
+            <th>nombre</th>
+            <th>apellido</th>
+            <th>curso</th>
+            <th>nivel</th>
+            <th>Promedio</th>
+            
+        </thead>
+        <tbody>
+            <% for(var i = 0; i < estudiantes.length; i++) { %>
+                <tr>
+                    <td> <%= estudiantes[i].nombre %> </td>
+                    <td> <%= estudiantes[i].apellido %> </td>
+                    <td> <%= estudiantes[i].curso %> </td>
+                    <td> <%= estudiantes[i].nivel %> </td>
+                    <td> <%= promedio %> </td>
+                </tr>
+            <% } %>  
+        </tbody>
+                    
+    </table>
+
+      <!-- BEGIN VENDOR JS-->
+      <script src="vendors/js/vendors.min.js" type="text/javascript"></script>
+      <!-- BEGIN VENDOR JS-->
+      <!-- BEGIN PAGE VENDOR JS-->
+      <!-- END PAGE VENDOR JS-->
+      <!-- BEGIN CHAMELEON  JS-->
+      <script src="js/core/app-menu-lite.js" type="text/javascript"></script>
+      <script src="js/core/app-lite.js" type="text/javascript"></script>
+      <!-- END CHAMELEON  JS-->
+      <!-- BEGIN PAGE LEVEL JS-->
+      <!-- END PAGE LEVEL JS-->
