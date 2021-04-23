@@ -112,20 +112,17 @@
     <table  class="table table-bordered bg-white">
         <thead class="thead-dark">
             <th>Materia</th>
-            <th>Periodo 1</th>
-            <th>Periodo 2</th>
-            <th>Periodo 3</th>
-            <th>Periodo 4</th>
+            <% for(var j = 0; j < cali[0].length; j++) { %>
+              <th>Periodo <%= j +1%></th>
+            <% } %>
         </thead>
         <tbody>
             <% for(var i = 0; i < mat.length; i++) { %>
                 <tr>
                     <td> <%= mat[i] %> </td>
-                    <td> <%= cali[i][0] == 0 ? '': cali[i][0] %> </td>
-                    <td> <%= cali[i][1] == 0 ? '': cali[i][1] %> </td>
-                    <td> <%= cali[i][2] == 0 ? '': cali[i][2] %> </td>
-                    <td> <%= cali[i][3] == 0 ? '': cali[i][3] %> </td>
-
+                    <% for(var j = 0; j < cali[i].length; j++) { %>
+                      <td> <%= cali[i][j] == 0 ? '': cali[i][j] %> </td>
+                      <% }%>  
                 </tr>
             <% }%>  
         </tbody>

@@ -605,7 +605,7 @@ router.get('/calificaciones/:cod', async (req,res) => {
     if(calificaciones.length != 0){
         for(var i = 0; i < calificaciones.length; i++){
             var materia = await Grupo.findOne({_id: calificaciones[i].grupo})
-            if(meteria != null){
+            if(materia != null){
                 mat.push(materia.materia)
                 cali[i] = calificaciones[i].nota
             }
