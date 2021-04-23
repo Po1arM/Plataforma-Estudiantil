@@ -606,7 +606,8 @@ router.get('/calificaciones/:cod', async (req,res) => {
         for(var i = 0; i < calificaciones.length; i++){
             var materia = await Grupo.findOne({_id: calificaciones[i].grupo})
             if(materia != null){
-                mat.push(materia.materia)
+                aux = [materia.materia, materia._id]
+                mat.push(aux)
                 cali[i] = calificaciones[i].nota
             }
         };
@@ -716,5 +717,25 @@ async function peri(){
     i++
     }
 }
+router.get('/descrip/:id/:cod', async (req,res) => {
+    const {id} = req.params
+    const {cod} = req.params
 
+    var grupo = await Grupo.findById(id)
+    var calificacion = await Calificacion.findOne({estudiante: cod, grupo: id})
+    var promedio = calcularProm(calificacion.nota)
+    res.render('descrip', {cod,calificacion,grupo, promedio})
+})
+function calcularProm(notas){
+    var prom = 0
+    var cont = 0
+
+    for (var i = 0; i < notas.length; i++){
+        if(notas[i] !== null){
+            prom += notas[i]
+            cont++
+        }
+    }
+    return prom/cont
+}
 module.exports = router;

@@ -8,7 +8,6 @@ const grupo = new Schema({
     materia: String,
     horario: String,
     maestro: String,
-    calificaciones: Array,
     periodo: String
 });
 

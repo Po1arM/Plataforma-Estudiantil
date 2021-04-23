@@ -101,35 +101,14 @@
 <div class="row match-height">
    
 </div>
-<div class = "row">
-    <div class="col-xl-4 col-lg-6 col-md-12">
-        <h1>Tus grupos</h1>
-        
-    </div>
-</div>
-<div class="table-responsive">
+<div class="card">
+    <div class="card-header">
+        <h1>Materia: <%= grupo.materia %></h1>
+        <h3>Docente: <%= grupo.maestro %></h3>
 
-    <table  class="table table-bordered bg-white">
-        <thead class="thead-dark">
-            <th>Materia</th>
-            <% for(var j = 0; j < cali[0].length; j++) { %>
-              <th>Periodo <%= j +1%></th>
-            <% } %>
-        </thead>
-        <tbody>
-            <% for(var i = 0; i < mat.length; i++) { %>
-                <tr>
-                    <td> <%= mat[i][0] %> </td>
-                    <% for(var j = 0; j < cali[i].length; j++) { %>
-                      <td> <%= cali[i][j] == 0 ? '': cali[i][j] %> </td>
-                    <% }%>
-                    <td><a href="/descrip/<%= mat[i][1] %>/<%= cod %>"><i class="fas fa-eye"></i></a></td>
-                  </tr>
-            <% }%>  
-            
-        </tbody>
-                    
-    </table>
+    </div>
+    
+</div>
 
       <!-- BEGIN VENDOR JS-->
       <script src="vendors/js/vendors.min.js" type="text/javascript"></script>
