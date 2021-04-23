@@ -637,7 +637,7 @@ router.get('/promocion', async (req,res) => {
     var promedio = 0
     var grupos
     for(var i = 0; i < estudiantes.length; i++){
-        grupos = await Grupo.find({curso: estudiantes[i].curso, nivel: estudiantes[i].nivel})
+        grupos = await Grupo.find({curso: estudiantes[i].curso, nivel: estudiantes[i].nivel, estado : "activo"})
 
         for(var j = 0; j < grupos.length;j++){
             const calificacion = await Calificacion.findOne({estudiante: estudiantes[i]._id, grupo: grupos[j]._id})
