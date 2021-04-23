@@ -602,6 +602,8 @@ router.get('/calificaciones/:cod', async (req,res) => {
     var calificaciones = await Calificacion.find({estudiante: cod})
     var mat = []
     var cali = []
+    var aux = 0
+    var promedio = []
     if(calificaciones.length != 0){
         for(var i = 0; i < calificaciones.length; i++){
             var materia = await Grupo.findOne({_id: calificaciones[i].grupo})
@@ -610,9 +612,26 @@ router.get('/calificaciones/:cod', async (req,res) => {
                 mat.push(aux)
                 cali[i] = calificaciones[i].nota
             }
+            console.log(cali)
         };
+
+        var periodo = await Periodo.findOne({estado: "activo"})
+
+        for(var j = 0; j < periodo.sub; j++){
+            aux = 0
+          
+            for(var z = 0; z < mat.length; z++){
+                aux = aux + cali[z][j]
+
+            };
+            aux = aux/mat.length
+            promedio.push(aux)
+            
+          };
+
+          
         console.log(cali)
-    res.render('calificaciones',{cod,mat, cali})
+        res.render('calificaciones',{cod,mat, cali,promedio})
     }
     
 })

@@ -54,9 +54,9 @@
             </ul>
     
             <ul class="nav navbar-nav float-right">
-              <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             <span class="avatar avatar-online"><img src="images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span></a>
+              <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             <span class="avatar avatar-online"><img src="/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                  <div class="arrow_box_right"><a class="dropdown-item" href="#"><span class="avatar avatar-online"><img src="images/portrait/small/avatar-s-19.png" alt="avatar"><span class="user-name text-bold-700 ml-1">Luis </span></span></a>
+                  <div class="arrow_box_right"><a class="dropdown-item" href="#"><span class="avatar avatar-online"><img src="/images/portrait/small/avatar-s-19.png" alt="avatar"><span class="user-name text-bold-700 ml-1">Luis </span></span></a>
                     <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="ft-user"></i> Editar Perfil</a><a class="dropdown-item" href="#"><i class="ft-mail"></i> Mensajes</a><a class="dropdown-item" href="#">
                     <div class="dropdown-divider"></div><a class="dropdown-item" href="/"><i class="ft-power"></i> Logout</a>
                   </div>
@@ -120,12 +120,29 @@
             <% for(var i = 0; i < mat.length; i++) { %>
                 <tr>
                     <td> <%= mat[i][0] %> </td>
+                    
                     <% for(var j = 0; j < cali[i].length; j++) { %>
+                     <script> var aux = 0 </script>
                       <td> <%= cali[i][j] == 0 ? '': cali[i][j] %> </td>
+                      <script>aux = aux + cali[i][j]</script>
                     <% }%>
+                    
                     <td><a href="/descrip/<%= mat[i][1] %>/<%= cod %>"><i class="fas fa-eye"></i></a></td>
                   </tr>
+                 
             <% }%>  
+
+            <td>Promedio 
+             <% for(var i = 0; i < mat.length; i++) { %>
+             
+              <% for(var j = 0; j < (cali[i].length)/2; j++) { %>
+                <td> <%= promedio[j] %> </td>
+                
+                <% }%>
+              <% }%>
+            
+            </td>
+          
             
         </tbody>
                     
