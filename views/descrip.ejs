@@ -99,16 +99,30 @@
         </div>
         <div class="content-body"><!-- Chart -->
 <div class="row match-height">
-   
-</div>
-<div class="card">
-    <div class="card-header">
-        <h1>Materia: <%= grupo.materia %></h1>
-        <h3>Docente: <%= grupo.maestro %></h3>
-
+    <div class="col">
+        <div class="card ">
+            <div class="card-header align-center ">
+                <h1>Materia: <%= grupo.materia %></h1>
+                <h3>Docente: <%= grupo.maestro %></h3>
+            </div>
+        </div>
     </div>
-    
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h1>Promedio</h1>
+                <h3><%= promedio%></h3>
+            </div>
+        </div>
+    </div>
 </div>
+        <div class="card">
+            <div class="card-header">
+                <h1>Comentario</h1>
+                <p class="h3"><%= calificacion.comentario%><p>
+            </div>
+    </div>
+
 
       <!-- BEGIN VENDOR JS-->
       <script src="vendors/js/vendors.min.js" type="text/javascript"></script>
