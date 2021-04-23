@@ -387,9 +387,10 @@ router.get('/grupoActual/:id', async (req,res) => {
     const {id} = req.params
     const profesor = await Docente.findById(id);
     const grupos = await Grupo.find({maestro : profesor.nombre + " " + profesor.apellido});
-
+    const aux = await peri()
+    console.log(aux)
     res.render('grupoActual',{
-        id, grupos
+        id, grupos,aux
     })
 
 });
@@ -404,13 +405,12 @@ router.get('/estudiantesDeGrupo/:id/:cod', async (req,res) => {
     const grupo = await Grupo.findById(id)
     const estudiantes = await Estudiante.find({curso : grupo.curso, nivel : grupo.nivel})
     console.log(grupo)
-
+    var aux = await peri()
     res.render('estudiantesDeGrupo',{
-        estudiantes,grupo,id,cod
+        estudiantes,grupo,id,cod,aux
     })
-
-
 });
+
 
 router.get('/generarPensum', async (req,res ) => {
     Grupo.db.dropCollection('grupos', function(err,result){
@@ -484,14 +484,16 @@ async function generarGrupos(){
     }
 }
 //Cargar pagina para calificar 
-router.get('/calificar/:id/:cod', async (req,res) => {
-    const id = req.params.id
+router.get('/calificar/:cod/:codi/:sub/:id', async (req,res) => {
     const cod = req.params.cod
-    const grupo =  await Grupo.findOne({_id: id});
-    const estudiante = await Estudiante.findOne({_id: cod})
+    const codi = req.params.codi
+    const sub = req.params.sub
+    const {id} = req.params
+    const grupo =  await Grupo.findOne({_id: cod});
+    const estudiante = await Estudiante.findOne({_id: codi})
     var nota
     var cod1
-    var calificaciones = await Calificacion.findOne({ estudiante : estudiante._id, grupo : grupo._id})
+    var calificaciones = await Calificacion.findOne({ estudiante :codi, grupo : cod})
     console.log(calificaciones)
   
     var mes = monthNames[new Date().getMonth()]	
@@ -529,7 +531,7 @@ router.get('/calificar/:id/:cod', async (req,res) => {
 
     }
     res.render('calificar', 
-    {nota, grupo, estudiante,id,cod,mes})
+    {nota, grupo, estudiante,id,codi,mes,sub,cod})
 });
 
 //Enviar calificacion
@@ -558,25 +560,29 @@ router.get('/periodo', async (req,res) => {
     res.render('periodos',{actual, pasados})
 });
 
-router.post('/calificar/:id/:cod', async (req,res) =>{
+router.post('/calificar/:id/:cod/:sub', async (req,res) =>{
 
     var id = req.params.id
     const cod = req.params.cod
-    const grupo =  await Grupo.findOne({_id: id});
-    const estudiantes = await Estudiante.findOne({_id: cod})
-    var calificaciones = await Calificacion.findOne({ estudiante : estudiantes._id, grupo : grupo._id})
-    nota = crearNota(req.body)
-    await Calificacion.update({_id: calificaciones._id},{nota: nota})
-    console.log(calificaciones)
+    const {sub} = req.params
+    const grupo = await Grupo.findById(id)
+
+    var calificaciones = await Calificacion.findOne({ estudiante :cod, grupo : id})
+
+    var nota = await Calificacion.findOne({_id: calificaciones._id})
+    nota = nota.nota
+    nota[sub] = parseInt(req.body.nota,10)
+    await Calificacion.updateOne({_id: calificaciones._id},{nota: nota,comentario: req.body.mensaje})
+
     nombre = grupo.maestro.split(" ")
     const profesor = await Docente.findOne({nombre: nombre[0], apellido: nombre[1]})
-    const grupos = await Grupo.find({maestro : profesor.nombre + " " + profesor.apellido});
+    const estudiantes = await Estudiante.find({curso : grupo.curso, nivel : grupo.nivel})
 
     id = profesor._id
-    res.render('grupoActual',{id,grupos})
+    const aux = await peri()
+    res.render('estudiantesDeGrupo',{id,estudiantes,aux,sub,cod,grupo})
 
 });
-
 //Cargar pagina de ver eventos en Docente y Estudiante
 
 router.get('/verEventos/:id',  async (req,res) => {
@@ -673,4 +679,42 @@ async function cantGrupos(pensum){
 
     return cantEstudiantes + 1
 }
+
+router.get('/estatusEstudiante/:id',async (req,res) =>{
+    const {id} = req.params
+    await Estudiante.updateOne({_id: id},{estado:'inactivo'})
+    res.redirect('/estudiantes')
+})
+
+async function peri(){
+    var periodos = await Periodo.findOne({estado: 'activo'})
+    periodos = periodos.periodos
+    console.log(periodos) 
+    var date = new Date()
+    var bool = 0
+    var i = 0
+
+    while(!bool && i < periodos.length){
+    var date1 = new Date(periodos[i][0])
+    var date2 = new Date(periodos[i][1])
+    var date3
+
+    if (date.getTime() >= date1.getTime() && date.getTime() <= date2.getTime()){
+        bool = 1
+        return [bool,i,date1,date2]
+
+    }
+    if(i < periodos.length - 1){
+        date3 = new Date(periodos[i+1][0])
+        if(date.getTime() > date2.getTime() && date.getTime() < date3.getTime() || date.getTime() < date1.getTime()){
+            bool = 2
+            console.log(`Periodo ${i}, siguiente periodo empieza ${date3.toLocaleString()}`)
+            return [bool,i,date2,date3]
+        } 
+    }  
+    
+    i++
+    }
+}
+
 module.exports = router;

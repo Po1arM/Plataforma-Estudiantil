@@ -99,17 +99,20 @@
 </div>
 <div class = "row">
     <div class="col-xl-4 col-lg-6 col-md-12">
-        <h1>Tus grupos</h1>        
+        <h1>Tus Alumnos</h1>    
     </div>
 </div>
 <div class="table-responsive">
     <table  class="table table-bordered bg-white">
         <thead class="thead-dark">
-            <th>nombre</th>
-            <th>apellido</th>
-            <th>curso</th>
-            <th>nivel</th>
-            <th>Calificacion</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Curso</th>
+            <th>Nivel</th>
+            <% if(aux[1]=== 1 ){ %>
+              <th>Calificar</th>
+            <%}%>
+
             
         </thead>
         <tbody>
@@ -119,8 +122,10 @@
                     <td> <%= estudiantes[i].apellido %> </td>
                     <td> <%= estudiantes[i].curso %> </td>
                     <td> <%= estudiantes[i].nivel %> </td>
-                    <td><a href="/calificar/<%= grupo._id %>/<%= estudiantes[i]._id %>"><i class="fa fa-pencil" ></i></a></td>
-                </tr>
+                    <% if(aux[0] === 1 ){ %>
+                      <td><a href="/calificar/<%= grupo._id %>/<%= estudiantes[i]._id%>/<%= aux[1]%>/<%= cod %>"><i class="fa fa-pencil" ></i></a></td>
+                    <%}%>
+                  </tr>
             <% } %>  
         </tbody>
                     

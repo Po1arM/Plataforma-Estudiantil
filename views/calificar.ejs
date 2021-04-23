@@ -79,9 +79,9 @@
       </div>
       <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-          <li class=" nav-item"><a href="/grupoActual/<%= id %>>"><i class="fas fa-user-friends"></i><span class="menu-title" data-i18n="">Grupo</span></a>
+          <li class=" nav-item"><a href="/grupoActual/<%= cod %>"><i class="fas fa-user-friends"></i><span class="menu-title" data-i18n="">Grupo</span></a>
           </li>
-          <li class=" nav-item"><a href="/verEventos/<%= id %>"><i class="fas fa-calendar-week"></i><span class="menu-title" data-i18n="">Eventos</span></a>
+          <li class=" nav-item"><a href="/verEventos/<%= cod %>"><i class="fas fa-calendar-week"></i><span class="menu-title" data-i18n="">Eventos</span></a>
           </li>
         </ul>
       </div>
@@ -102,14 +102,14 @@
     <div class="container p-3 my-3 bg-white">
         
                   <!-- Default form register -->
-                  <form class="text-center border border-dark p-4" action = "/calificar/<%= grupo._id %>/<%= estudiante._id %>" method="POST">
+                  <form class="text-center border border-dark p-4" action = "/calificar/<%= grupo._id %>/<%= estudiante._id %>/<%= sub %>" method="POST">
           
                     <p class="h4 mb-4">Calificación del mes de <%= mes %></p>
                     <div class="form-row mb-4">
                       <div class="col">
                         <!-- First name -->
-                        <label for="nota1">  Calificación </label>
-                        <input name="nota" type="text" id="defaultRegisterFormFirstName" class="form-control" value="<%= nota[0] %>">
+                        <label for="nota">  Calificación </label>
+                        <input id="nota" name="nota" type="number" max="100"  class="form-control" value="<%=nota[sub]%>">
                         <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
                       
                         </small>
@@ -121,12 +121,7 @@
                     
                     <!-- Sign up button -->
                     <button class="btn btn-secondary my-2 btn-block waves-effect " type="submit">Calificar</button>
-          
-                 
-             
-          
-                
-                  </p></form>
+                  </form>
                   <!-- TERMINO Register form -->
     
       </div>

@@ -28,7 +28,8 @@
                                 <th>Apellido</th>
                                 <th>Curso</th>
                                 <th>Nivel</th>
-                                
+                                <th>Ver</th>
+                                <th>Eliminar</th>
                             </thead>
                             <tbody>
                                 <% for(var i = 0; i < estudiantes.length; i++) { %>
@@ -39,6 +40,7 @@
                                         <td> <%= estudiantes[i].curso %> </td>
                                         <td> <%= estudiantes[i].nivel %> </td>
                                         <td><a href="/perfil/<%= estudiantes[i]._id %>""><i class="fas fa-eye"></i></a></td>
+                                        <td><a onclick="myFunction('<%= estudiantes[i]._id %>')"><i class="fas fa-user-times"></i></a></td>
                                     </tr>
                                 <% }%>  
                             </tbody>
@@ -54,7 +56,7 @@
     <div class="col ">
         <div class="card ">
             <div class="card-header">
-                <h4 class="card-title">Estudiantes Graduados</h4>
+                <h4 class="card-title">Antiguos Estudiantes</h4>
                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                 <div class="heading-elements">
                     <ul class="list-inline mb-0">
@@ -70,6 +72,7 @@
                                 <th>Matricula</th>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
+                                <th>Ver</th>
                             </thead>
                             <tbody>
                                 <% for(var i = 0; i < graduados.length; i++) { %>
@@ -89,7 +92,15 @@
     </div>
 </div>
 
-
+    <script>
+        function myFunction(id){
+            if (confirm("El estudiante pasará a estado inactivo y no podrá recuperarse!")) {
+            window.location.href = '/estatusEstudiante/'+id
+        } else {
+            window.location.href = '/estudiantes'
+        }
+        }   
+    </script>
       <!-- BEGIN VENDOR JS-->
       <script src="vendors/js/vendors.min.js" type="text/javascript"></script>
       <!-- BEGIN VENDOR JS-->

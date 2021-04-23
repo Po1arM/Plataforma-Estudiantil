@@ -28,7 +28,7 @@
     <!-- END Custom CSS-->
   </head>
   <body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-gradient-x" data-col="2-columns">
-
+    
     <!-- fixed-top-->
     <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-light">
       <div class="navbar-wrapper">
@@ -94,15 +94,46 @@
         <div class="content-header row">
         </div>
         <div class="content-body"><!-- Chart -->
-<div class="row match-height">
-   
-</div>
+      <div class="card">
+        <div class="card-header">
+          <% if (aux[0] === 1) {%>
+            <h1>Periodo para publicación de calificaciones abierto</h1>
+          </div>
+          <div class="card-content" aria-expanded="true">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-xl-6 ">
+                      <h4>Desde <%= (aux[2].getDate()+1) +'/' + (aux[2].getMonth()+1) + '/' + aux[2].getFullYear()%></h4>
+                      </div>
+                      <div class="col-xl-6 ">
+                      <h4>Hasta <%= (aux[3].getDate()+1) +'/' + (aux[3].getMonth()+1) + '/' + aux[3].getFullYear()%></h4>
+                      </div>
+              </div>
+              </div>
+          </div>
+          <%} else {%>
+            <h1>Proximo periodo de publicación de calificaciones</h1>
+          </div>
+          <div class="card-content" aria-expanded="true">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-xl-6 ">
+                      <h4>Empieza <%= (aux[3].getDate()+1) +'/' + (aux[3].getMonth()+1) + '/' + aux[3].getFullYear()%></h4>
+                      </div>
+                      
+              </div>
+              </div>
+          </div>
+            <%}%>
+        
+    </div>
+
 <div class = "row">
     <div class="col-xl-4 col-lg-6 col-md-12">
         <h1>Tus grupos</h1>
-        
     </div>
 </div>
+
 <div class="table-responsive">
     <table  class="table table-bordered bg-white">
         <thead class="thead-dark">
@@ -122,8 +153,9 @@
                     <td> <%= grupos[i].materia %> </td>
                     <td> <%= grupos[i].horario %> </td>
                     <td> <%= grupos[i].maestro %> </td>
-                    <td><a href="/estudiantesDeGrupo/<%= grupos[i]._id%>/<%= id %>"><i class="fa fa-pencil" ></i></a></td>
-                </tr>
+                    <td><a href="/estudiantesDeGrupo/<%= grupos[i]._id%>/<%= id %>"><i class="fa fa-eye" ></i></a></td>
+                
+                  </tr>
             <% }%>  
         </tbody>
                     
