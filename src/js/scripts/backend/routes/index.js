@@ -488,7 +488,7 @@ router.get('/calificar/:cod/:codi/:sub/:id', async (req,res) => {
     const cod = req.params.cod
     const codi = req.params.codi
     const sub = req.params.sub
-    const {id} = req.params
+    const id = req.params.id
     const grupo =  await Grupo.findOne({_id: cod});
     const estudiante = await Estudiante.findOne({_id: codi})
     var nota
@@ -563,7 +563,7 @@ router.get('/periodo', async (req,res) => {
 router.post('/calificar/:id/:cod/:sub', async (req,res) =>{
 
     var id = req.params.id
-    const cod = req.params.cod
+    var cod = req.params.cod
     const {sub} = req.params
     const grupo = await Grupo.findById(id)
 
@@ -578,7 +578,7 @@ router.post('/calificar/:id/:cod/:sub', async (req,res) =>{
     const profesor = await Docente.findOne({nombre: nombre[0], apellido: nombre[1]})
     const estudiantes = await Estudiante.find({curso : grupo.curso, nivel : grupo.nivel})
 
-    id = profesor._id
+    cod = profesor._id.toString()
     const aux = await peri()
     res.render('estudiantesDeGrupo',{id,estudiantes,aux,sub,cod,grupo})
 
