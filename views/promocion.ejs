@@ -31,26 +31,40 @@
     <div class="table-responsive">
         <table  class="table table-bordered bg-white">
             <thead class="thead-dark">
-                <th>nombre</th>
-                <th>apellido</th>
-                <th>curso</th>
-                <th>nivel</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Curso</th>
+                <th>Nivel</th>
                 <th>Promedio</th>
                 
             </thead>
             <tbody>
-                <% for(var i = 0; i < estudiantes.length; i++) { %>
+                <% var aux = 0 %> 
+                <% 
+                for(var i = 0; i < estudiantes.length; i++) { %>
+                   <% if(arrpro[i] > aux){%>
                     <tr>
                         <td> <%= estudiantes[i].nombre %> </td>
                         <td> <%= estudiantes[i].apellido %> </td>
                         <td> <%= estudiantes[i].curso %> </td>
                         <td> <%= estudiantes[i].nivel %> </td>
-                        <td> <%= promedio %> </td>
+                        <td> <%= arrpro[i] %> </td>
                     </tr>
+                    <% } %>
+
                 <% } %>  
             </tbody>
                         
         </table>
+
+        <form>
+        <input  name = "Promedio" type="number" id="defaultRegisterFormEmail" class="form-control mb-1" >
+        <button onclick = "location.href='/promocion/'"  type="button" class="btn btn-secondary btn-min-width mr-1 mb-1">Usar esta metrica</button>
+      </form>
+
+
+        <button class="btn btn-secondary my-4 btn-block waves-effect " id="Metrica" type="submit">Realizar promocion</button>
+          
                         </div>
                     </div>
                 </div>

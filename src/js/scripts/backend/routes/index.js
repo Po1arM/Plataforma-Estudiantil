@@ -635,6 +635,7 @@ router.get('/calificaciones/:cod', async (req,res) => {
     }
     
 })
+
 async function calificacione(curso, nivel){
     const estudiantes = await Estudiante.find({curso: curso, nivel: nivel})
     var calificaciones = []
@@ -661,9 +662,9 @@ async function calificacione(curso, nivel){
 router.get('/promocion', async (req,res) => {
     const estudiantes = await Estudiante.find()
     var promedio = 0
-    var grupos
+    var arrpro = []
     for(var i = 0; i < estudiantes.length; i++){
-        grupos = await Grupo.find({curso: estudiantes[i].curso, nivel: estudiantes[i].nivel, estado : "activo"})
+        var grupos = await Grupo.find({curso: estudiantes[i].curso, nivel: estudiantes[i].nivel})
 
         for(var j = 0; j < grupos.length;j++){
             const calificacion = await Calificacion.findOne({estudiante: estudiantes[i]._id, grupo: grupos[j]._id})
@@ -674,23 +675,23 @@ router.get('/promocion', async (req,res) => {
                     promedio = promedio + calificacion.nota[z]
                 }
                 promedio = promedio/calificacion.nota.length
+                console.log(promedio)
             }
             
 
         }
+        arrpro[i] = promedio
     }
-    promedio = parseFloat(promedio/grupos.length)
-    console.log(promedio)
+   // promedio = parseFloat(promedio/grupos.length)
+    console.log(arrpro)
 
-    console.log(estudiantes)
-
-   
+  //  console.log(estudiantes)
    // console.log(grupos)
 
     res.render('promocion',{
-        estudiantes,grupos,promedio
+        estudiantes,grupos,arrpro
     })
-});
+})
 
 
 async function cantGrupos(pensum){
