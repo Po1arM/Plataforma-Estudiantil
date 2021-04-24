@@ -1,9 +1,6 @@
 <%- include('partials/_header1') %>
 
 
-
-
-
     <div class="row ">
         <div class="col-12 ">
             <div class="card ">
@@ -28,6 +25,13 @@
             <h1>Estudiantes elegibles </h1>        
         </div>
     </div>
+    <form action="/promocion" method="POST" class=" justify-content-center">
+        <input  name = "promedio" type="number" id="defaultRegisterFormEmail" class="form-control mb-1" value="<%= promAux%>">
+        <div class=" text-right">
+            <button type="submit" class="btn btn-secondary btn-min-width mr-1 mb-1 align-right">Usar esta metrica</button>
+        </div>
+    </form>
+
     <div class="table-responsive">
         <table  class="table table-bordered bg-white">
             <thead class="thead-dark">
@@ -39,10 +43,10 @@
                 
             </thead>
             <tbody>
-                <% var aux = 0 %> 
+                
                 <% 
                 for(var i = 0; i < estudiantes.length; i++) { %>
-                   <% if(arrpro[i] > aux){%>
+                   <% if(arrpro[i] > promAux){%>
                     <tr>
                         <td> <%= estudiantes[i].nombre %> </td>
                         <td> <%= estudiantes[i].apellido %> </td>
@@ -57,11 +61,7 @@
                         
         </table>
 
-        <form>
-        <input  name = "Promedio" type="number" id="defaultRegisterFormEmail" class="form-control mb-1" >
-        <button onclick = "location.href='/promocion/'"  type="button" class="btn btn-secondary btn-min-width mr-1 mb-1">Usar esta metrica</button>
-      </form>
-
+        
 
         <button class="btn btn-secondary my-4 btn-block waves-effect " id="Metrica" type="submit">Realizar promocion</button>
           

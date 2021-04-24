@@ -661,6 +661,8 @@ async function calificacione(curso, nivel){
 //Cargar pagina promocion
 router.get('/promocion', async (req,res) => {
     const estudiantes = await Estudiante.find()
+   
+ 
     var promedio = 0
     var arrpro = []
     for(var i = 0; i < estudiantes.length; i++){
@@ -687,12 +689,58 @@ router.get('/promocion', async (req,res) => {
 
   //  console.log(estudiantes)
    // console.log(grupos)
+   var promAux
 
+    if(req.params.promAux !== null){
+        promAux = 0
+    }else{
+        promAux = req.params.promAux
+    }
     res.render('promocion',{
-        estudiantes,grupos,arrpro
+        estudiantes,grupos,arrpro,promAux
     })
+    
 })
+router.post('/promocion', async (req,res) => {
+    const estudiantes = await Estudiante.find()
+    var promedio = 0
+    var arrpro = []
+    for(var i = 0; i < estudiantes.length; i++){
+        var grupos = await Grupo.find({curso: estudiantes[i].curso, nivel: estudiantes[i].nivel})
 
+        for(var j = 0; j < grupos.length;j++){
+            const calificacion = await Calificacion.findOne({estudiante: estudiantes[i]._id, grupo: grupos[j]._id})
+            console.log(calificacion)
+
+            if(calificacion != null){
+                for(var z = 0; z < calificacion.nota.length; z++){
+                    promedio = promedio + calificacion.nota[z]
+                }
+                promedio = promedio/calificacion.nota.length
+                console.log(promedio)
+            }
+            
+
+        }
+        arrpro[i] = promedio
+    }
+   // promedio = parseFloat(promedio/grupos.length)
+    console.log(req.body)
+
+  //  console.log(estudiantes)
+   // console.log(grupos)
+   var promAux
+
+    if(req.body.promedio === null){
+        promAux = 0
+    }else{
+        promAux = parseInt(req.body.promedio)
+    }
+    res.render('promocion',{
+        estudiantes,grupos,arrpro,promAux
+    })
+    
+})
 
 async function cantGrupos(pensum){
     var cantEstudiantes = await Estudiante.find({curso:pensum.cuso, nivel: pensum.nivel}).count()
