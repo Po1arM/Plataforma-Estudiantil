@@ -18,6 +18,8 @@ const calificaciones = require('../models/calificaciones.js')
 const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
 "Julio", "Augosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
 ];
+
+const cursoArr = ['1ro','2do','3ro','4to','5to','6to']
 router.get('/perioCali', async (req,res) => {
     const periodo = await Periodo.findOne({estado: 'activo'})
     var sub = periodo.periodos 
@@ -746,7 +748,8 @@ router.post('/promocion', async (req,res) => {
 
 router.get('/promo/:promAux', async (req,res) => {
 
-    const estudiantes = await Estudiante.find()
+    const estudiantes = await Estudiante.find({estado: 'activo'})
+    const periodo = await Periodo.findOne({estado: 'activo'})
     var promedio
     var arrpro = []
     for(var i = 0; i < estudiantes.length; i++){
@@ -754,62 +757,45 @@ router.get('/promo/:promAux', async (req,res) => {
         promedio = 0
         for(var j = 0; j < grupos.length;j++){
             const calificacion = await Calificacion.findOne({estudiante: estudiantes[i]._id, grupo: grupos[j]._id})
-            console.log(calificacion)
+            //console.log(calificacion)
 
             if(calificacion != null){
                 for(var z = 0; z < calificacion.nota.length; z++){
                     promedio = promedio + calificacion.nota[z]
                 }
                 promedio = promedio/calificacion.nota.length
-                console.log(promedio)
+                //console.log(promedio)
             }
 
         }
         arrpro[i] = promedio
     }
-
-    console.log(req.body)
-    //var promAux
-
-    if(req.body.promedio === null){
-        promAux = 0
-    }
-    else{
-        promAux = parseInt(req.body.promedio)
-
-        for(var i =0; i < estudiantes.length; i++){
-            if(arrpro[i] > promAux){
-                
-            if(ParseInt(estudiante[i].curso[0]) == 6 &&  estudiante[i].nivel == "secundaria") {
-                estudiantes = await Estudiante.updateOne({_id: estudiantes[i]._id},{nivel: 0, estado: "inactivo"})
-            }
-            else{
-            
-                if(ParseInt(estudiante[i].curso[0]) == 6 &&  estudiante[i].nivel == "basica"){
-                    estudiantes = await Estudiante.updateOne({_id: estudiantes[i]._id}, {nivel: "secundaria"})
-                }
-                else{
-
-                var temp = 0
-                temp = ParseInt(estudiantes[i].curso[0]) + 1
-                estudiantes[i].curso[0] = toString(temp)
-            
-                estudiantes = await Estudiante.updateOne({_id: estudiantes[i]._id}, {curso: estudiantes[i].curso})
-            
-                }
-            }
-        
-        }
-
-     }
-    }
-
-    /*res.render('promocion',{
-        estudiantes,grupos,arrpro,promAux
-    })*/
-
-    res.redirect('/periodo')
     
+    
+    const promAux =  parseInt(req.params.promAux)
+
+    for(var i = 0; i < estudiantes.length; i++){
+        if(arrpro[i] >= promAux){
+            
+            if(parseInt(estudiantes[i].curso[0]) === 6){
+                if (estudiantes[i].nivel === "Secundario") {
+                    await Estudiante.updateOne({_id: estudiantes[i]._id},{curso: 'Graduado', estado: "graduado"})
+                }
+                if (estudiantes[i].nivel === "Basico"){
+                    await Estudiante.updateOne({_id: estudiantes[i]._id},{curso: '1ro', nivel: 'Secundario'})
+                }
+        }
+        else{
+            var cursoSig = parseInt(estudiantes[i].curso[0])
+            await Estudiante.updateOne({_id: estudiantes[i]._id}, {curso: cursoArr[cursoSig]})
+        
+            }
+        }
+    
+    }
+
+    res.redirect('/estudiantes')
+
 })
 
 
