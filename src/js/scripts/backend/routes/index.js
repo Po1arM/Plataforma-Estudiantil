@@ -744,7 +744,8 @@ router.post('/promocion', async (req,res) => {
     
 })
 
-router.post('/promo', async (req,res) => {
+router.get('/promo/:promAux', async (req,res) => {
+
     const estudiantes = await Estudiante.find()
     var promedio
     var arrpro = []
@@ -768,28 +769,46 @@ router.post('/promo', async (req,res) => {
     }
 
     console.log(req.body)
-    var promAux
+    //var promAux
 
     if(req.body.promedio === null){
         promAux = 0
-    }else{
+    }
+    else{
         promAux = parseInt(req.body.promedio)
 
-        if(arrpro[i] > promAux){
-        if(estudiante[i].nivel == 6 &&  estudiante[i].curso == "basica"){
-            await Estudiante.updateOne({_id: estudiantes[i]._id}, {curso: "secundaria"})
-        }
-        else{
-            await Estudiante.updateOne({_id: estudiantes[i]._id},{nivel: 0}, {estado: "inactivo"})
-        }
-        estudiantes[i] = 
-        await Estudiante.updateOne({_id: estudiantes[i]._id}, {nivel: (parseInt(estudiantes[i].nivel) + 1)})
-    }
+        for(var i =0; i < estudiantes.length; i++){
+            if(arrpro[i] > promAux){
+                
+            if(ParseInt(estudiante[i].curso[0]) == 6 &&  estudiante[i].nivel == "secundaria") {
+                estudiantes = await Estudiante.updateOne({_id: estudiantes[i]._id},{nivel: 0, estado: "inactivo"})
+            }
+            else{
+            
+                if(ParseInt(estudiante[i].curso[0]) == 6 &&  estudiante[i].nivel == "basica"){
+                    estudiantes = await Estudiante.updateOne({_id: estudiantes[i]._id}, {nivel: "secundaria"})
+                }
+                else{
+
+                var temp = 0
+                temp = ParseInt(estudiantes[i].curso[0]) + 1
+                estudiantes[i].curso[0] = toString(temp)
+            
+                estudiantes = await Estudiante.updateOne({_id: estudiantes[i]._id}, {curso: estudiantes[i].curso})
+            
+                }
+            }
         
+        }
+
+     }
     }
-    res.render('promocion',{
+
+    /*res.render('promocion',{
         estudiantes,grupos,arrpro,promAux
-    })
+    })*/
+
+    res.redirect('/periodo')
     
 })
 
