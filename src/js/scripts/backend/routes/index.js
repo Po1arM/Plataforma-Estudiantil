@@ -93,11 +93,14 @@ router.get('/adminDashboard', async (req,res) => {
     const estudiantes = await Estudiante.count();
     const docentes = await Docente.count();
     const grupos = await Grupo.count();
-
+    const mejor = await mejorCurso()
+    const aux = await peri()
     res.render('index', {
         estudiantes,
         docentes,
-        grupos
+        grupos,
+        mejor,
+        aux
     });
 });
 
@@ -663,11 +666,11 @@ router.get('/promocion', async (req,res) => {
     const estudiantes = await Estudiante.find()
    
  
-    var promedio = 0
+    var promedio
     var arrpro = []
     for(var i = 0; i < estudiantes.length; i++){
         var grupos = await Grupo.find({curso: estudiantes[i].curso, nivel: estudiantes[i].nivel})
-
+        promedio = 0
         for(var j = 0; j < grupos.length;j++){
             const calificacion = await Calificacion.findOne({estudiante: estudiantes[i]._id, grupo: grupos[j]._id})
             console.log(calificacion)
@@ -709,11 +712,11 @@ router.get('/promocion', async (req,res) => {
 
 router.post('/promocion', async (req,res) => {
     const estudiantes = await Estudiante.find()
-    var promedio = 0
+    var promedio
     var arrpro = []
     for(var i = 0; i < estudiantes.length; i++){
         var grupos = await Grupo.find({curso: estudiantes[i].curso, nivel: estudiantes[i].nivel})
-
+        promedio = 0
         for(var j = 0; j < grupos.length;j++){
             const calificacion = await Calificacion.findOne({estudiante: estudiantes[i]._id, grupo: grupos[j]._id})
             console.log(calificacion)
@@ -788,6 +791,7 @@ async function peri(){
         } 
     }  
     
+    
     i++
     }
 }
@@ -811,5 +815,32 @@ function calcularProm(notas){
         }
     }
     return prom/cont
+}
+async function mejorCurso(){
+    const pensum = await Pensum.find()
+    const periodo = await Periodo.findOne({estado: 'activo'})
+    var aux 
+    var arr = []
+    var arr2 = []
+    for(var i = 0; i < pensum.length; i++){
+        aux = 0
+        var grupos = await Grupo.find({curso: pensum[i].curso, nivel: pensum[i].nivel})
+        for(var j = 0; j < grupos.length; j++){
+            var califi = await Calificacion.find({grupo: grupos[j]._id})
+                for(var k = 0; k < califi.length; k++){
+                    aux += calcularProm(califi[k].nota)
+                }
+
+        }
+        var curso = pensum[i].curso + ' de ' +pensum[i].nivel
+        var aux1 = {curso: curso, valor: aux }
+        arr.push(aux1)
+
+    }
+    arr.sort(function (a, b) {
+        return a.valor > b.valor
+    });
+    console.log(arr)
+    return arr
 }
 module.exports = router;

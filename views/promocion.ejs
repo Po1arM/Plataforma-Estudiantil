@@ -18,60 +18,59 @@
                 </div>
                 <div class="card-content collapse show">
                     <div class="card-body">
-                            <div class="height-400">
                         
-    <div class = "row">
-        <div class="col-xl-4 col-lg-6 col-md-12">
-            <h1>Estudiantes elegibles </h1>        
-        </div>
+                                <div class = "row">
+                                    <div class="col-xl-4 col-lg-6 col-md-12">
+                                        <h1>Estudiantes elegibles </h1>        
+                                    </div>
+                                </div>
+                                <form action="/promocion" method="POST" class=" justify-content-center">
+                                    <input  name = "promedio" type="number" id="defaultRegisterFormEmail" class="form-control mb-1" value="<%= promAux%>">
+                                    <div class=" text-right">
+                                        <button type="submit" class="btn btn-secondary btn-min-width mr-1 mb-1 align-right">Usar esta metrica</button>
+                                    </div>
+                                </form>
+
+                                <div class="table-responsive">
+                                    <table  class="table table-bordered bg-white">
+                                        <thead class="thead-dark">
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>Curso</th>
+                                            <th>Nivel</th>
+                                            <th>Promedio</th>
+                                            
+                                        </thead>
+                                        <tbody>
+                                            
+                                            <% 
+                                            for(var i = 0; i < estudiantes.length; i++) { %>
+                                            <% if(arrpro[i] > promAux){%>
+                                                <tr>
+                                                    <td> <%= estudiantes[i].nombre %> </td>
+                                                    <td> <%= estudiantes[i].apellido %> </td>
+                                                    <td> <%= estudiantes[i].curso %> </td>
+                                                    <td> <%= estudiantes[i].nivel %> </td>
+                                                    <td> <%= arrpro[i] %> </td>
+                                                </tr>
+                                                <% } %>
+
+                                            <% } %>  
+                                        </tbody>
+                                                    
+                                    </table>
+
+                                    
+
+                                    <button class="btn btn-secondary my-4 btn-block waves-effect " id="Metrica" type="submit">Realizar promocion</button>
+                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
     </div>
-    <form action="/promocion" method="POST" class=" justify-content-center">
-        <input  name = "promedio" type="number" id="defaultRegisterFormEmail" class="form-control mb-1" value="<%= promAux%>">
-        <div class=" text-right">
-            <button type="submit" class="btn btn-secondary btn-min-width mr-1 mb-1 align-right">Usar esta metrica</button>
-        </div>
-    </form>
-
-    <div class="table-responsive">
-        <table  class="table table-bordered bg-white">
-            <thead class="thead-dark">
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Curso</th>
-                <th>Nivel</th>
-                <th>Promedio</th>
-                
-            </thead>
-            <tbody>
-                
-                <% 
-                for(var i = 0; i < estudiantes.length; i++) { %>
-                   <% if(arrpro[i] > promAux){%>
-                    <tr>
-                        <td> <%= estudiantes[i].nombre %> </td>
-                        <td> <%= estudiantes[i].apellido %> </td>
-                        <td> <%= estudiantes[i].curso %> </td>
-                        <td> <%= estudiantes[i].nivel %> </td>
-                        <td> <%= arrpro[i] %> </td>
-                    </tr>
-                    <% } %>
-
-                <% } %>  
-            </tbody>
-                        
-        </table>
-
-        
-
-        <button class="btn btn-secondary my-4 btn-block waves-effect " id="Metrica" type="submit">Realizar promocion</button>
-          
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    
 
       <!-- BEGIN VENDOR JS-->
       <script src="vendors/js/vendors.min.js" type="text/javascript"></script>
