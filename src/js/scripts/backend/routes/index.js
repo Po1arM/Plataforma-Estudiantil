@@ -684,23 +684,29 @@ router.get('/promocion', async (req,res) => {
         }
         arrpro[i] = promedio
     }
-   // promedio = parseFloat(promedio/grupos.length)
+
     console.log(arrpro)
 
-  //  console.log(estudiantes)
-   // console.log(grupos)
    var promAux
 
     if(req.params.promAux !== null){
         promAux = 0
     }else{
         promAux = req.params.promAux
+
+        estudiantes[i] = 
+        await Estudiante.update({_id: id}, {nivel: (parseInt(estudiantes[i].nivel) + 1)})
+        if(estudiante[i].nivel == 7){
+            await Estudiante.update({_id: id}, {curso: "secundario"})
+        }
     }
     res.render('promocion',{
         estudiantes,grupos,arrpro,promAux
     })
     
 })
+
+
 router.post('/promocion', async (req,res) => {
     const estudiantes = await Estudiante.find()
     var promedio = 0
