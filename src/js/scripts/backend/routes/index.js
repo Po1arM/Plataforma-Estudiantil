@@ -697,11 +697,7 @@ router.get('/promocion', async (req,res) => {
     }else{
         promAux = req.params.promAux
 
-        estudiantes[i] = 
-        await Estudiante.update({_id: id}, {nivel: (parseInt(estudiantes[i].nivel) + 1)})
-        if(estudiante[i].nivel == 7){
-            await Estudiante.update({_id: id}, {curso: "secundario"})
-        }
+       
     }
     res.render('promocion',{
         estudiantes,grupos,arrpro,promAux
@@ -728,28 +724,79 @@ router.post('/promocion', async (req,res) => {
                 promedio = promedio/calificacion.nota.length
                 console.log(promedio)
             }
-            
 
         }
         arrpro[i] = promedio
     }
-   // promedio = parseFloat(promedio/grupos.length)
-    console.log(req.body)
 
-  //  console.log(estudiantes)
-   // console.log(grupos)
-   var promAux
+    console.log(req.body)
+    var promAux
 
     if(req.body.promedio === null){
         promAux = 0
     }else{
         promAux = parseInt(req.body.promedio)
+
     }
     res.render('promocion',{
         estudiantes,grupos,arrpro,promAux
     })
     
 })
+
+router.post('/promo', async (req,res) => {
+    const estudiantes = await Estudiante.find()
+    var promedio
+    var arrpro = []
+    for(var i = 0; i < estudiantes.length; i++){
+        var grupos = await Grupo.find({curso: estudiantes[i].curso, nivel: estudiantes[i].nivel})
+        promedio = 0
+        for(var j = 0; j < grupos.length;j++){
+            const calificacion = await Calificacion.findOne({estudiante: estudiantes[i]._id, grupo: grupos[j]._id})
+            console.log(calificacion)
+
+            if(calificacion != null){
+                for(var z = 0; z < calificacion.nota.length; z++){
+                    promedio = promedio + calificacion.nota[z]
+                }
+                promedio = promedio/calificacion.nota.length
+                console.log(promedio)
+            }
+
+        }
+        arrpro[i] = promedio
+    }
+
+    console.log(req.body)
+    var promAux
+
+    if(req.body.promedio === null){
+        promAux = 0
+    }else{
+        promAux = parseInt(req.body.promedio)
+
+        if(arrpro[i] > promAux){
+        if(estudiante[i].nivel == 6 &&  estudiante[i].curso == "basica"){
+            await Estudiante.updateOne({_id: estudiantes[i]._id}, {curso: "secundaria"})
+        }
+        else{
+            await Estudiante.updateOne({_id: estudiantes[i]._id},{nivel: 0}, {estado: "inactivo"})
+        }
+        estudiantes[i] = 
+        await Estudiante.updateOne({_id: estudiantes[i]._id}, {nivel: (parseInt(estudiantes[i].nivel) + 1)})
+    }
+        
+    }
+    res.render('promocion',{
+        estudiantes,grupos,arrpro,promAux
+    })
+    
+})
+
+
+
+
+
 
 async function cantGrupos(pensum){
     var cantEstudiantes = await Estudiante.find({curso:pensum.cuso, nivel: pensum.nivel}).count()
