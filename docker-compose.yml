@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+ base-datos:
+    image: mysql:5.7.26
+   
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345678
+      - MYSQL_USER=ADMIN
+      - MYSQL_DATABASE=HolaMundo
+    volumes:
+      - ~/data_mysql:/var/lib/mysql
+    networks:
+      - red-app
+
+
+  phpmyadmin:
+    image: phpmyadmin:5.1.1
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    environment:
+      - PMA_ARBITRARY=1
+      - ServerName = Server
+    networks:
+      - red-app
+
+    depends_on:
+      - base-datos
+
+networks:
+  red-app:
