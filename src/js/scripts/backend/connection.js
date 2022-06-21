@@ -1,5 +1,5 @@
 const {MongoClient} = require('mongodb');
-const uri = 'mongodb+srv://admin:Fj028929@plataformaestudiantil.uzjq1.mongodb.net/plataforma?retryWrites=true&w=majority'
+const uri = 'mongodb+srv://fguzman:CroIEqnhT4yZcsrF@cluster0.8fcma.mongodb.net/plataforma?retryWrites=true&w=majority'
 
 connect();
 async function connect() {
