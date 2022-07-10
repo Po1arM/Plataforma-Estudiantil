@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const uri = 'mongodb+srv://admin:Fj028929@plataformaestudiantil.uzjq1.mongodb.net/plataforma?retryWrites=true&w=majority'
+const uri = 'mongodb://localhost:27017/plataforma'
 const consolidate = require('consolidate');
 
 // Conectando a Mongo
