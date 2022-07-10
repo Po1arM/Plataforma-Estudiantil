@@ -42,39 +42,6 @@
           </div>
       </div>
     </div>
-    <% if(aux[0] > 0 && aux[1] !== 1) {%>
-    <div class="row">
-        <div class="col-6">
-            <div class="card">
-                <div class="card-header ">
-                    <h2 class="teal" style="padding-bottom: 20px;">Grupos con mejor desempeño</h2>
-                    <div class="height-200 ">
-                        <h3><i class="fas fa-medal"></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <%= mejor[0].curso%> </h2>
-                        <canvas id="myCanvas" width="100" height="0" style="border:1px solid #02b8a5; margin: 15px; width: 90%"></canvas>
-                        <h3><i class="fas fa-medal"></i> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <%= mejor[1].curso%> </h2>
-                            <canvas id="myCanvas" width="100" height="0" style="border:1px solid #02b8a5; margin: 15px; width: 90%"></canvas>
-                            <h3><i class="fas fa-medal"></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <%= mejor[2].curso%> </h2>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="card">
-                <div class="card-header ">
-                    <h2 class="danger" style="padding-bottom: 20px;">Grupos con mejor desempeño</h2>
-                    <div class="height-200 ">
-                        <h3><i class="fas fa-exclamation-circle"></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <%= mejor[9].curso%> </h2>
-                        <canvas id="myCanvas" width="100" height="0" style="border:1px solid #be4a4a; margin: 15px; width: 90%"></canvas>
-                        <h3><i class="fas fa-exclamation-circle"></i> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <%= mejor[10].curso%> </h2>
-                            <canvas id="myCanvas" width="100" height="0" style="border:1px solid #be4a4a; margin: 15px; width: 90%"></canvas>
-                            <h3><i class="fas fa-exclamation-circle"></i>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <%= mejor[11].curso%> </h2>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
-    <%}%>
+    
     
   <%- include('partials/_footer') %>
